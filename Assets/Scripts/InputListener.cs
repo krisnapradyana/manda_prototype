@@ -12,9 +12,7 @@ public class InputListener : MonoBehaviour
     [SerializeField] GameObject _testCursor;
 
     Camera _cam;
-    Vector2 _mousePos = new Vector2();
-
-    int layerMask = 1 << 8;
+    int layerMask = 1 << 9;
     
 
     private void Awake()
@@ -42,7 +40,7 @@ public class InputListener : MonoBehaviour
 
     public void MoveByMouse(Vector3 targetPosition)
     {
-        _testCursor.transform.position = new Vector3(targetPosition.x, 5, targetPosition.z);
+        _testCursor.transform.position = new Vector3(targetPosition.x, 2, targetPosition.z);
         _gameHandler._controlledPlayer._seekerObject.StartPath(_gameHandler._controlledPlayer.transform.position, targetPosition);
     }
 
@@ -54,7 +52,7 @@ public class InputListener : MonoBehaviour
         Vector3 point = Vector3.zero;
         if(Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            Debug.LogFormat("Mouse Position : x{0}, y{1}, z{2} ", hit.point.normalized.x, hit.point.normalized.y, hit.point.normalized.z);
+            //Debug.LogFormat("Mouse Position : x{0}, y{1}, z{2} ", hit.point.normalized.x, hit.point.normalized.y, hit.point.normalized.z);
             point = new Vector3(hit.point.x, hit.point.y, hit.point.z);
         }
         return point;

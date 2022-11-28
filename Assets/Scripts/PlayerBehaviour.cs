@@ -18,7 +18,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] GameHandler _gameHandler;
     [SerializeField] EventTrigger _eventTrigger;
 
-    public event Action onMoveClicked;
+    //public event Action onMoveClicked;
     public event Action onSelectCharacter;
 
     public void InitCharacterEvents(GameHandler handler)
@@ -28,6 +28,7 @@ public class PlayerBehaviour : MonoBehaviour
 
         _eventTrigger.AddEvent(EventTriggerType.PointerClick, (data) =>
         {
+            Debug.Log("Trying to select character : "+ gameObject.name);
             if (_isSelected)
             {
                 return;
@@ -36,7 +37,7 @@ public class PlayerBehaviour : MonoBehaviour
             onSelectCharacter?.Invoke();
             ToggleSelected(true);
 
-            foreach (var item in _gameHandler._freelookCamera)
+            foreach (var item in _gameHandler._cameras)
             {
                 if (item.CameraId == _characterId)
                 {

@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-[RequireComponent(typeof(CinemachineFreeLook))]
+[RequireComponent(typeof(CinemachineVirtualCamera))]
 public class CameraBehaviour : MonoBehaviour
 {   
-    private CinemachineFreeLook _freelook;
+    private CinemachineVirtualCamera virtualCamera;
     [field : SerializeField]
     public int CameraId { get; private set; }
     [field : SerializeField]
-    public int Priority { get => _freelook.Priority; private set => _freelook.Priority = value; }
+    public int Priority { get => virtualCamera.Priority; private set => virtualCamera.Priority = value; }
 
     private void Start()
     {
-        _freelook = GetComponent<CinemachineFreeLook>();
+        virtualCamera = GetComponent<CinemachineVirtualCamera>();
     }
 
     public void SetCameraPriority(int targetPriority)
