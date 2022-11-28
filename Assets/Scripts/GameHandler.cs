@@ -7,9 +7,22 @@ using Cinemachine;
 
 public class GameHandler : MonoBehaviour
 {
-    public PlayerBehaviour[] _players;
-    public CameraBehaviour[] _freelookCamera;
-
+    [field: SerializeField] public PlayerBehaviour[] _players;
+    [field: SerializeField] public CameraBehaviour[] _freelookCamera;
+    [field: SerializeField] public PlayerBehaviour _controlledPlayer { get
+        {
+            PlayerBehaviour result = null;
+            foreach (var item in _players)
+            {
+                if (item._isSelected)
+                {
+                    result = item;
+                }
+            }
+            return result;
+        }
+    }
+ 
     private void Start()
     {
         InitEvents();
@@ -26,7 +39,7 @@ public class GameHandler : MonoBehaviour
         {
             item.InitCharacterEvents(this);
             //item.onMoveClicked
-            item.onSelectCharacter += OnChangedCharacted;
+            //item.onSelectCharacter += OnChangedCharacted;
         }
     }    
 

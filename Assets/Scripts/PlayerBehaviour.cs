@@ -9,12 +9,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    [field : SerializeField]
-    public int CharacterId { get; private set; } 
-
-    [SerializeField] bool _isSelected;
+    [field : SerializeField] public int _characterId { get; private set; } 
+    [field : SerializeField] public bool _isSelected { get; private set; }
+    [field : SerializeField] public Rigidbody _rigidbody { get; private set; }
     //[SerializeField] float _speed;
-    [SerializeField] AIPath _pathFinder;
+    [field: SerializeField] public AIPath _pathFinder { get; private set; }
+    [field: SerializeField] public Seeker _seekerObject { get; private set; }
     [SerializeField] GameHandler _gameHandler;
     [SerializeField] EventTrigger _eventTrigger;
 
@@ -38,7 +38,7 @@ public class PlayerBehaviour : MonoBehaviour
 
             foreach (var item in _gameHandler._freelookCamera)
             {
-                if (item.CameraId == CharacterId)
+                if (item.CameraId == _characterId)
                 {
                     item.SetCameraPriority(1);
                 }
