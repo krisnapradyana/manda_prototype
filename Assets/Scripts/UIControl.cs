@@ -3,21 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using System;
 
 public class UIControl : MonoBehaviour
 {
+    public event Action onReturnInspectPressed;
+
+    [Header("UI Interaction")]
+    [SerializeField] Button _returnButton;
+
+    [Header("Basic Attributes")]
     [SerializeField] public TMP_Text _popupText0;
     [SerializeField] public TMP_Text _popupText1;
     [SerializeField] private RectTransform _popupPivot0;
     [SerializeField] private RectTransform _popupPivot1;
 
     Vector3 mousePosition;
+    float halfScreenWidth;
+
+    private void OnDestroy()
+    {
+        onReturnInspectPressed = null;
+    }
+
+    private void Start()
+    {
+        halfScreenWidth = Screen.width / 2;
+        RegisterUIEvents();
+    }
 
     private void Update()
     {
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition.z = 10f;
         _popupPivot0.anchoredPosition = _popupPivot1.anchoredPosition = mousePosition;
+    }
+
+    void RegisterUIEvents()
+    {
+        _returnButton.onClick.AddListener(() =>
+        {
+            onReturnInspectPressed?.Invoke();
+        });
     }
 
     public void ToggleHoverInfo(bool visibility, GameObject passedObject = null)
@@ -32,7 +60,7 @@ public class UIControl : MonoBehaviour
 
         _popupPivot0.gameObject.SetActive(false);
         _popupPivot1.gameObject.SetActive(false);
-        if (mousePosition.x > Screen.width/2)
+        if (mousePosition.x > halfScreenWidth)
         {
             _popupPivot1.gameObject.SetActive(visibility);
         }
