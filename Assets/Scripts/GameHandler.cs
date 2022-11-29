@@ -14,7 +14,7 @@ public class GameHandler : MonoBehaviour
             PlayerBehaviour result = null;
             foreach (var item in _players)
             {
-                if (item._isSelected)
+                if (item.IsSelected)
                 {
                     result = item;
                 }

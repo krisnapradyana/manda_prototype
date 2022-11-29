@@ -9,17 +9,24 @@ using UnityEngine.InputSystem;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    [field : SerializeField] public int _characterId { get; private set; } 
-    [field : SerializeField] public bool _isSelected { get; private set; }
-    [field : SerializeField] public Rigidbody _rigidbody { get; private set; }
-    //[SerializeField] float _speed;
-    [field: SerializeField] public AIPath _pathFinder { get; private set; }
-    [field: SerializeField] public Seeker _seekerObject { get; private set; }
+    [field : SerializeField] public int CharacterId { get; private set; } 
+    [field : SerializeField] public bool IsSelected { get; private set; }
+    [field : SerializeField] public Rigidbody Rigidbody { get; private set; }
+    [field: SerializeField] public Seeker SeekerObject { get; private set; }
+    [field: SerializeField] public AIPath AiPath { get; private set; }
+
+    [Header("References")]
     [SerializeField] GameHandler _gameHandler;
     [SerializeField] EventTrigger _eventTrigger;
+    [SerializeField] Animator _characterAnimator;
 
     //public event Action onMoveClicked;
     public event Action onSelectCharacter;
+
+    void FixedUpdate()
+    {
+        _characterAnimator.SetFloat("Velocity", AiPath.velocity.magnitude);
+    }
 
     public void InitCharacterEvents(GameHandler handler)
     {
@@ -28,27 +35,37 @@ public class PlayerBehaviour : MonoBehaviour
 
         _eventTrigger.AddEvent(EventTriggerType.PointerClick, (data) =>
         {
-            Debug.Log("Trying to select character : "+ gameObject.name);
-            if (_isSelected)
+            if (IsSelected)
             {
                 return;
             }
-            Debug.Log("Character : " + gameObject.name);
-            onSelectCharacter?.Invoke();
-            ToggleSelected(true);
 
-            foreach (var item in _gameHandler._cameras)
+            if (Mouse.current.leftButton.wasReleasedThisFrame)
             {
-                if (item.CameraId == _characterId)
+                Debug.Log("Trying to select character : "+ gameObject.name);
+                Debug.Log("Character : " + gameObject.name);
+                onSelectCharacter?.Invoke();
+                ToggleSelected(true);
+
+                foreach (var item in _gameHandler._cameras)
                 {
-                    item.SetCameraPriority(1);
+                    if (item.CameraId == CharacterId)
+                    {
+                        item.SetCameraPriority(1);
+                    }
                 }
+                return;
             }
         });
     }
 
     public void ToggleSelected(bool state)
     {
-        _isSelected = state;
+        IsSelected = state;
+    }
+
+    public void MoveCharacter(Vector3 targetPosition)
+    {
+        SeekerObject.StartPath(_gameHandler._controlledPlayer.transform.position, targetPosition);
     }
 }

@@ -14,7 +14,6 @@ public class InputListener : MonoBehaviour
     Camera _cam;
     int layerMask = 1 << 9;
     
-
     private void Awake()
     {
       _moveAction.Enable();
@@ -41,7 +40,7 @@ public class InputListener : MonoBehaviour
     public void MoveByMouse(Vector3 targetPosition)
     {
         _testCursor.transform.position = new Vector3(targetPosition.x, 2, targetPosition.z);
-        _gameHandler._controlledPlayer._seekerObject.StartPath(_gameHandler._controlledPlayer.transform.position, targetPosition);
+        _gameHandler._controlledPlayer.MoveCharacter(targetPosition);
     }
 
     private Vector3 GetWorldPoint()
