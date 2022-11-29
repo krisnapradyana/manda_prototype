@@ -40,7 +40,7 @@ public class InputListener : MonoBehaviour
     public void MoveByMouse(Vector3 targetPosition)
     {
         _testCursor.transform.position = new Vector3(targetPosition.x, 2, targetPosition.z);
-        _gameHandler._controlledPlayer.MoveCharacter(targetPosition);
+        _gameHandler.ControlledPlayer.MoveCharacter(targetPosition);
     }
 
     private Vector3 GetWorldPoint()
@@ -51,7 +51,6 @@ public class InputListener : MonoBehaviour
         Vector3 point = Vector3.zero;
         if(Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            //Debug.LogFormat("Mouse Position : x{0}, y{1}, z{2} ", hit.point.normalized.x, hit.point.normalized.y, hit.point.normalized.z);
             point = new Vector3(hit.point.x, hit.point.y, hit.point.z);
         }
         return point;

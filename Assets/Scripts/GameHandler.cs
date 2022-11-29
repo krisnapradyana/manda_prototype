@@ -7,12 +7,17 @@ using Cinemachine;
 
 public class GameHandler : MonoBehaviour
 {
-    [field: SerializeField] public PlayerBehaviour[] _players;
-    [field: SerializeField] public CameraBehaviour[] _cameras;
-    [field: SerializeField] public PlayerBehaviour _controlledPlayer { get
+    [Header("References")]
+    [SerializeField] UIControl _uiControl;
+
+    [Header("Getter Setter Fields")]
+    [field: SerializeField] public PlayerBehaviour[] Players;
+    [field: SerializeField] public CameraBehaviour[] Cameras;
+    [field: SerializeField] public BuildingBehaviour[] Buildings;
+    [field: SerializeField] public PlayerBehaviour ControlledPlayer { get
         {
             PlayerBehaviour result = null;
-            foreach (var item in _players)
+            foreach (var item in Players)
             {
                 if (item.IsSelected)
                 {
@@ -22,10 +27,16 @@ public class GameHandler : MonoBehaviour
             return result;
         }
     }
- 
+
+    private void OnDestroy()
+    {
+   
+    }
+
     private void Start()
     {
         Debug.Log("Starting handler");
+        InitObjects();
         InitEvents();
     }
 
@@ -34,12 +45,24 @@ public class GameHandler : MonoBehaviour
         
     }
 
+    private void InitObjects()
+    {
+        foreach (var item in Buildings)
+        {
+            Debug.Log("Initializing Objects");
+            item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(true, info.gameObject);
+            item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo(false);
+        }
+    }
+
     private void InitEvents()
     {
-        foreach (var item in _players)
+        foreach (var item in Players)
         {
             Debug.Log("Creating event");
             item.InitCharacterEvents(this);
+            item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(true, info.gameObject);
+            item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo(false);
             item.onSelectCharacter += OnChangedCharacted;
         }
     }    
@@ -47,12 +70,12 @@ public class GameHandler : MonoBehaviour
     public void OnChangedCharacted()
     {
         Debug.Log("Changed character");
-        foreach (var item in _players)
+        foreach (var item in Players)
         {
             item.ToggleSelected(false);
         }
 
-        foreach (var item in _cameras)
+        foreach (var item in Cameras)
         {
             item.SetCameraPriority(0);
         }

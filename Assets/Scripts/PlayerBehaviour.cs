@@ -20,8 +20,16 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] EventTrigger _eventTrigger;
     [SerializeField] Animator _characterAnimator;
 
-    //public event Action onMoveClicked;
+    public event Action<PlayerBehaviour> onHoverObject;
+    public event Action<PlayerBehaviour> onExitHoverObject;
     public event Action onSelectCharacter;
+
+    private void OnDestroy()
+    {
+        onSelectCharacter = null;
+        onExitHoverObject = null;
+        onHoverObject = null;
+    }
 
     void FixedUpdate()
     {
@@ -32,6 +40,20 @@ public class PlayerBehaviour : MonoBehaviour
     {
         _gameHandler = handler;
         _eventTrigger = GetComponent<EventTrigger>();
+
+        _eventTrigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
+        {
+            if (IsSelected)
+            {
+                return;
+            }
+            onHoverObject?.Invoke(this);
+        });
+
+        _eventTrigger.AddEvent(EventTriggerType.PointerExit, (data) =>
+        {
+            onExitHoverObject?.Invoke(this);
+        });
 
         _eventTrigger.AddEvent(EventTriggerType.PointerClick, (data) =>
         {
@@ -47,7 +69,7 @@ public class PlayerBehaviour : MonoBehaviour
                 onSelectCharacter?.Invoke();
                 ToggleSelected(true);
 
-                foreach (var item in _gameHandler._cameras)
+                foreach (var item in _gameHandler.Cameras)
                 {
                     if (item.CameraId == CharacterId)
                     {
@@ -66,6 +88,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     public void MoveCharacter(Vector3 targetPosition)
     {
-        SeekerObject.StartPath(_gameHandler._controlledPlayer.transform.position, targetPosition);
+        SeekerObject.StartPath(_gameHandler.ControlledPlayer.transform.position, targetPosition);
     }
 }
