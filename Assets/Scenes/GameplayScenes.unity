@@ -1362,7 +1362,7 @@ GameObject:
   - component: {fileID: 246674685}
   - component: {fileID: 246674686}
   m_Layer: 3
-  m_Name: Blaksmith
+  m_Name: Blacksmith
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4472,6 +4472,7 @@ MonoBehaviour:
   - {fileID: 1972924865}
   - {fileID: 125328281}
   - {fileID: 1851450997}
+  <IsInspecting>k__BackingField: 0
 --- !u!114 &1365287720
 MonoBehaviour:
   m_ObjectHideFlags: 0

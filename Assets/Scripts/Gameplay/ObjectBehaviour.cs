@@ -40,6 +40,10 @@ public class ObjectBehaviour : MonoBehaviour
 
         _eventTrigger.AddEvent(EventTriggerType.PointerClick, (data) =>
         {
+            if (_gameHandler.IsInspecting)
+            {
+                return;
+            }
             onInteractObject?.Invoke(this);
         });
     }

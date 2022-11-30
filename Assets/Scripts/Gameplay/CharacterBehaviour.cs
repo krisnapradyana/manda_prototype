@@ -72,6 +72,10 @@ public class CharacterBehaviour : MonoBehaviour
                 {
                     Debug.Log("Scelected as NPC");
 
+                    if (_gameHandler.IsInspecting)
+                    {
+                        return;
+                    }
                     onInteractCharacter?.Invoke(this);
                     return;
                 }
