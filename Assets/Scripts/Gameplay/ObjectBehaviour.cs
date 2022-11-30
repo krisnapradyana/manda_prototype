@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BuildingBehaviour : MonoBehaviour
+public class ObjectBehaviour : MonoBehaviour
 {
     [Header("Properties")]
     [SerializeField] GameHandler _gameHandler;
     [SerializeField] EventTrigger _eventTrigger;
 
-    public event Action<BuildingBehaviour> onHoverObject;
-    public event Action<BuildingBehaviour> onExitHoverObject;
+    public event Action<ObjectBehaviour> onHoverObject;
+    public event Action<ObjectBehaviour> onExitHoverObject;
 
     private void OnDestroy()
     {

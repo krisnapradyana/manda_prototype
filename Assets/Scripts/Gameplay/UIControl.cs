@@ -48,12 +48,12 @@ public class UIControl : MonoBehaviour
         });
     }
 
-    public void ToggleHoverInfo(bool visibility, GameObject passedObject = null)
+    public void ToggleHoverInfo(bool visibility, GameObject passedObjectData = null)
     {
         GameObject hoveredObject= null;
-        if (passedObject != null)
+        if (passedObjectData != null)
         {
-            hoveredObject = passedObject;
+            hoveredObject = passedObjectData;
             _popupText0.text = _popupText1.text = hoveredObject.name;
         }
         else Debug.LogWarning("No Passed object");
@@ -68,5 +68,10 @@ public class UIControl : MonoBehaviour
         {
             _popupPivot0.gameObject.SetActive(visibility);
         }
+    }
+
+    public void ToggleExitButtonVisibility(bool visibility)
+    {
+        _returnButton.gameObject.SetActive(visibility);
     }
 }

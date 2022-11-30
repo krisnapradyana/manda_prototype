@@ -15,7 +15,8 @@ public class GameHandler : MonoBehaviour
     [Header("Getter Setter Fields")]
     [field: SerializeField] public CharacterBehaviour[] Players;
     [field: SerializeField] public CameraBehaviour[] Cameras;
-    [field: SerializeField] public BuildingBehaviour[] Buildings;
+    [field: SerializeField] public ObjectBehaviour[] Buildings;
+    [field: SerializeField] public ObjectBehaviour[] Objects;
     [field: SerializeField] public CharacterBehaviour ControlledPlayer { get
         {
             CharacterBehaviour result = null;
@@ -59,6 +60,12 @@ public class GameHandler : MonoBehaviour
             item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(true, info.gameObject);
             item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo(false);
         }
+
+        foreach (var item in Objects)
+        {
+            item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(true, info.gameObject);
+            item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo(false);
+        }
     }
 
     private void InitEvents()
@@ -96,6 +103,7 @@ public class GameHandler : MonoBehaviour
 
         _playgroundParent.SetActive(false);
         _inspectParent.SetActive(true);
+        _uiControl.ToggleExitButtonVisibility(true);
         SetCameraPriority(3,false);
         Debug.Log("Inspecting Character : " + character.name);
     }
@@ -107,7 +115,7 @@ public class GameHandler : MonoBehaviour
 
         _playgroundParent.SetActive(true);
         _inspectParent.SetActive(false);
-
+        _uiControl.ToggleExitButtonVisibility(false);
         SetCameraPriority(_lastCameraPriority, false);
     }
 

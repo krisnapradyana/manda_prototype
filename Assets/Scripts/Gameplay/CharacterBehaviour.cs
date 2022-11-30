@@ -66,21 +66,21 @@ public class CharacterBehaviour : MonoBehaviour
 
         _eventTrigger.AddEvent(EventTriggerType.PointerClick, (data) =>
         {
-            if (IsNPC)
-            {
-                Debug.Log("Scelected as NPC");
-
-                onInteractCharacter?.Invoke(this);
-                return;
-            }
-
-            if (IsSelected)
-            {
-                return;
-            }
-
             if (Mouse.current.leftButton.wasReleasedThisFrame)
             {
+                if (IsNPC)
+                {
+                    Debug.Log("Scelected as NPC");
+
+                    onInteractCharacter?.Invoke(this);
+                    return;
+                }
+
+                if (IsSelected)
+                {
+                    return;
+                }
+
                 onSelectCharacter?.Invoke();
                 ToggleSelected(true);
                 _gameHandler.SetCameraPriority(CharacterId);
@@ -98,7 +98,7 @@ public class CharacterBehaviour : MonoBehaviour
     {
         _targetDistance = Vector3.Distance(_gameHandler.ControlledPlayer.transform.position, targetPosition);
         Debug.Log("Distance to Point : " + _targetDistance);
-        if (_targetDistance > 4.5)
+        if (_targetDistance > 6)
         {
             AiPath.maxSpeed = _runSpeed;
             _divider = 1;
