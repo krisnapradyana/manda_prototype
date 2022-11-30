@@ -10,7 +10,7 @@ public class GameHandler : MonoBehaviour
     [Header("References")]
     [SerializeField] UIControl _uiControl;
     [SerializeField] GameObject _playgroundParent;
-    [SerializeField] GameObject _inspectParent;
+    [SerializeField] InspectGroundBehaviour _inspectParent;
 
     [Header("Getter Setter Fields")]
     [field: SerializeField] public CharacterBehaviour[] Players;
@@ -30,15 +30,13 @@ public class GameHandler : MonoBehaviour
             return result;
         }
     }
+    [field: SerializeField] public bool IsInspecting { get; private set; }
 
     CharacterBehaviour _inspectedCharacter;
+    ObjectBehaviour _inspectedObject;
     Quaternion _selectedRotationData;
     int _lastCameraPriority;
-
-    private void OnDestroy()
-    {
-   
-    }
+    bool _hasInspectCharacter;
 
     private void Start()
     {
@@ -47,39 +45,64 @@ public class GameHandler : MonoBehaviour
         InitEvents();
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void InitObjects()
     {
         foreach (var item in Buildings)
         {
             Debug.Log("Initializing Objects");
-            item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(true, info.gameObject);
-            item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo(false);
+            item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info, _uiControl.MousePivot);
+            item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
+            item.onInteractObject += (info) => info.OnObjectInspected(out _inspectedObject, out _selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
+            {
+                SetCameraPriority(3, false);
+                _hasInspectCharacter = false;
+                _inspectParent.ToggleInspectionBackground(false);
+                IsInspecting = true;
+            });
         }
 
         foreach (var item in Objects)
         {
-            item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(true, info.gameObject);
-            item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo(false);
+            item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info, _uiControl.MousePivot);
+            item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
         }
     }
 
     private void InitEvents()
     {
-        _uiControl.onReturnInspectPressed += ()=> ExitInpectCharacter(_inspectedCharacter);
+        _uiControl.onReturnInspectPressed += () =>
+        {
+            if (_hasInspectCharacter)
+            {
+                _inspectedCharacter.ExitInspectCharacter(_selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
+                {
+                    SetCameraPriority(_lastCameraPriority, false);
+                });
+            }
+            else
+            {
+                _inspectedObject.ExitInspectObject(_selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
+                {
+                    SetCameraPriority(_lastCameraPriority, false);
+                });
+            }
+            IsInspecting = false;
+        };
 
         foreach (var item in Players)
         {
             Debug.Log("Creating event");
             item.InitCharacterEvents(this);
-            item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(true, info.gameObject);
-            item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo(false);
+            item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info, _uiControl.MousePivot);
+            item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
             item.onSelectCharacter += OnChangedCharacted;
-            item.onInteractCharacter += (character) => OnCharacterInspected(character);
+            item.onInteractCharacter += (info) => info.OnCharacterInspected(out _inspectedCharacter, out _selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
+            {
+                SetCameraPriority(3, false);
+                _hasInspectCharacter = true;
+                _inspectParent.ToggleInspectionBackground(true);
+                IsInspecting = true;
+            });
         }
     }    
 
@@ -91,32 +114,6 @@ public class GameHandler : MonoBehaviour
             item.ToggleSelected(false);
         }
         ResetAllVirtualCameraPriority();
-    }
-
-    public void OnCharacterInspected(CharacterBehaviour character)
-    {
-        _inspectedCharacter = character;
-        _selectedRotationData = _inspectedCharacter.transform.rotation;
-        _inspectParent.transform.position = new Vector3(_inspectedCharacter.transform.position.x, 0, _inspectedCharacter.transform.position.z);
-        _inspectedCharacter.transform.rotation = Quaternion.Euler(0, -130, 0);
-        _inspectedCharacter.transform.parent = _inspectParent.transform;
-
-        _playgroundParent.SetActive(false);
-        _inspectParent.SetActive(true);
-        _uiControl.ToggleExitButtonVisibility(true);
-        SetCameraPriority(3,false);
-        Debug.Log("Inspecting Character : " + character.name);
-    }
-
-    public void ExitInpectCharacter(CharacterBehaviour character)
-    {
-        character.transform.rotation = _selectedRotationData;
-        character.transform.parent = _playgroundParent.transform;
-
-        _playgroundParent.SetActive(true);
-        _inspectParent.SetActive(false);
-        _uiControl.ToggleExitButtonVisibility(false);
-        SetCameraPriority(_lastCameraPriority, false);
     }
 
     public void SetCameraPriority(int comparedId, bool saveLastId = true)

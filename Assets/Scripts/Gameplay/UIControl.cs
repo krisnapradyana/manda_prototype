@@ -19,6 +19,8 @@ public class UIControl : MonoBehaviour
     [SerializeField] private RectTransform _popupPivot0;
     [SerializeField] private RectTransform _popupPivot1;
 
+    [field : SerializeField] public RectTransform MousePivot;
+
     Vector3 mousePosition;
     float halfScreenWidth;
 
@@ -37,7 +39,7 @@ public class UIControl : MonoBehaviour
     {
         mousePosition = Mouse.current.position.ReadValue();
         mousePosition.z = 10f;
-        _popupPivot0.anchoredPosition = _popupPivot1.anchoredPosition = mousePosition;
+        MousePivot.anchoredPosition = _popupPivot0.anchoredPosition = _popupPivot1.anchoredPosition = mousePosition;
     }
 
     void RegisterUIEvents()
@@ -48,18 +50,31 @@ public class UIControl : MonoBehaviour
         });
     }
 
-    public void ToggleHoverInfo(bool visibility, GameObject passedObjectData = null)
+    /// <summary>
+    /// To toggle false simply by not include any parameters
+    /// </summary>
+    /// <param name="passedObjectData"></param>
+    public UIControl ToggleHoverInfo(GameObject passedObjectData = null)
     {
-        GameObject hoveredObject= null;
+        bool visibility = false;
+        if (passedObjectData == null)
+        {
+            visibility = false;
+        }
+        else
+        {
+            visibility = true;
+        }
+
         if (passedObjectData != null)
         {
-            hoveredObject = passedObjectData;
-            _popupText0.text = _popupText1.text = hoveredObject.name;
+            _popupText0.text = _popupText1.text = passedObjectData.name;
         }
         else Debug.LogWarning("No Passed object");
 
         _popupPivot0.gameObject.SetActive(false);
         _popupPivot1.gameObject.SetActive(false);
+        MousePivot.gameObject.SetActive(false);
         if (mousePosition.x > halfScreenWidth)
         {
             _popupPivot1.gameObject.SetActive(visibility);
@@ -68,6 +83,8 @@ public class UIControl : MonoBehaviour
         {
             _popupPivot0.gameObject.SetActive(visibility);
         }
+
+        return this;
     }
 
     public void ToggleExitButtonVisibility(bool visibility)

@@ -10,8 +10,10 @@ public class ObjectBehaviour : MonoBehaviour
     [SerializeField] GameHandler _gameHandler;
     [SerializeField] EventTrigger _eventTrigger;
 
+    [field: SerializeField] public bool IsInspectable;
     public event Action<ObjectBehaviour> onHoverObject;
     public event Action<ObjectBehaviour> onExitHoverObject;
+    public event Action<ObjectBehaviour> onInteractObject;
 
     private void OnDestroy()
     {
@@ -34,6 +36,11 @@ public class ObjectBehaviour : MonoBehaviour
         {
             Debug.Log("Exited on building : " + gameObject.name);
             onExitHoverObject?.Invoke(this);
+        });
+
+        _eventTrigger.AddEvent(EventTriggerType.PointerClick, (data) =>
+        {
+            onInteractObject?.Invoke(this);
         });
     }
 
