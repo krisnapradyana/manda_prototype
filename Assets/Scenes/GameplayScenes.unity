@@ -1192,7 +1192,7 @@ GameObject:
   - component: {fileID: 246674685}
   - component: {fileID: 246674686}
   m_Layer: 3
-  m_Name: Building 2
+  m_Name: Blaksmith
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3920,7 +3920,7 @@ PrefabInstance:
     - target: {fileID: 2706904945158138114, guid: ee94bfe36b3183e47bc553806d120b63,
         type: 3}
       propertyPath: m_Name
-      value: npc
+      value: NPC Commander
       objectReference: {fileID: 0}
     - target: {fileID: 2706904945158138114, guid: ee94bfe36b3183e47bc553806d120b63,
         type: 3}
@@ -4088,7 +4088,7 @@ GameObject:
   - component: {fileID: 1525894013}
   - component: {fileID: 1525894014}
   m_Layer: 3
-  m_Name: Building 3
+  m_Name: Wizard Academy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4423,7 +4423,7 @@ GameObject:
   - component: {fileID: 1657859399}
   - component: {fileID: 1657859400}
   m_Layer: 3
-  m_Name: Building 1
+  m_Name: Barracks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4918,7 +4918,7 @@ PrefabInstance:
     - target: {fileID: 2706904945158138114, guid: ee94bfe36b3183e47bc553806d120b63,
         type: 3}
       propertyPath: m_Name
-      value: npc
+      value: Commander P2
       objectReference: {fileID: 0}
     - target: {fileID: 2706904945158138114, guid: ee94bfe36b3183e47bc553806d120b63,
         type: 3}
@@ -6034,7 +6034,7 @@ PrefabInstance:
     - target: {fileID: 2706904945158138114, guid: ee94bfe36b3183e47bc553806d120b63,
         type: 3}
       propertyPath: m_Name
-      value: Commander_LvDown_rigged@Walking
+      value: Commander P1
       objectReference: {fileID: 0}
     - target: {fileID: 2977356976954741864, guid: ee94bfe36b3183e47bc553806d120b63,
         type: 3}
