@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class IntroManager : MonoBehaviour
 {
+    [SerializeField] Transform _mainPlatform;
     [SerializeField] Animator[] _introCharacterAnimator;
     [SerializeField] CinemachineVirtualCamera _virtualCamera;
 
@@ -23,7 +25,8 @@ public class IntroManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         _virtualCamera.Priority = 2;
-        yield return new WaitForSeconds(5f);
+        _mainPlatform.DORotate(Vector3.zero, 5);
+        yield return new WaitForSeconds(7.5f);
         //move scene
         SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
