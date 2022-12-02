@@ -18,6 +18,21 @@ public static class EventTriggerShortcut
     }
 }
 
+public static class AccessComponents
+{
+    /// <summary>
+    /// Shorthand of GetComponent
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="gameobject"></param>
+    /// <returns></returns>
+    public static T Acquire<T> (this GameObject gameobject)
+    {
+        var aquiredClass = gameobject.GetComponent<T>();
+        return aquiredClass;
+    }
+}
+
 public static class UIMouseVisibility
 {
     public static UIControl ToggleMouse(this UIControl uiControl, CharacterBehaviour characterBehaviour, RectTransform mouseImage)

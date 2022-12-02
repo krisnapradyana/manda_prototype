@@ -8,14 +8,28 @@ using DG.Tweening;
 public class IntroManager : MonoBehaviour
 {
     [SerializeField] Transform _mainPlatform;
-    [SerializeField] Animator[] _introCharacterAnimator;
+    [SerializeField] SelectableCharacter[] _introCharacter;
     [SerializeField] CinemachineVirtualCamera _virtualCamera;
+
+    public GameDataContainer gameDataContainer;
+    bool _hasSelected;
+
+    private void OnDestroy()
+    {
+
+    }
 
     private void Start()
     {
-        for (int i = 0; i < _introCharacterAnimator.Length; i++)
+        gameDataContainer = FindObjectOfType<GameDataContainer>();
+
+        foreach (var item in _introCharacter)
         {
-            _introCharacterAnimator[i].SetFloat("AnimId", i);
+            
+            item.onSelectCharacter += () =>
+            {
+                gameDataContainer.SelectedCharacterIndex = item.CharacterId;
+            };
         }
 
         StartCoroutine(DelayMoveCamera());
@@ -26,7 +40,9 @@ public class IntroManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         _virtualCamera.Priority = 2;
         _mainPlatform.DORotate(Vector3.zero, 5);
-        yield return new WaitForSeconds(7.5f);
+
+        yield return new WaitUntil(() => _hasSelected == true);
+        yield return new WaitForSeconds(3f);
         //move scene
         SceneManager.LoadScene(1, LoadSceneMode.Single);
     }

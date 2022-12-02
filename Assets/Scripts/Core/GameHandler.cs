@@ -55,9 +55,9 @@ namespace Gameplay
             foreach (var item in Buildings)
             {
                 Debug.Log("Initializing Objects");
-                item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info, _uiControl.MousePivot);
+                item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.Acquire<CharacterBehaviour>(), _uiControl.MousePivot);
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
-                item.onInteractObject += (info) => info.OnObjectInspected(out _inspectedObject, out _selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
+                item.onInteractObject += (info) => info.Acquire<ObjectBehaviour>().OnObjectInspected(out _inspectedObject, out _selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
                 {
                     SetCameraPriority(3, false);
                     _hasInspectCharacter = false;
@@ -68,7 +68,7 @@ namespace Gameplay
 
             foreach (var item in Objects)
             {
-                item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info, _uiControl.MousePivot);
+                item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.Acquire<CharacterBehaviour>(), _uiControl.MousePivot);
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
             }
         }
@@ -98,10 +98,10 @@ namespace Gameplay
             {
                 Debug.Log("Creating event");
                 item.InitCharacterEvents(this);
-                item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info, _uiControl.MousePivot);
+                item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.Acquire<CharacterBehaviour>(), _uiControl.MousePivot);
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
                 item.onSelectCharacter += OnChangedCharacted;
-                item.onInteractCharacter += (info) => info.OnCharacterInspected(out _inspectedCharacter, out _selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
+                item.onInteractObject += (info) => info.Acquire<CharacterBehaviour>().OnCharacterInspected(out _inspectedCharacter, out _selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
                 {
                     SetCameraPriority(3, false);
                     _hasInspectCharacter = true;

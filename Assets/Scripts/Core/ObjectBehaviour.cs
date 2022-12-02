@@ -6,16 +6,19 @@ using UnityEngine.EventSystems;
 
 namespace Gameplay
 {
-    public class ObjectBehaviour : MonoBehaviour
+    [RequireComponent(typeof(EventTrigger))]
+    public class ObjectBehaviour : MonoBehaviour, InteractableObject
     {
         [Header("Properties")]
         [SerializeField] GameHandler _gameHandler;
-        [SerializeField] EventTrigger _eventTrigger;
 
-        [field: SerializeField] public bool IsInspectable;
-        public event Action<ObjectBehaviour> onHoverObject;
-        public event Action<ObjectBehaviour> onExitHoverObject;
-        public event Action<ObjectBehaviour> onInteractObject;
+        [field: SerializeField] public EventTrigger Trigger { get ; set ; }
+        public bool IsInspectable { get; set; }
+
+        public event Action<GameObject> onHoverObject;
+        public event Action<GameObject> onExitHoverObject;
+        public event Action<GameObject> onInteractObject;
+
 
         private void OnDestroy()
         {
@@ -27,33 +30,28 @@ namespace Gameplay
         void Start()
         {
             _gameHandler = FindObjectOfType<GameHandler>();
+            Trigger = gameObject.Acquire<EventTrigger>();
 
-            _eventTrigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
+            Trigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
             {
                 Debug.Log("Hovered on building : " + gameObject.name);
-                onHoverObject?.Invoke(this);
+                onHoverObject?.Invoke(this.gameObject);
             });
 
-            _eventTrigger.AddEvent(EventTriggerType.PointerExit, (data) =>
+            Trigger.AddEvent(EventTriggerType.PointerExit, (data) =>
             {
                 Debug.Log("Exited on building : " + gameObject.name);
-                onExitHoverObject?.Invoke(this);
+                onExitHoverObject?.Invoke(this.gameObject);
             });
 
-            _eventTrigger.AddEvent(EventTriggerType.PointerClick, (data) =>
+            Trigger.AddEvent(EventTriggerType.PointerClick, (data) =>
             {
                 if (_gameHandler.IsInspecting)
                 {
                     return;
                 }
-                onInteractObject?.Invoke(this);
+                onInteractObject?.Invoke(this.gameObject);
             });
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

@@ -9,19 +9,17 @@ using UnityEngine.InputSystem;
 
 namespace Gameplay
 {
-    public class CharacterBehaviour : MonoBehaviour
+    public class CharacterBehaviour : MonoBehaviour, InteractableObject
     {
-        public event Action<CharacterBehaviour> onHoverObject;
-        public event Action<CharacterBehaviour> onExitHoverObject;
-        public event Action<CharacterBehaviour> onInteractCharacter;
         public event Action onSelectCharacter;
-
         [field: SerializeField] public int CharacterId { get; private set; }
         [field: SerializeField] public bool IsSelected { get; private set; }
         [field: SerializeField] public bool IsNPC { get; private set; }
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
         [field: SerializeField] public Seeker SeekerObject { get; private set; }
         [field: SerializeField] public AIPath AiPath { get; private set; }
+        public EventTrigger Trigger { get; set; }
+        public bool IsInspectable { get; set; }
 
         [SerializeField] float _runSpeed;
         [SerializeField] float _walkSpeed;
@@ -34,12 +32,16 @@ namespace Gameplay
         private float _targetDistance;
         private float _divider = 1;
 
+        public event Action<GameObject> onHoverObject;
+        public event Action<GameObject> onExitHoverObject;
+        public event Action<GameObject> onInteractObject;
+
         private void OnDestroy()
         {
             onSelectCharacter = null;
             onExitHoverObject = null;
             onHoverObject = null;
-            onInteractCharacter = null;
+            onInteractObject = null;
         }
 
         void FixedUpdate()
@@ -58,12 +60,12 @@ namespace Gameplay
                 {
                     return;
                 }
-                onHoverObject?.Invoke(this);
+                onHoverObject?.Invoke(gameObject);
             });
 
             _eventTrigger.AddEvent(EventTriggerType.PointerExit, (data) =>
             {
-                onExitHoverObject?.Invoke(this);
+                onExitHoverObject?.Invoke(gameObject);
             });
 
             _eventTrigger.AddEvent(EventTriggerType.PointerClick, (data) =>
@@ -78,7 +80,7 @@ namespace Gameplay
                         {
                             return;
                         }
-                        onInteractCharacter?.Invoke(this);
+                        onInteractObject?.Invoke(gameObject);
                         return;
                     }
 

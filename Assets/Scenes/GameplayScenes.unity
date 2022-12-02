@@ -2211,8 +2211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameHandler: {fileID: 0}
-  _eventTrigger: {fileID: 246674685}
-  IsInspectable: 0
+  <_eventTrigger>k__BackingField: {fileID: 0}
 --- !u!114 &246674685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5060,8 +5059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameHandler: {fileID: 0}
-  _eventTrigger: {fileID: 778711190}
-  IsInspectable: 0
+  <_eventTrigger>k__BackingField: {fileID: 0}
 --- !u!1 &786908346 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4591612842677794615, guid: d26ec17856b2e124fabfa953893554a8,
@@ -8442,8 +8440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameHandler: {fileID: 0}
-  _eventTrigger: {fileID: 1293855327}
-  IsInspectable: 1
+  <_eventTrigger>k__BackingField: {fileID: 1293855327}
 --- !u!65 &1293855326
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9764,8 +9761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameHandler: {fileID: 0}
-  _eventTrigger: {fileID: 1525894013}
-  IsInspectable: 1
+  <_eventTrigger>k__BackingField: {fileID: 0}
 --- !u!114 &1525894013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10528,8 +10524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameHandler: {fileID: 0}
-  _eventTrigger: {fileID: 1657859399}
-  IsInspectable: 1
+  <_eventTrigger>k__BackingField: {fileID: 0}
 --- !u!114 &1657859399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11408,8 +11403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameHandler: {fileID: 0}
-  _eventTrigger: {fileID: 1846965341}
-  IsInspectable: 0
+  <_eventTrigger>k__BackingField: {fileID: 0}
 --- !u!1001 &1887992847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12937,8 +12931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameHandler: {fileID: 0}
-  _eventTrigger: {fileID: 2026633839}
-  IsInspectable: 0
+  <_eventTrigger>k__BackingField: {fileID: 0}
 --- !u!1 &2038142951 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2739113576511103735, guid: ca665daac5b990b4e9599676b4391335,
