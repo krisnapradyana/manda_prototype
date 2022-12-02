@@ -6,8 +6,8 @@ using UnityEngine.EventSystems;
 
 public interface InteractableObject 
 {
-    [SerializeField] EventTrigger Trigger { get; set; }
-    [field: SerializeField] public bool IsInspectable { get; set; }
+    public EventTrigger Trigger { get => Trigger; set => Trigger = value; }
+    public bool IsInspectable { get; set; }
     public event Action<GameObject> onHoverObject;
     public event Action<GameObject> onExitHoverObject;
     public event Action<GameObject> onInteractObject;

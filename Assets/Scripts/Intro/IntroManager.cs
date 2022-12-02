@@ -24,11 +24,20 @@ public class IntroManager : MonoBehaviour
         gameDataContainer = FindObjectOfType<GameDataContainer>();
 
         foreach (var item in _introCharacter)
-        {
-            
+        {   
             item.onSelectCharacter += () =>
             {
                 gameDataContainer.SelectedCharacterIndex = item.CharacterId;
+            };
+
+            item.onHoverObject += (obj) =>
+            {
+               
+            };
+
+            item.onExitHoverObject += (obj) =>
+            {
+
             };
         }
 

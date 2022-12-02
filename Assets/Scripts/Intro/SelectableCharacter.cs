@@ -5,13 +5,17 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(EventTrigger))]
-public class SelectableCharacter : MonoBehaviour
+public class SelectableCharacter : MonoBehaviour, InteractableObject
 {
     [field : SerializeField] public int CharacterId { get; private set; }
     [field: SerializeField] public Animator IntroCharacterAnimator { get; private set; }
-    public EventTrigger _eventTrigger;
+    public EventTrigger Trigger { get; private set; }
+    public bool IsInspectable { get; set; }
 
     public event Action onSelectCharacter;
+    public event Action<GameObject> onHoverObject;
+    public event Action<GameObject> onExitHoverObject;
+    public event Action<GameObject> onInteractObject;
 
     private void OnDestroy()
     {
@@ -25,7 +29,7 @@ public class SelectableCharacter : MonoBehaviour
 
     public void InitSelectableCharacter()
     {
-        _eventTrigger.AddEvent(EventTriggerType.PointerClick, (data) =>
+        Trigger.AddEvent(EventTriggerType.PointerClick, (data) =>
         {
             onSelectCharacter?.Invoke();
         });
