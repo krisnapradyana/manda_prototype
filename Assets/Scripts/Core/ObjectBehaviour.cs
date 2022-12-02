@@ -12,7 +12,7 @@ namespace Gameplay
         [Header("Properties")]
         [SerializeField] GameHandler _gameHandler;
 
-        [field: SerializeField] public EventTrigger Trigger { get ; set ; }
+        [field: SerializeField] public EventTrigger Trigger { get ; set; }
         public bool IsInspectable { get; set; }
 
         public event Action<GameObject> onHoverObject;
