@@ -35,7 +35,7 @@ public static class AccessComponents
 
 public static class UIMouseVisibility
 {
-    public static UIControl ToggleMouse(this UIControl uiControl, CharacterBehaviour characterBehaviour, RectTransform mouseImage)
+    public static GameplayUIControl ToggleMouse(this GameplayUIControl uiControl, CharacterBehaviour characterBehaviour, RectTransform mouseImage)
     {
         if (characterBehaviour != null)
         {
@@ -47,7 +47,7 @@ public static class UIMouseVisibility
         return uiControl;
     }
 
-    public static UIControl ToggleMouse(this UIControl uiControl, ObjectBehaviour objectBehaviour, RectTransform mouseImage)
+    public static GameplayUIControl ToggleMouse(this GameplayUIControl uiControl, ObjectBehaviour objectBehaviour, RectTransform mouseImage)
     {
         if (objectBehaviour != null)
         {
@@ -64,7 +64,7 @@ public static class ObjectInspections
 {
     public static void OnCharacterInspected
         (this CharacterBehaviour selectedObject, out CharacterBehaviour inspectedCharacter, out Quaternion selectedRotationData,
-            GameObject inspectParent, GameObject playgroundParent, UIControl uiControl, Action additionalEvent = null)
+            GameObject inspectParent, GameObject playgroundParent, GameplayUIControl uiControl, Action additionalEvent = null)
     {
         inspectedCharacter = selectedObject;
         selectedRotationData = inspectedCharacter.transform.rotation;
@@ -81,7 +81,7 @@ public static class ObjectInspections
 
     public static void OnObjectInspected
     (this ObjectBehaviour selectedObject, out ObjectBehaviour inspectedObject, out Quaternion selectedRotationData,
-        GameObject inspectParent, GameObject playgroundParent, UIControl uiControl, Action additionalEvent = null)
+        GameObject inspectParent, GameObject playgroundParent, GameplayUIControl uiControl, Action additionalEvent = null)
     {
         inspectedObject = selectedObject;
         selectedRotationData = inspectedObject.transform.rotation;
@@ -98,7 +98,7 @@ public static class ObjectInspections
 
     public static void ExitInspectCharacter
         (this CharacterBehaviour selectedObject, Quaternion _selectedRotationData,
-            GameObject inspectParent, GameObject playgroundParent, UIControl uiControl, Action additionalEvent = null)
+            GameObject inspectParent, GameObject playgroundParent, GameplayUIControl uiControl, Action additionalEvent = null)
     {
         selectedObject.transform.rotation = _selectedRotationData;
         selectedObject.transform.parent = playgroundParent.transform;
@@ -111,7 +111,7 @@ public static class ObjectInspections
 
     public static void ExitInspectObject
     (this ObjectBehaviour selectedObject, Quaternion _selectedRotationData,
-            GameObject inspectParent, GameObject playgroundParent, UIControl uiControl, Action additionalEvent = null)
+            GameObject inspectParent, GameObject playgroundParent, GameplayUIControl uiControl, Action additionalEvent = null)
     {
         selectedObject.transform.rotation = _selectedRotationData;
         selectedObject.transform.parent = playgroundParent.transform;

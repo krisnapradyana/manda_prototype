@@ -8,6 +8,7 @@ using DG.Tweening;
 public class IntroManager : MonoBehaviour
 {
     [SerializeField] Transform _mainPlatform;
+    [SerializeField] IntroUIControl _uiControl;
     [SerializeField] SelectableCharacter[] _introCharacter;
     [SerializeField] CinemachineVirtualCamera _virtualCamera;
 
@@ -32,12 +33,12 @@ public class IntroManager : MonoBehaviour
 
             item.onHoverObject += (obj) =>
             {
-               
+                HoverInfo(obj, true);
             };
 
             item.onExitHoverObject += (obj) =>
             {
-
+                HoverInfo(obj, false);
             };
         }
 
@@ -54,5 +55,10 @@ public class IntroManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         //move scene
         SceneManager.LoadScene(1, LoadSceneMode.Single);
+    }
+
+    void HoverInfo(GameObject targetObject, bool visibility)
+    {
+        _uiControl.ToggleTextVisibility(targetObject, visibility);
     }
 }

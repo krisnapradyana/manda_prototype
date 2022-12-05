@@ -29,9 +29,20 @@ public class SelectableCharacter : MonoBehaviour, InteractableObject
 
     public void InitSelectableCharacter()
     {
+        Trigger = GetComponent<EventTrigger>();
         Trigger.AddEvent(EventTriggerType.PointerClick, (data) =>
         {
             onSelectCharacter?.Invoke();
+        });
+
+        Trigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
+        {
+            onHoverObject?.Invoke(this.gameObject);
+        });
+
+        Trigger.AddEvent(EventTriggerType.PointerExit, (data) =>
+        {
+            onExitHoverObject?.Invoke(this.gameObject);
         });
 
         IntroCharacterAnimator.SetFloat("AnimId", CharacterId);

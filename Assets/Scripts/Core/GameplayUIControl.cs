@@ -8,7 +8,7 @@ using System;
 
 namespace Gameplay
 {
-    public class UIControl : MonoBehaviour
+    public class GameplayUIControl : MonoBehaviour
     {
         public event Action onReturnInspectPressed;
 
@@ -55,7 +55,7 @@ namespace Gameplay
         /// To toggle false simply by not include any parameters
         /// </summary>
         /// <param name="passedObjectData"></param>
-        public UIControl ToggleHoverInfo(GameObject passedObjectData = null)
+        public GameplayUIControl ToggleHoverInfo(GameObject passedObjectData = null)
         {
             bool visibility = false;
             halfScreenWidth = Screen.width / 2;

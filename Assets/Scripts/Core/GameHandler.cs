@@ -10,7 +10,7 @@ namespace Gameplay
     public class GameHandler : MonoBehaviour
     {
         [Header("References")]
-        [SerializeField] UIControl _uiControl;
+        [SerializeField] GameplayUIControl _uiControl;
         [SerializeField] GameObject _playgroundParent;
         [SerializeField] InspectGroundBehaviour _inspectParent;
 
@@ -37,6 +37,10 @@ namespace Gameplay
         }
         [field: SerializeField] public bool IsInspecting { get; private set; }
 
+        //Singleton privates
+        GameDataContainer _dataContainer;
+
+        ///Private fields
         CharacterBehaviour _inspectedCharacter;
         ObjectBehaviour _inspectedObject;
         Quaternion _selectedRotationData;
@@ -46,6 +50,8 @@ namespace Gameplay
         private void Start()
         {
             Debug.Log("Starting handler");
+            _dataContainer = FindObjectOfType<GameDataContainer>();
+
             InitObjects();
             InitEvents();
         }
@@ -71,6 +77,11 @@ namespace Gameplay
                 item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.Acquire<CharacterBehaviour>(), _uiControl.MousePivot);
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
             }
+
+            //foreach (var item in Sele)
+            //{
+            //
+            //}
         }
 
         private void InitEvents()
