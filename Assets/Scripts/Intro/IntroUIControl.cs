@@ -35,7 +35,8 @@ public class IntroUIControl : MonoBehaviour
         ///_popupPivot.anchoredPosition = targetObjectPos;
 
         _popupPivot.anchoredPosition = AdditionalModule.WorldToScreenSpace(targetObject.transform.position * _canvasScaler.scaleFactor, Camera.main, _arenaPanel);
-
+        _popupPivot.anchoredPosition = new Vector2(_popupPivot.anchoredPosition.x, _popupPivot.anchoredPosition.y + textPosYOffset);
+        _popupPivot.gameObject.SetActive(visibility);
         _popupText.text = targetObject.name;
     }
 }

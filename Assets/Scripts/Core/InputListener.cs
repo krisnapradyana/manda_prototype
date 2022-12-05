@@ -11,6 +11,7 @@ namespace Gameplay
     {
         [SerializeField] GameHandler _gameHandler;
         [SerializeField] InputAction _moveAction;
+        [SerializeField] InputAction _rotateAction;
         [SerializeField] InputAction _pointerInput;
         [SerializeField] GameObject _testCursor;
 
@@ -20,6 +21,7 @@ namespace Gameplay
         private void Awake()
         {
             _moveAction.Enable();
+            _rotateAction.Enable();
         }
 
         private void Start()
@@ -31,6 +33,11 @@ namespace Gameplay
             {
                 MoveByMouse(AdditionalModule.GetWorldPoint());
             };
+
+            //_rotateAction. += context =>
+            //{
+            //
+            //};
         }
 
         private void Update()
@@ -44,6 +51,11 @@ namespace Gameplay
         {
             _testCursor.transform.position = new Vector3(targetPosition.x, 2, targetPosition.z);
             _gameHandler.ControlledPlayer.MoveCharacter(targetPosition);
+        }
+
+        void RotateCamera(float value)
+        {
+
         }
     }
 }

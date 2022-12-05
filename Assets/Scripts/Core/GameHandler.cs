@@ -51,9 +51,15 @@ namespace Gameplay
         {
             Debug.Log("Starting handler");
             _dataContainer = FindObjectOfType<GameDataContainer>();
-
             InitObjects();
-            InitEvents();
+            if (_dataContainer == null)
+            {
+                InitEvents(0);
+            }
+            else
+            {
+                InitEvents(_dataContainer.SelectedCharacterIndex);
+            }
         }
 
         private void InitObjects()
@@ -65,7 +71,7 @@ namespace Gameplay
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
                 item.onInteractObject += (info) => info.Acquire<ObjectBehaviour>().OnObjectInspected(out _inspectedObject, out _selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
                 {
-                    SetCameraPriority(3, false);
+                    AsisgnCameraPriority(3, false);
                     _hasInspectCharacter = false;
                     _inspectParent.ToggleInspectionBackground(false);
                     IsInspecting = true;
@@ -77,29 +83,26 @@ namespace Gameplay
                 item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.Acquire<CharacterBehaviour>(), _uiControl.MousePivot);
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
             }
-
-            //foreach (var item in Sele)
-            //{
-            //
-            //}
         }
 
-        private void InitEvents()
+        private void InitEvents(int focusCharacters)
         {
+            Debug.Log("Initializing character events");
+
             _uiControl.onReturnInspectPressed += () =>
             {
                 if (_hasInspectCharacter)
                 {
                     _inspectedCharacter.ExitInspectCharacter(_selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
                     {
-                        SetCameraPriority(_lastCameraPriority, false);
+                        AsisgnCameraPriority(_lastCameraPriority, false);
                     });
                 }
                 else
                 {
                     _inspectedObject.ExitInspectObject(_selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
                     {
-                        SetCameraPriority(_lastCameraPriority, false);
+                        AsisgnCameraPriority(_lastCameraPriority, false);
                     });
                 }
                 IsInspecting = false;
@@ -114,25 +117,33 @@ namespace Gameplay
                 item.onSelectCharacter += OnChangedCharacted;
                 item.onInteractObject += (info) => info.Acquire<CharacterBehaviour>().OnCharacterInspected(out _inspectedCharacter, out _selectedRotationData, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
                 {
-                    SetCameraPriority(3, false);
+                    AsisgnCameraPriority(3, false);
                     _hasInspectCharacter = true;
                     _inspectParent.ToggleInspectionBackground(true);
                     IsInspecting = true;
                 });
             }
+
+            for (int i = 0; i < Players.Length; i++)
+            {
+                if (Players[i].CharacterId == focusCharacters)
+                {
+                    Players[i].SetSelected(true);
+                }
+            }
         }
 
         public void OnChangedCharacted()
         {
-            Debug.Log("Changed character");
+            //Debug.Log("Changed character");
+            ResetAllVirtualCameraPriority();
             foreach (var item in Players)
             {
-                item.ToggleSelected(false);
+                item.SetSelected(false);
             }
-            ResetAllVirtualCameraPriority();
         }
 
-        public void SetCameraPriority(int comparedId, bool saveLastId = true)
+        public void AsisgnCameraPriority(int comparedId, bool saveLastId = true)
         {
             ResetAllVirtualCameraPriority();
             foreach (var item in Cameras)

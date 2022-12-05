@@ -14,7 +14,7 @@ namespace Gameplay
         [field: SerializeField]
         public int Priority { get => virtualCamera.Priority; private set => virtualCamera.Priority = value; }
 
-        private void Start()
+        private void Awake()
         {
             virtualCamera = GetComponent<CinemachineVirtualCamera>();
         }

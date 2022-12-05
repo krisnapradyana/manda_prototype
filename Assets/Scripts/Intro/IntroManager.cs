@@ -25,10 +25,12 @@ public class IntroManager : MonoBehaviour
         gameDataContainer = FindObjectOfType<GameDataContainer>();
 
         foreach (var item in _introCharacter)
-        {   
-            item.onSelectCharacter += () =>
+        {
+            item.onInteractObject += (obj) =>
             {
-                gameDataContainer.SelectedCharacterIndex = item.CharacterId;
+                Debug.Log("Selected character");
+                gameDataContainer.SelectedCharacterIndex = obj.Acquire<SelectableCharacter>().CharacterId;
+                SceneManager.LoadScene(1, LoadSceneMode.Single);
             };
 
             item.onHoverObject += (obj) =>
@@ -38,7 +40,7 @@ public class IntroManager : MonoBehaviour
 
             item.onExitHoverObject += (obj) =>
             {
-                //HoverInfo(obj, false);
+                HoverInfo(obj, false);
             };
         }
 
@@ -53,8 +55,6 @@ public class IntroManager : MonoBehaviour
 
         yield return new WaitUntil(() => _hasSelected == true);
         yield return new WaitForSeconds(3f);
-        //move scene
-        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 
     void HoverInfo(GameObject targetObject, bool visibility)

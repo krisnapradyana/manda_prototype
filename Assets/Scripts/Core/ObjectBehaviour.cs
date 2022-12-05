@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 namespace Gameplay
 {
@@ -50,7 +51,11 @@ namespace Gameplay
                 {
                     return;
                 }
-                onInteractObject?.Invoke(this.gameObject);
+
+                if (Mouse.current.leftButton.wasReleasedThisFrame)
+                {
+                    onInteractObject?.Invoke(this.gameObject);
+                }
             });
         }
     }

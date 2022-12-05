@@ -90,16 +90,17 @@ namespace Gameplay
                     }
 
                     onSelectCharacter?.Invoke();
-                    ToggleSelected(true);
-                    _gameHandler.SetCameraPriority(CharacterId);
+                    SetSelected(true);
                     return;
                 }
             });
         }
 
-        public void ToggleSelected(bool state)
+        public void SetSelected( bool state)
         {
+            Debug.LogFormat("Set character {0} to active ", gameObject.name);
             IsSelected = state;
+            _gameHandler.AsisgnCameraPriority(CharacterId);
         }
 
         public void MoveCharacter(Vector3 targetPosition)

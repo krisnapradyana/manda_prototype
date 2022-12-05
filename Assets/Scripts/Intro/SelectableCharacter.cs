@@ -20,6 +20,9 @@ public class SelectableCharacter : MonoBehaviour, InteractableObject
     private void OnDestroy()
     {
         onSelectCharacter = null;
+        onHoverObject = null;
+        onInteractObject = null;
+        onExitHoverObject = null;
     }
 
     private void Awake()
@@ -32,7 +35,7 @@ public class SelectableCharacter : MonoBehaviour, InteractableObject
         Trigger = GetComponent<EventTrigger>();
         Trigger.AddEvent(EventTriggerType.PointerClick, (data) =>
         {
-            onSelectCharacter?.Invoke();
+            onInteractObject?.Invoke(this.gameObject);
         });
 
         Trigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
