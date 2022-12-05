@@ -14,7 +14,7 @@ public static class InteractionHandler
         selectionObjects,
     }
 
-    public static T OnObjectInspected<T> (this T reference, InspectObjectType type,out Type targetObject, out Quaternion selectedRotationData, GameObject inspectParent = null, GameObject playgroundParent = null, UIControl uiControl = null, Action additionalEvent = null)
+    public static T OnObjectInspected<T> (this T reference, InspectObjectType type,out Type targetObject, out Quaternion selectedRotationData, GameObject inspectParent = null, GameObject playgroundParent = null, GameplayUIControl uiControl = null, Action additionalEvent = null)
     {
         dynamic inspectedObject = null;
         targetObject = null;

@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System;
+using Modules;
 
 namespace Gameplay
 {
@@ -16,8 +17,10 @@ namespace Gameplay
         [SerializeField] Button _returnButton;
 
         [Header("Basic Attributes")]
-        [SerializeField] public TMP_Text _popupText0;
-        [SerializeField] public TMP_Text _popupText1;
+        [SerializeField] private CanvasScaler _scaler;
+        [SerializeField] private TMP_Text _popupText0;
+        [SerializeField] private TMP_Text _popupText1;
+        [SerializeField] private RectTransform _screenArea;
         [SerializeField] private RectTransform _popupPivot0;
         [SerializeField] private RectTransform _popupPivot1;
 
@@ -38,9 +41,12 @@ namespace Gameplay
 
         private void Update()
         {
-            mousePosition = Mouse.current.position.ReadValue();
-            mousePosition.z = 10f;
-            MousePivot.anchoredPosition = _popupPivot0.anchoredPosition = _popupPivot1.anchoredPosition = mousePosition;
+            //mousePosition = Mouse.current.position.ReadValue();
+            //mousePosition.z = 10f;
+            //MousePivot.anchoredPosition = _popupPivot0.anchoredPosition = _popupPivot1.anchoredPosition = mousePosition;
+
+            var screenMousePos = AdditionalModule.GetWorldPoint();
+            MousePivot.anchoredPosition = _popupPivot0.anchoredPosition = _popupPivot1.anchoredPosition = AdditionalModule.WorldToScreenSpace(screenMousePos * _scaler.scaleFactor, Camera.main, _screenArea);
         }
 
         void RegisterUIEvents()

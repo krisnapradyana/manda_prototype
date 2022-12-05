@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Pathfinding;
+using Modules;
 
 namespace Gameplay
 {
@@ -28,7 +29,7 @@ namespace Gameplay
             _cam = Camera.main;
             _moveAction.performed += context =>
             {
-                MoveByMouse(GetWorldPoint());
+                MoveByMouse(AdditionalModule.GetWorldPoint());
             };
         }
 
@@ -43,19 +44,6 @@ namespace Gameplay
         {
             _testCursor.transform.position = new Vector3(targetPosition.x, 2, targetPosition.z);
             _gameHandler.ControlledPlayer.MoveCharacter(targetPosition);
-        }
-
-        private Vector3 GetWorldPoint()
-        {
-            Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-            RaycastHit hit;
-
-            Vector3 point = Vector3.zero;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-            {
-                point = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-            }
-            return point;
         }
     }
 }

@@ -38,7 +38,7 @@ public class IntroManager : MonoBehaviour
 
             item.onExitHoverObject += (obj) =>
             {
-                HoverInfo(obj, false);
+                //HoverInfo(obj, false);
             };
         }
 
