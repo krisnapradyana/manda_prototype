@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -16,10 +17,9 @@ namespace Gameplay
 
         [Header("Getter Setter Fields")]
         [field: SerializeField] public CharacterBehaviour[] Players;
-        [field: SerializeField] public CameraBehaviour[] Cameras;
+        [field: SerializeField] public CameraCore[] Cameras;
         [field: SerializeField] public ObjectBehaviour[] Buildings;
         [field: SerializeField] public ObjectBehaviour[] Objects;
-        [field: SerializeField]
         public CharacterBehaviour ControlledPlayer
         {
             get
@@ -35,7 +35,9 @@ namespace Gameplay
                 return result;
             }
         }
-        [field: SerializeField] public bool IsInspecting { get; private set; }
+
+        public bool IsInspecting { get; private set; }
+        public CameraCore PriorityCamera { get; private set; }
 
         //Singleton privates
         GameDataContainer _dataContainer;
@@ -151,6 +153,7 @@ namespace Gameplay
                 if (item.CameraId == comparedId)
                 {
                     item.SetCameraPriority(1);
+                    PriorityCamera = item;
                     if (saveLastId)
                         _lastCameraPriority = comparedId;
                 }

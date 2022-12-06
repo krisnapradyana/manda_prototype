@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace Gameplay
 {
-    public class CharacterBehaviour : MonoBehaviour, InteractableObject
+    public class CharacterBehaviour : MonoBehaviour, IInteractableObject
     {
         public event Action onSelectCharacter;
         [field: SerializeField] public int CharacterId { get; private set; }

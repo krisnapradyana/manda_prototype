@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 namespace Gameplay
 {
     [RequireComponent(typeof(EventTrigger))]
-    public class ObjectBehaviour : MonoBehaviour, InteractableObject
+    public class ObjectBehaviour : MonoBehaviour, IInteractableObject
     {
         [Header("Properties")]
         [SerializeField] GameHandler _gameHandler;
@@ -35,13 +35,13 @@ namespace Gameplay
 
             Trigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
             {
-                Debug.Log("Hovered on building : " + gameObject.name);
+                //Debug.Log("Hovered on building : " + gameObject.name);
                 onHoverObject?.Invoke(this.gameObject);
             });
 
             Trigger.AddEvent(EventTriggerType.PointerExit, (data) =>
             {
-                Debug.Log("Exited on building : " + gameObject.name);
+                //Debug.Log("Exited on building : " + gameObject.name);
                 onExitHoverObject?.Invoke(this.gameObject);
             });
 

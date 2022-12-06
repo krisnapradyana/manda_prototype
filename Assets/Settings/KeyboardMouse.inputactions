@@ -2,40 +2,13 @@
     "name": "KeyboardMouse",
     "maps": [
         {
-            "name": "Movement",
-            "id": "aabe2e86-2412-42c0-9fc8-51aa2e1f8a3e",
+            "name": "RotateCamera",
+            "id": "f8da8405-10a0-4040-80cd-4f7354df4cb0",
             "actions": [
                 {
-                    "name": "MoveByMouse",
-                    "type": "Button",
-                    "id": "01833ba6-bd9a-41fe-8999-b6a86e28c39b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "MoveByButton",
+                    "name": "Rotate",
                     "type": "Value",
-                    "id": "0ce8b7d8-0e42-40a1-9ee0-cdfb30435c41",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "SelectCharacter",
-                    "type": "Button",
-                    "id": "5be73785-322f-4ccb-941c-4703603fe43e",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "MousePosition",
-                    "type": "Value",
-                    "id": "6d2d17ad-f3b4-4db1-bb13-13dca265daeb",
+                    "id": "9dea3288-2182-45f5-bf57-cc98d6b5ac91",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -44,103 +17,37 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "82d800b8-d05f-4c5e-850e-e38a93e8b99f",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "MoveByMouse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "Horizontal",
-                    "id": "deecf944-b3d8-4037-b852-9d8681acc101",
-                    "path": "1DAxis",
+                    "name": "1DAxis",
+                    "id": "0c93edc8-3b78-4c4c-b421-0dc16b840037",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveByButton",
+                    "action": "Rotate",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "positive",
-                    "id": "ac9ab3b0-a9de-410d-9152-2aff75c7c586",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "MoveByButton",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "negative",
-                    "id": "8df53eb8-9a12-4945-9289-369d33aa4a6f",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "MoveByButton",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Vertical",
-                    "id": "c5a63969-8572-4f4c-86bd-c944380a1cd7",
-                    "path": "1DAxis",
+                    "name": "Left",
+                    "id": "0f2b8e3a-cefc-48a4-9b18-3735b0d1e3e6",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveByButton",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "positive",
-                    "id": "f30fd59c-20fc-4fe6-bb49-bd3ae0102398",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "MoveByButton",
+                    "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "negative",
-                    "id": "2506d9a8-bb1c-4183-84ee-ebcc0ee4c8b2",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "MoveByButton",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "5541cd02-4456-44db-9cb0-f5fd7ed21e72",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "SelectCharacter",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cdd83ca3-c69d-439b-b8c2-f8a865747b75",
-                    "path": "<Mouse>/position",
+                    "name": "Right",
+                    "id": "e5959ece-c80b-4ba0-b560-ac38249edf5b",
+                    "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MousePosition",
+                    "action": "Rotate",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 }
             ]
         }

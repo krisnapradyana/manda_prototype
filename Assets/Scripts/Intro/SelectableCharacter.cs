@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(EventTrigger))]
-public class SelectableCharacter : MonoBehaviour, InteractableObject
+public class SelectableCharacter : MonoBehaviour, IInteractableObject
 {
     [field : SerializeField] public int CharacterId { get; private set; }
     [field: SerializeField] public Animator IntroCharacterAnimator { get; private set; }

@@ -41,10 +41,6 @@ namespace Gameplay
 
         private void Update()
         {
-            //mousePosition = Mouse.current.position.ReadValue();
-            //mousePosition.z = 10f;
-            //MousePivot.anchoredPosition = _popupPivot0.anchoredPosition = _popupPivot1.anchoredPosition = mousePosition;
-
             var screenMousePos = AdditionalModule.GetWorldPoint();
             MousePivot.anchoredPosition = _popupPivot0.anchoredPosition = _popupPivot1.anchoredPosition = AdditionalModule.WorldToScreenSpace(screenMousePos * _scaler.scaleFactor, Camera.main, _screenArea);
         }

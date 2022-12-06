@@ -17,6 +17,7 @@ namespace Gameplay
 
         Camera _cam;
         int layerMask = 1 << 9;
+        bool held = false;
 
         private void Awake()
         {
@@ -34,17 +35,21 @@ namespace Gameplay
                 MoveByMouse(AdditionalModule.GetWorldPoint());
             };
 
-            //_rotateAction. += context =>
-            //{
-            //
-            //};
+            _rotateAction.performed += context =>
+            {
+                held = true;
+            };
+
+            _rotateAction.canceled += context =>
+            {
+                held = false;
+            };
         }
 
         private void Update()
         {
-            //GetWorldPoint();
-            Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
-            Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow);
+            DrawRayLine();
+            RotateCamera(1000);
         }
 
         public void MoveByMouse(Vector3 targetPosition)
@@ -55,7 +60,27 @@ namespace Gameplay
 
         void RotateCamera(float value)
         {
+            if (!held)
+            {
+                return;
+            }
 
+            //if (Keyboard.current.eKey.isPressed)
+            //{
+            //    Debug.Log(value);
+            //    _gameHandler.PriorityCamera.transform.RotateAround(_gameHandler.PriorityCamera.virtualCamera.Follow.transform.position , Vector3.up, value * Time.deltaTime);
+            //}
+            //else if(Keyboard.current.qKey.isPressed)
+            //{
+            //    Debug.Log(value  * -1);
+            //    _gameHandler.PriorityCamera.transform.RotateAround(_gameHandler.PriorityCamera.virtualCamera.Follow.transform.position, Vector3.up, (value * -1) * Time.deltaTime);
+            //}
+        }
+
+        void DrawRayLine()
+        {
+            Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
+            Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow);
         }
     }
 }
