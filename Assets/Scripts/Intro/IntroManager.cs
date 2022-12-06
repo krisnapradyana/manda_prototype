@@ -44,14 +44,17 @@ public class IntroManager : MonoBehaviour
             };
         }
 
-        StartCoroutine(DelayMoveCamera());
+        _uiControl.onStartGame += () => StartCoroutine(DelayMoveCamera());
     }
 
     IEnumerator DelayMoveCamera()
     {
         yield return new WaitForSeconds(2f);
         _virtualCamera.Priority = 2;
-        _mainPlatform.DORotate(Vector3.zero, 5);
+        _mainPlatform.DORotate(Vector3.zero, 5).OnComplete(() =>
+        {
+            _uiControl.EnableTitleCharSlc();
+        });
 
         yield return new WaitUntil(() => _hasSelected == true);
         yield return new WaitForSeconds(3f);

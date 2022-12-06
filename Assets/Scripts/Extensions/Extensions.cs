@@ -69,7 +69,7 @@ public static class ObjectInspections
         inspectedCharacter = selectedObject;
         selectedRotationData = inspectedCharacter.transform.rotation;
         inspectParent.transform.position = new Vector3(inspectedCharacter.transform.position.x, 0, inspectedCharacter.transform.position.z);
-        inspectedCharacter.transform.rotation = Quaternion.Euler(0, -130, 0);
+        //inspectedCharacter.transform.rotation = Quaternion.Euler(0, -130, 0);
         inspectedCharacter.transform.parent = inspectParent.transform;
 
         playgroundParent.SetActive(false);
@@ -86,7 +86,7 @@ public static class ObjectInspections
         inspectedObject = selectedObject;
         selectedRotationData = inspectedObject.transform.rotation;
         inspectParent.transform.position = new Vector3(inspectedObject.transform.position.x, 0, inspectedObject.transform.position.z);
-        inspectedObject.transform.rotation = Quaternion.Euler(0, -130, 0);
+        //inspectedObject.transform.rotation = Quaternion.Euler(0, -130, 0);
         inspectedObject.transform.parent = inspectParent.transform;
 
         playgroundParent.SetActive(false);

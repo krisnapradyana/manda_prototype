@@ -4,6 +4,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Modules;
+using System;
+using DG.Tweening;
 
 public class IntroUIControl : MonoBehaviour
 {
@@ -15,28 +17,42 @@ public class IntroUIControl : MonoBehaviour
 
     [Header("Modifier attributes")]
     [SerializeField] float textPosYOffset;
-    Vector3 objectPosition;
+
+    [Header("Start Menu")]
+    [SerializeField] CanvasGroup _canvasGroup;
+    [SerializeField] TMP_InputField _inputField;
+    [SerializeField] Button _startButton;
+    [SerializeField] TMP_Text _characterSelectTitle;
+
+    public event Action onStartGame;
+
+    private void OnDestroy()
+    {
+        onStartGame = null;
+    }
 
     private void Start()
     {
-        
-    }
-
-    private void Update()
-    {
-        
+        _startButton.onClick.AddListener(() =>
+        {
+            Debug.Log("Start Explore game pressed");
+            onStartGame?.Invoke();
+            _startButton.interactable = false;
+            _canvasGroup.DOFade(0, 4.5f);
+            _canvasGroup.blocksRaycasts = false;
+        });
     }
 
     public void ToggleTextVisibility(GameObject targetObject, bool visibility)
     {
-        ///var targetObjectPos = Camera.main.WorldToViewportPoint(targetObject.transform.position);
-        ///targetObjectPos.z = 10f;
-        ///targetObjectPos.y = targetObjectPos.y + textPosYOffset;
-        ///_popupPivot.anchoredPosition = targetObjectPos;
-
         _popupPivot.anchoredPosition = AdditionalModule.WorldToScreenSpace(targetObject.transform.position * _canvasScaler.scaleFactor, Camera.main, _arenaPanel);
         _popupPivot.anchoredPosition = new Vector2(_popupPivot.anchoredPosition.x, _popupPivot.anchoredPosition.y + textPosYOffset);
         _popupPivot.gameObject.SetActive(visibility);
         _popupText.text = targetObject.name;
+    }
+
+    public void EnableTitleCharSlc()
+    {
+        _characterSelectTitle.gameObject.SetActive(true);
     }
 }
