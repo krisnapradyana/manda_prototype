@@ -25,7 +25,7 @@ namespace Gameplay
         [SerializeField] float _walkSpeed;
 
         [Header("References")]
-        [SerializeField] GameHandler _gameHandler;
+        GameHandler _gameHandler;
         [SerializeField] EventTrigger _eventTrigger;
         [SerializeField] Animator _characterAnimator;
 
