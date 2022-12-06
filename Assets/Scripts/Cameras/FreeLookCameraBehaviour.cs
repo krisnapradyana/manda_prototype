@@ -12,6 +12,7 @@ namespace Gameplay
         public override int CameraId { get; set; }
         [field: SerializeField]
         public override int Priority { get; set; }
+        public override float CameraRotationValue { get => freeLookCamera.m_XAxis.Value; set => freeLookCamera.m_XAxis.Value = value; }
 
         // Start is called before the first frame update
         void Awake()
@@ -24,6 +25,5 @@ namespace Gameplay
             base.SetCameraPriority(targetPriority);
             freeLookCamera.Priority = Priority;
         }
-
     }
 }

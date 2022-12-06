@@ -64,6 +64,11 @@ namespace Gameplay
             }
         }
 
+        private void Update()
+        {
+            MatchCameraRotation();
+        }
+
         private void InitObjects()
         {
             foreach (var item in Buildings)
@@ -90,7 +95,6 @@ namespace Gameplay
         private void InitEvents(int focusCharacters)
         {
             Debug.Log("Initializing character events");
-
             _uiControl.onReturnInspectPressed += () =>
             {
                 if (_hasInspectCharacter)
@@ -112,7 +116,7 @@ namespace Gameplay
 
             foreach (var item in Players)
             {
-                Debug.Log("Creating event");
+                Debug.Log("Creating Character event");
                 item.InitCharacterEvents(this);
                 item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.Acquire<CharacterBehaviour>(), _uiControl.MousePivot);
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
@@ -165,6 +169,14 @@ namespace Gameplay
             foreach (var item in Cameras)
             {
                 item.SetCameraPriority(0);
+            }
+        }
+
+        void MatchCameraRotation()
+        {
+            foreach (var item in Cameras)
+            {
+                item.OnCameraRotation(PriorityCamera.CameraRotationValue);
             }
         }
     }
