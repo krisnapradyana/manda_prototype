@@ -11,10 +11,12 @@ namespace Gameplay
         [HideInInspector] public GameHandler _gameHandler;
         [field: SerializeField] public bool IsInspectable { get; set; }
         [field: SerializeField] public int Level { get; private set; }
+        [field: SerializeField] public int MaxLevel { get; private set; }
         [field: SerializeField] public ObjectType Type { get; set; }
         public Action<GameObject> onHoverObject { get; set; }
         public Action<GameObject> onExitHoverObject { get; set; }
         public Action<GameObject> onInteractObject { get; set; }
+
 
         public event Action onlevelUp;
 
@@ -29,8 +31,20 @@ namespace Gameplay
 
         public void IncreaseLevel(int levelIncrement)
         {
+            if (Level > MaxLevel)
+            {
+                Debug.Log("Max Level Achieved");
+                Level = MaxLevel;
+                return;
+            }
+
             Level = Level + levelIncrement;
             onlevelUp?.Invoke();
+        }
+
+        public void SetMaxLevel(int value)
+        {
+            MaxLevel = value;
         }
 
         public void OnObjectInspected (out Interactables inspectedObject, GameObject inspectParent, GameObject playgroundParent, GameplayUIControl uiControl, Action additionalEvent = null)

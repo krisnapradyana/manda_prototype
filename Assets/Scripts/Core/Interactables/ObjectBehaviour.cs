@@ -11,6 +11,8 @@ namespace Gameplay
     public class ObjectBehaviour : Interactables
     {
         [field : Header("Properties")]
+        [Header("Platform Items")]
+        [SerializeField] GameObject[] platformObjects;
         [field: SerializeField] public EventTrigger Trigger { get ; set; }
 
         // Start is called before the first frame update
@@ -18,6 +20,8 @@ namespace Gameplay
         {
             _gameHandler = FindObjectOfType<GameHandler>();
             Trigger = gameObject.Acquire<EventTrigger>();
+
+            SetMaxLevel(platformObjects.Length - 1);
 
             Trigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
             {
@@ -43,6 +47,14 @@ namespace Gameplay
                     onInteractObject?.Invoke(this.gameObject);
                 }
             });
+        }
+
+        public void ShowObjectProperties()
+        {
+            for (int i = 0; i < Level; i++)
+            {
+                platformObjects[Level - 1].SetActive(true);
+            }
         }
     }
 }

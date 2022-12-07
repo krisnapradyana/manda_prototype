@@ -9,6 +9,7 @@ namespace Gameplay
     public interface ILevel
     {
         public int Level { get; }
+        public int MaxLevel { get; }
         public event Action onlevelUp;
         public void IncreaseLevel(int level);
     }

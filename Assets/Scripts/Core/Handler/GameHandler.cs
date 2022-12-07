@@ -80,7 +80,11 @@ namespace Gameplay
                 {
                     OnInspecting(info.Acquire<Interactables>());
                 });
-                item.onlevelUp += () => _uiControl.SetUpdateObjectDescription(_inspectedObject.name, "Test interaction", string.Format("Level : ", _inspectedObject.Level.ToString()));
+                item.onlevelUp += () =>
+                {
+                    _uiControl.SetUpdateObjectDescription(_inspectedObject.name, "Test interaction", string.Format("Level : {0}", _inspectedObject.Level.ToString()));
+                    item.ShowObjectProperties();
+                };
             }
 
             _uiControl.onReturnInspectPressed += () =>
@@ -118,7 +122,6 @@ namespace Gameplay
 
         public void OnChangedCharacted()
         {
-            //Debug.Log("Changed character");
             ResetAllVirtualCameraPriority();
             foreach (var item in Players)
             {
@@ -166,7 +169,8 @@ namespace Gameplay
                     OnChangedCharacted();
                     break;
                 case ObjectType.Object:
-                    _uiControl.SetUpdateObjectDescription(intereactedObj.name, "Test interaction", string.Format("Level : ", intereactedObj.Level.ToString()));
+                    Debug.Log("Inspecting Object");
+                    _uiControl.SetUpdateObjectDescription(intereactedObj.name, "Test interaction", string.Format("Level : {0}", intereactedObj.Level.ToString()));
                     AsisgnCameraPriority(3, false);
                     _inspectParent.ToggleInspectionBackground(true);
                     IsInspecting = true;
@@ -174,7 +178,6 @@ namespace Gameplay
                 default:
                     break;
             }
-
         }
     }
 }
