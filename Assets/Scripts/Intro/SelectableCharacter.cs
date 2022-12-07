@@ -3,27 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using Gameplay;
 
 [RequireComponent(typeof(EventTrigger))]
-public class SelectableCharacter : MonoBehaviour, IInteractableObject
+public class SelectableCharacter : Interactables
 {
     [field : SerializeField] public int CharacterId { get; private set; }
     [field: SerializeField] public Animator IntroCharacterAnimator { get; private set; }
-    public EventTrigger Trigger { get; private set; }
-    public bool IsInspectable { get; set; }
-
-    public event Action onSelectCharacter;
-    public event Action<GameObject> onHoverObject;
-    public event Action<GameObject> onExitHoverObject;
-    public event Action<GameObject> onInteractObject;
-
-    private void OnDestroy()
-    {
-        onSelectCharacter = null;
-        onHoverObject = null;
-        onInteractObject = null;
-        onExitHoverObject = null;
-    }
+    public EventTrigger Trigger { get; private set; }                  
 
     private void Awake()
     {

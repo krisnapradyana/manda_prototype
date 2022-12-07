@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 
 public interface IInteractableObject 
 {
-    public EventTrigger Trigger { get => Trigger; set => Trigger = value; }
+    public ObjectType Type { get; }
     public bool IsInspectable { get; set; }
-    public event Action<GameObject> onHoverObject;
-    public event Action<GameObject> onExitHoverObject;
-    public event Action<GameObject> onInteractObject;
+    public Action<GameObject> onHoverObject { get; set; }
+    public Action<GameObject> onExitHoverObject { get; set; }
+    public Action<GameObject> onInteractObject { get; set; }
 }
