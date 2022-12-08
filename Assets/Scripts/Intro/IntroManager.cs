@@ -29,18 +29,18 @@ public class IntroManager : MonoBehaviour
             item.onInteractObject += (obj) =>
             {
                 Debug.Log("Selected character");
-                gameDataContainer.SelectedCharacterIndex = obj.Acquire<SelectableCharacter>().CharacterId;
+                gameDataContainer.SelectedCharacterIndex = obj.GetComponent<SelectableCharacter>().CharacterId;
                 SceneManager.LoadScene(1, LoadSceneMode.Single);
             };
 
             item.onHoverObject += (obj) =>
             {
-                HoverInfo(obj, true);
+                HoverInfo(obj.gameObject, true);
             };
 
             item.onExitHoverObject += (obj) =>
             {
-                HoverInfo(obj, false);
+                HoverInfo(obj.gameObject, false);
             };
         }
 

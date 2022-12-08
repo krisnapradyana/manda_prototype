@@ -31,6 +31,7 @@ namespace Gameplay
         [SerializeField] private TMP_Text _objectDesction;
         [SerializeField] private Button _levelUpButton;
         [SerializeField] private TMP_Text _level;
+        [SerializeField] private TMP_Text _levelBtnText;
 
         [field: SerializeField] public RectTransform MousePivot;
 
@@ -67,7 +68,7 @@ namespace Gameplay
 
             _levelUpButton.onClick.AddListener(() =>
             {
-                _gameHandler.InspectedObject.IncreaseLevel(1);
+                _gameHandler.InspectedObject.IncreaseLevel(1, () => _levelUpButton.interactable = false);
             });
         }
 
@@ -109,12 +110,28 @@ namespace Gameplay
             return this;
         }
 
-        public void SetUpdateObjectDescription(string title, string desc, string objectLevel)
+        public GameplayUIControl SetUpdateObjectDescription(string title, string desc, string objectLevel)
         {
             _inspectWindow.SetActive(true);
             _objectName.text = title;
             _objectDesction.text = desc;
             _level.text = objectLevel;
+
+            return this;
+        }
+
+        public void SetLevelUpButton(int currentLevel, int maxLevel)
+        {
+            if (currentLevel > maxLevel)
+            {
+                _levelUpButton.interactable = false;
+                _levelBtnText.text = "Level Max";
+            }
+            else
+            {
+                _levelUpButton.interactable = true;
+                _levelBtnText.text = "Level Up!";
+            }
         }
 
         public void ToggleInspectVisibility(bool visibility)

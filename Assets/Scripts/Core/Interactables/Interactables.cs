@@ -13,9 +13,9 @@ namespace Gameplay
         [field: SerializeField] public int Level { get; private set; }
         [field: SerializeField] public int MaxLevel { get; private set; }
         [field: SerializeField] public ObjectType Type { get; set; }
-        public Action<GameObject> onHoverObject { get; set; }
-        public Action<GameObject> onExitHoverObject { get; set; }
-        public Action<GameObject> onInteractObject { get; set; }
+        public Action<Interactables> onHoverObject { get; set; }
+        public Action<Interactables> onExitHoverObject { get; set; }
+        public Action<Interactables> onInteractObject { get; set; }
 
 
         public event Action onlevelUp;
@@ -29,7 +29,7 @@ namespace Gameplay
             Debug.Log("Destroyed : " + gameObject.name);
         }
 
-        public void IncreaseLevel(int levelIncrement)
+        public void IncreaseLevel(int levelIncrement, Action maxLevelCallback = null)
         {
             if (Level > MaxLevel)
             {
@@ -40,6 +40,11 @@ namespace Gameplay
 
             Level = Level + levelIncrement;
             onlevelUp?.Invoke();
+
+            if (Level > MaxLevel)
+            {
+                maxLevelCallback?.Invoke();
+            }
         }
 
         public void SetMaxLevel(int value)
@@ -47,7 +52,7 @@ namespace Gameplay
             MaxLevel = value;
         }
 
-        public void OnObjectInspected (out Interactables inspectedObject, GameObject inspectParent, GameObject playgroundParent, GameplayUIControl uiControl, Action additionalEvent = null)
+        public void OnObjectInspected(out Interactables inspectedObject, GameObject inspectParent, GameObject playgroundParent, GameplayUIControl uiControl, Action additionalEvent = null)
         {
             inspectedObject = this;
             inspectParent.transform.position = new Vector3(inspectedObject.transform.position.x, 0, inspectedObject.transform.position.z);

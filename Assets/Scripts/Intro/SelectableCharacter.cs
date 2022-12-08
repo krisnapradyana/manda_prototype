@@ -22,17 +22,17 @@ public class SelectableCharacter : Interactables
         Trigger = GetComponent<EventTrigger>();
         Trigger.AddEvent(EventTriggerType.PointerClick, (data) =>
         {
-            onInteractObject?.Invoke(this.gameObject);
+            onInteractObject?.Invoke(this);
         });
 
         Trigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
         {
-            onHoverObject?.Invoke(this.gameObject);
+            onHoverObject?.Invoke(this);
         });
 
         Trigger.AddEvent(EventTriggerType.PointerExit, (data) =>
         {
-            onExitHoverObject?.Invoke(this.gameObject);
+            onExitHoverObject?.Invoke(this);
         });
 
         IntroCharacterAnimator.SetFloat("AnimId", CharacterId);

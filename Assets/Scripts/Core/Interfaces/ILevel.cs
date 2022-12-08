@@ -11,6 +11,6 @@ namespace Gameplay
         public int Level { get; }
         public int MaxLevel { get; }
         public event Action onlevelUp;
-        public void IncreaseLevel(int level);
+        public void IncreaseLevel(int level, Action maxLevelCallback = null);
     }
 }

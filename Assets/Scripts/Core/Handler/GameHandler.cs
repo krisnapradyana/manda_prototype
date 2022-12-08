@@ -74,15 +74,18 @@ namespace Gameplay
             foreach (var item in Objects)
             {
                 Debug.Log("Initializing Objects");
-                item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.Acquire<ObjectBehaviour>(), _uiControl.MousePivot);
+                item.onHoverObject += (info) => {
+                    var objInfo = info;
+                    _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(objInfo.GetComponent<ObjectBehaviour>(), _uiControl.MousePivot
+                        );
+                };
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
-                item.onInteractObject += (info) => info.Acquire<Interactables>().OnObjectInspected(out _inspectedObject, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
-                {
-                    OnInspecting(info.Acquire<Interactables>());
-                });
+                item.onInteractObject += InspectObj;
                 item.onlevelUp += () =>
                 {
-                    _uiControl.SetUpdateObjectDescription(_inspectedObject.name, "Test interaction", string.Format("Level : {0}", _inspectedObject.Level.ToString()));
+                    var platformData = _inspectedObject.gameObject.GetComponent<ObjectBehaviour>().PlatformData;
+                    var platformInteractable = _inspectedObject.gameObject.GetComponent<Interactables>();
+                    _uiControl.SetUpdateObjectDescription(platformData.platformName, platformData.platformDescription, string.Format("Level : {0}", _inspectedObject.Level.ToString())).SetLevelUpButton(platformInteractable.Level, platformInteractable.MaxLevel);
                     item.ShowObjectProperties();
                 };
             }
@@ -106,9 +109,9 @@ namespace Gameplay
             {
                 Debug.Log("Creating Character event");
                 item.InitCharacterEvents(this);
-                item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.Acquire<CharacterBehaviour>(), _uiControl.MousePivot);
+                item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.GetComponent<CharacterBehaviour>(), _uiControl.MousePivot);
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
-                item.onInteractObject += (info) => { OnChangedCharacted(); info.Acquire<CharacterBehaviour>().SetSelected(true);  };
+                item.onInteractObject += (info) => { OnChangedCharacted(); info.GetComponent<CharacterBehaviour>().SetSelected(true); };
             }
 
             for (int i = 0; i < Players.Length; i++)
@@ -160,17 +163,29 @@ namespace Gameplay
             }
         }
 
+        void InspectObj(Interactables interactables)
+        {
+            interactables.OnObjectInspected(out _inspectedObject, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
+            {
+                _uiControl.SetLevelUpButton(interactables.Level, interactables.MaxLevel);
+                OnInspecting(interactables);
+            });
+        }
+
         void OnInspecting(Interactables intereactedObj)
         {
             switch (intereactedObj.Type)
             {
                 case ObjectType.Character:
-                    AsisgnCameraPriority(intereactedObj.gameObject.Acquire<CharacterBehaviour>().CharacterId, true);
+                    AsisgnCameraPriority(intereactedObj.gameObject.GetComponent<CharacterBehaviour>().CharacterId, true);
                     OnChangedCharacted();
                     break;
                 case ObjectType.Object:
                     Debug.Log("Inspecting Object");
-                    _uiControl.SetUpdateObjectDescription(intereactedObj.name, "Test interaction", string.Format("Level : {0}", intereactedObj.Level.ToString()));
+                    var platformData = _inspectedObject.gameObject.GetComponent<ObjectBehaviour>().PlatformData;
+                    var platformInteractable = _inspectedObject.gameObject.GetComponent<Interactables>();
+                    _uiControl.SetUpdateObjectDescription(platformData.platformName,platformData.platformDescription, string.Format("Level : {0}", _inspectedObject.Level.ToString()))
+                        .SetLevelUpButton(platformInteractable.Level, platformInteractable.MaxLevel);
                     AsisgnCameraPriority(3, false);
                     _inspectParent.ToggleInspectionBackground(true);
                     IsInspecting = true;

@@ -11,28 +11,28 @@ namespace Gameplay
     public class ObjectBehaviour : Interactables
     {
         [field : Header("Properties")]
-        [Header("Platform Items")]
         [SerializeField] GameObject[] platformObjects;
+        [field: SerializeField] public PlatformDataScriptables PlatformData { get; private set; }
         [field: SerializeField] public EventTrigger Trigger { get ; set; }
 
         // Start is called before the first frame update
         void Start()
         {
             _gameHandler = FindObjectOfType<GameHandler>();
-            Trigger = gameObject.Acquire<EventTrigger>();
+            Trigger = gameObject.GetComponent<EventTrigger>();
 
             SetMaxLevel(platformObjects.Length - 1);
 
             Trigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
             {
                 //Debug.Log("Hovered on building : " + gameObject.name);
-                onHoverObject?.Invoke(this.gameObject);
+                onHoverObject?.Invoke(this);
             });
 
             Trigger.AddEvent(EventTriggerType.PointerExit, (data) =>
             {
                 //Debug.Log("Exited on building : " + gameObject.name);
-                onExitHoverObject?.Invoke(this.gameObject);
+                onExitHoverObject?.Invoke(this);
             });
 
             Trigger.AddEvent(EventTriggerType.PointerClick, (data) =>
@@ -44,7 +44,7 @@ namespace Gameplay
 
                 if (Mouse.current.leftButton.wasReleasedThisFrame)
                 {
-                    onInteractObject?.Invoke(this.gameObject);
+                    onInteractObject?.Invoke(this);
                 }
             });
         }

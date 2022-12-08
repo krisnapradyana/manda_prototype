@@ -51,12 +51,12 @@ namespace Gameplay
                 {
                     return;
                 }
-                onHoverObject?.Invoke(gameObject);
+                onHoverObject?.Invoke(this);
             });
 
             _eventTrigger.AddEvent(EventTriggerType.PointerExit, (data) =>
             {
-                onExitHoverObject?.Invoke(gameObject);
+                onExitHoverObject?.Invoke(this);
             });
 
             _eventTrigger.AddEvent(EventTriggerType.PointerClick, (data) =>
@@ -71,7 +71,7 @@ namespace Gameplay
                         {
                             return;
                         }
-                        onInteractObject?.Invoke(this.gameObject);
+                        onInteractObject?.Invoke(this);
                         return;
                     }
 
@@ -80,7 +80,7 @@ namespace Gameplay
                         return;
                     }
 
-                    onInteractObject?.Invoke(this.gameObject);
+                    onInteractObject?.Invoke(this);
                     Debug.Log(_gameHandler.ControlledPlayer.name);
                     return;
                 }
