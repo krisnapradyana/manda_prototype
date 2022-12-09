@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.VFX;
 
 namespace Gameplay
 {
@@ -54,6 +55,7 @@ namespace Gameplay
             for (int i = 0; i < Level; i++)
             {
                 platformObjects[Level - 1].SetActive(true);
+                platformObjects[Level - 1].GetComponent<Animator>().SetTrigger("popItem");
             }
         }
     }
