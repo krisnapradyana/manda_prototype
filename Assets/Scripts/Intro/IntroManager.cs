@@ -12,7 +12,7 @@ public class IntroManager : MonoBehaviour
     [SerializeField] SelectableCharacter[] _introCharacter;
     [SerializeField] CinemachineVirtualCamera _virtualCamera;
 
-    public GameDataContainer gameDataContainer;
+    public GameDataContainer gameDataContainer { get; private set; }
     bool _hasSelected;
 
     private void OnDestroy()
@@ -29,7 +29,7 @@ public class IntroManager : MonoBehaviour
             item.onInteractObject += (obj) =>
             {
                 Debug.Log("Selected character");
-                gameDataContainer.SelectedCharacterIndex = obj.GetComponent<SelectableCharacter>().CharacterId;
+                gameDataContainer.SelectCharacter(obj.GetComponent<SelectableCharacter>().CharacterId);
                 SceneManager.LoadScene(1, LoadSceneMode.Single);
             };
 

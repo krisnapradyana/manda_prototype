@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameDataContainer : MonoBehaviour
 {
     public static GameDataContainer GameData{ get; private set; }
-
-    [field : SerializeField]
-    public int SelectedCharacterIndex { get; set; }
-
+    public int SelectedCharacterIndex { get; private set; }
+    public string PlayerName { get; private set; }
+    [SerializeField] InputField _nameInputField;
 
     private void Awake()
     {
@@ -18,5 +18,20 @@ public class GameDataContainer : MonoBehaviour
         }
         GameData = this;
         DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+        
+    }
+
+    public void SelectCharacter(int targetIndex)
+    {
+        SelectedCharacterIndex = targetIndex;
+    }
+
+    public void SetPlayerName(string playerName)
+    {
+        PlayerName = playerName;
     }
 }
