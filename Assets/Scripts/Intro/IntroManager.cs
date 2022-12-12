@@ -44,7 +44,8 @@ public class IntroManager : MonoBehaviour
             };
         }
 
-        _uiControl.onStartGame += () => StartCoroutine(DelayMoveCamera());
+        _uiControl.InitUIIntro(this);
+        _uiControl.OnStartGame += () => StartCoroutine(DelayMoveCamera());
     }
 
     IEnumerator DelayMoveCamera()

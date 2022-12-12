@@ -8,7 +8,6 @@ public class GameDataContainer : MonoBehaviour
     public static GameDataContainer GameData{ get; private set; }
     public int SelectedCharacterIndex { get; private set; }
     public string PlayerName { get; private set; }
-    [SerializeField] InputField _nameInputField;
 
     private void Awake()
     {
@@ -22,7 +21,7 @@ public class GameDataContainer : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     public void SelectCharacter(int targetIndex)

@@ -60,7 +60,7 @@ namespace Gameplay
 
             playgroundParent.SetActive(false);
             inspectParent.SetActive(true);
-            uiControl.ToggleInspectVisibility(true);
+            StartCoroutine(uiControl.ShowOrHidePosition(true, null));
             additionalEvent?.Invoke();
             Debug.Log("Inspecting Object : " + gameObject.name);
         }
@@ -79,7 +79,7 @@ namespace Gameplay
 
             playgroundParent.SetActive(true);
             inspectParent.SetActive(false);
-            uiControl.ToggleInspectVisibility(false);
+            StartCoroutine(uiControl.ShowOrHidePosition(false, null));
             additionalEvent?.Invoke();
         }
     }
