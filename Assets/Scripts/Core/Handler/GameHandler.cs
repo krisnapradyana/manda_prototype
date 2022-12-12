@@ -42,7 +42,7 @@ namespace Gameplay
         public int _playerGold;
 
         //Singleton privates
-        GameDataContainer _dataContainer;
+        [HideInInspector] public GameDataContainer _dataContainer { get; private set; }
 
         ///Private fields
         Interactables _inspectedObject;

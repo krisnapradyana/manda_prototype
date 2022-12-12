@@ -21,6 +21,7 @@ namespace Gameplay
         [SerializeField] private CanvasScaler _scaler;
         [SerializeField] private TMP_Text _popupText0;
         [SerializeField] private TMP_Text _popupText1;
+        [SerializeField] private TMP_Text _playerName;
         [SerializeField] private RectTransform _screenArea;
         [SerializeField] private RectTransform _popupPivot0;
         [SerializeField] private RectTransform _popupPivot1;
@@ -51,12 +52,18 @@ namespace Gameplay
         private void Start()
         {
             RegisterUIEvents();
+            SetPlayerUI();
         }
 
         private void Update()
         {
             var screenMousePos = AdditionalModule.GetWorldPoint();
             MousePivot.anchoredPosition = _popupPivot0.anchoredPosition = _popupPivot1.anchoredPosition = AdditionalModule.WorldToScreenSpace(screenMousePos * _scaler.scaleFactor, Camera.main, _screenArea);
+        }
+
+        private void SetPlayerUI()
+        {
+            _playerName.text = _gameHandler._dataContainer.PlayerName;
         }
 
         void RegisterUIEvents()

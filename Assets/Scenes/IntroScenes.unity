@@ -532,7 +532,6 @@ MonoBehaviour:
   - {fileID: 1519090271}
   - {fileID: 905546888}
   _virtualCamera: {fileID: 1818321668}
-  gameDataContainer: {fileID: 346630108}
 --- !u!1 &97334362
 GameObject:
   m_ObjectHideFlags: 0
@@ -1218,7 +1217,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2005c2c2c6d874787686cfe9e8808e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <SelectedCharacterIndex>k__BackingField: 0
 --- !u!1 &351074666
 GameObject:
   m_ObjectHideFlags: 0
@@ -2061,7 +2059,19 @@ MonoBehaviour:
       m_Calls: []
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 346630108}
+        m_TargetAssemblyTypeName: GameDataContainer, Singletons
+        m_MethodName: SetPlayerName
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTouchScreenKeyboardStatusChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -2409,6 +2419,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da4a4aec93d4994abcd308f1ddfc00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameHandler: {fileID: 0}
+  <IsInspectable>k__BackingField: 0
+  <Level>k__BackingField: 0
+  <MaxLevel>k__BackingField: 0
+  <Type>k__BackingField: 0
   <CharacterId>k__BackingField: 2
   <IntroCharacterAnimator>k__BackingField: {fileID: 905546885}
 --- !u!1 &940036310
@@ -3178,6 +3193,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da4a4aec93d4994abcd308f1ddfc00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameHandler: {fileID: 0}
+  <IsInspectable>k__BackingField: 0
+  <Level>k__BackingField: 0
+  <MaxLevel>k__BackingField: 0
+  <Type>k__BackingField: 0
   <CharacterId>k__BackingField: 1
   <IntroCharacterAnimator>k__BackingField: {fileID: 1519090268}
 --- !u!1 &1801940359
@@ -3994,6 +4014,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da4a4aec93d4994abcd308f1ddfc00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gameHandler: {fileID: 0}
+  <IsInspectable>k__BackingField: 0
+  <Level>k__BackingField: 0
+  <MaxLevel>k__BackingField: 0
+  <Type>k__BackingField: 0
   <CharacterId>k__BackingField: 0
   <IntroCharacterAnimator>k__BackingField: {fileID: 2042139231}
 --- !u!54 &919132147975302928
