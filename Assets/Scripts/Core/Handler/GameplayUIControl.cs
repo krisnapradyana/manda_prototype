@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System;
 using Modules;
+using DG.Tweening;
 
 namespace Gameplay
 {
@@ -27,12 +28,16 @@ namespace Gameplay
         [SerializeField] private RectTransform _popupPivot1;
 
         [Header("Inspect Detail UI")]
-        [SerializeField] private GameObject _inspectWindow;
+        [SerializeField] private Transform _inspectWindow;
         [SerializeField] private TMP_Text _objectName;
         [SerializeField] private TMP_Text _objectDesction;
         [SerializeField] private Button _levelUpButton;
         [SerializeField] private TMP_Text _level;
         [SerializeField] private TMP_Text _levelBtnText;
+
+        [Header("Positional")]
+        [SerializeField] Transform _inspectUIShowPosition;
+        [SerializeField] Transform _inspectUIHidePosition;
 
         [field: SerializeField] public RectTransform MousePivot;
 
@@ -52,7 +57,6 @@ namespace Gameplay
         private void Start()
         {
             RegisterUIEvents();
-            SetPlayerUI();
         }
 
         private void Update()
@@ -61,7 +65,7 @@ namespace Gameplay
             MousePivot.anchoredPosition = _popupPivot0.anchoredPosition = _popupPivot1.anchoredPosition = AdditionalModule.WorldToScreenSpace(screenMousePos * _scaler.scaleFactor, Camera.main, _screenArea);
         }
 
-        private void SetPlayerUI()
+        public void SetPlayerUI()
         {
             _playerName.text = _gameHandler._dataContainer.PlayerName;
         }
@@ -119,7 +123,7 @@ namespace Gameplay
 
         public GameplayUIControl SetUpdateObjectDescription(string title, string desc, string objectLevel)
         {
-            _inspectWindow.SetActive(true);
+            _inspectWindow.gameObject.SetActive(true);
             _objectName.text = title;
             _objectDesction.text = desc;
             _level.text = objectLevel;
@@ -144,7 +148,26 @@ namespace Gameplay
         public void ToggleInspectVisibility(bool visibility)
         {
             _returnButton.gameObject.SetActive(visibility);
-            _inspectWindow.SetActive(visibility);
+            _inspectWindow.gameObject.SetActive(visibility);
+        }
+
+        public IEnumerator ShowOrHidePosition(bool isShow, Action onComplete)
+        {
+            Tween uiAnimation;
+            if (isShow)
+            {
+                uiAnimation = _inspectWindow.DOLocalMoveX(_inspectUIShowPosition.localPosition.x, 1f).SetEase(Ease.OutBack);
+                yield return uiAnimation.WaitForCompletion();
+                _returnButton.gameObject.SetActive(isShow);
+                onComplete?.Invoke();
+            }
+            else
+            {
+                uiAnimation = _inspectWindow.DOLocalMoveX(_inspectUIHidePosition.localPosition.x, 1f).SetEase(Ease.OutBack);
+                _returnButton.gameObject.SetActive(isShow);
+                yield return uiAnimation.WaitForCompletion();
+                onComplete?.Invoke();
+            }
         }
     }
 }

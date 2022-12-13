@@ -23,24 +23,34 @@ public class IntroUIControl : MonoBehaviour
     [SerializeField] TMP_InputField _inputField;
     [SerializeField] Button _startButton;
     [SerializeField] TMP_Text _characterSelectTitle;
+    [SerializeField] TMP_InputField _nameInputField;
 
-    public event Action onStartGame;
+    public event Action OnStartGame;
+    IntroManager IntroManager { get; set; }
 
     private void OnDestroy()
     {
-        onStartGame = null;
+        OnStartGame = null;
     }
 
     private void Start()
     {
+    }
+    
+    public void InitUIIntro(IntroManager manager)
+    {
+        IntroManager = manager;
+
         _startButton.onClick.AddListener(() =>
         {
             Debug.Log("Start Explore game pressed");
-            onStartGame?.Invoke();
+            OnStartGame?.Invoke();
             _startButton.interactable = false;
             _canvasGroup.DOFade(0, 4.5f);
             _canvasGroup.blocksRaycasts = false;
         });
+
+        _nameInputField.onValueChanged.AddListener((input) => IntroManager.gameDataContainer.SetPlayerName(input));
     }
 
     public void ToggleTextVisibility(GameObject targetObject, bool visibility)

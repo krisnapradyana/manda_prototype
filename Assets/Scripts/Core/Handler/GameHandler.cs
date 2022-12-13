@@ -54,6 +54,7 @@ namespace Gameplay
             Debug.Log("Starting handler");
             _dataContainer = FindObjectOfType<GameDataContainer>();
             InitObjects();
+            _uiControl.SetPlayerUI();
             if (_dataContainer == null)
             {
                 InitEvents(0);
