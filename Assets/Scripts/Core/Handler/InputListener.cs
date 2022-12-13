@@ -41,7 +41,7 @@ namespace Gameplay
 
         public void MoveByMouse(Vector3 targetPosition)
         {
-            _testCursor.transform.position = new Vector3(targetPosition.x, -10, targetPosition.z);
+            //_testCursor.transform.position = new Vector3(targetPosition.x, -10, targetPosition.z);
             _gameHandler.ControlledPlayer.MoveCharacter(targetPosition);
         }
 
