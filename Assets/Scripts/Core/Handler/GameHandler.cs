@@ -76,6 +76,12 @@ namespace Gameplay
             {
                 Debug.Log("Initializing Objects");
                 item.onHoverObject += (info) => {
+                    if (IsInspecting)
+                    {
+                        _uiControl.ToggleHoverInfo();
+                        return;
+                    }
+
                     var objInfo = info;
                     _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(objInfo.GetComponent<ObjectBehaviour>(), _uiControl.MousePivot
                         );
@@ -110,7 +116,23 @@ namespace Gameplay
             {
                 Debug.Log("Creating Character event");
                 item.InitCharacterEvents(this);
-                item.onHoverObject += (info) => _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.GetComponent<CharacterBehaviour>(), _uiControl.MousePivot);
+                item.onHoverObject += (info) => {
+                    if (IsInspecting)
+                    {
+                        _uiControl.ToggleHoverInfo();
+                        return;
+                    }
+
+                    if (info.GetComponent<CharacterBehaviour>().IsSelected)
+                    {
+                        print("hover on selected");
+                        _uiControl.ToggleHoverInfo(info.gameObject, customObjName: "You", showMouse: false).ToggleMouse(info.GetComponent<CharacterBehaviour>(), _uiControl.MousePivot);
+                    }
+                    else
+                    {
+                        _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.GetComponent<CharacterBehaviour>(), _uiControl.MousePivot);
+                    }
+                };
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
                 item.onInteractObject += (info) => { OnChangedCharacted(); info.GetComponent<CharacterBehaviour>().SetSelected(true); };
             }
@@ -166,6 +188,7 @@ namespace Gameplay
 
         void InspectObj(Interactables interactables)
         {
+            _uiControl.ToggleHoverInfo();
             interactables.OnObjectInspected(out _inspectedObject, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
             {
                 _uiControl.SetLevelUpButton(interactables.Level, interactables.MaxLevel);

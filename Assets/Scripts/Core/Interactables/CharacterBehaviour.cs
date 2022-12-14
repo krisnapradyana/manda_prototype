@@ -47,10 +47,6 @@ namespace Gameplay
 
             _eventTrigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
             {
-                if (IsSelected)
-                {
-                    return;
-                }
                 onHoverObject?.Invoke(this);
             });
 
@@ -66,7 +62,6 @@ namespace Gameplay
                     if (IsNPC)
                     {
                         Debug.Log("Scelected as NPC");
-
                         if (_gameHandler.IsInspecting)
                         {
                             return;

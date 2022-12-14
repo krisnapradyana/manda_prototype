@@ -22,6 +22,7 @@ namespace Gameplay
         [SerializeField] private CanvasScaler _scaler;
         [SerializeField] private TMP_Text _popupText;
         [SerializeField] private TMP_Text _playerName;
+        [SerializeField] private RectTransform _mouseIcon;
         [SerializeField] private RectTransform _screenArea;
         [SerializeField] private RectTransform _popupLabel;
         [SerializeField] private RectTransform _popupPivot0;
@@ -107,14 +108,8 @@ namespace Gameplay
         /// To toggle false simply by not include any parameters
         /// </summary>
         /// <param name="passedObjectData"></param>
-        public GameplayUIControl ToggleHoverInfo(GameObject passedObjectData = null)
+        public GameplayUIControl ToggleHoverInfo(GameObject passedObjectData = null, string customObjName = null, bool showMouse = true)
         {
-            if (_gameHandler.IsInspecting)
-            {
-                MousePivot.gameObject.SetActive(false);
-                return this;
-            }
-
             bool visibility;
             halfScreenWidth = Screen.width / 2 * _scaler.scaleFactor;
             if (passedObjectData == null)
@@ -128,12 +123,35 @@ namespace Gameplay
 
             if (passedObjectData != null)
             {
-                _popupText.text = passedObjectData.GetComponent<ObjectBehaviour>().PlatformData.platformName;
+                if (passedObjectData.GetComponent<ObjectBehaviour>() != null)
+                {
+                    if (string.IsNullOrEmpty(customObjName))
+                    {
+                        _popupText.text = passedObjectData.GetComponent<ObjectBehaviour>().PlatformData.platformName;
+                    }
+                    else
+                    {
+                        _popupText.text = customObjName;
+                    }
+                }
+                else if (passedObjectData.GetComponent<CharacterBehaviour>() != null)
+                {
+                    if (string.IsNullOrEmpty(customObjName))
+                    {                        
+                        _popupText.text = passedObjectData.name;
+                    }
+                    else
+                    {
+                        _popupText.text = customObjName;
+                    }
+                }
+                else if (passedObjectData.GetComponent<CharacterBehaviour>() == null && passedObjectData.GetComponent<ObjectBehaviour>() == null)
+                {
+                    print("This is non Interactable Object");
+                }
             }
             else Debug.LogWarning("No Passed object");
-
             MousePivot.gameObject.SetActive(visibility);
-
             return this;
         }
 
