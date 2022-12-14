@@ -20,10 +20,10 @@ namespace Gameplay
 
         [Header("Basic Attributes")]
         [SerializeField] private CanvasScaler _scaler;
-        [SerializeField] private TMP_Text _popupText0;
-        [SerializeField] private TMP_Text _popupText1;
+        [SerializeField] private TMP_Text _popupText;
         [SerializeField] private TMP_Text _playerName;
         [SerializeField] private RectTransform _screenArea;
+        [SerializeField] private RectTransform _popupLabel;
         [SerializeField] private RectTransform _popupPivot0;
         [SerializeField] private RectTransform _popupPivot1;
 
@@ -57,12 +57,28 @@ namespace Gameplay
         private void Start()
         {
             RegisterUIEvents();
+
+            print(_popupPivot1.anchoredPosition);
+            print(_popupPivot0.anchoredPosition);
         }
 
         private void Update()
         {
             var screenMousePos = AdditionalModule.GetWorldPoint();
-            MousePivot.anchoredPosition = _popupPivot0.anchoredPosition = _popupPivot1.anchoredPosition = AdditionalModule.WorldToScreenSpace(screenMousePos * _scaler.scaleFactor, Camera.main, _screenArea);
+            MousePivot.anchoredPosition = AdditionalModule.WorldToScreenSpace(screenMousePos * _scaler.scaleFactor, Camera.main, _screenArea);
+
+            mousePosition = Mouse.current.position.ReadValue();
+
+            if (mousePosition.x > halfScreenWidth)
+            {
+                _popupLabel.localPosition =  _popupPivot1.localPosition;
+            }               
+            else            
+            {               
+                _popupLabel.localPosition = _popupPivot0.localPosition;
+            }
+
+
         }
 
         public void SetPlayerUI()
@@ -93,7 +109,13 @@ namespace Gameplay
         /// <param name="passedObjectData"></param>
         public GameplayUIControl ToggleHoverInfo(GameObject passedObjectData = null)
         {
-            bool visibility = false;
+            if (_gameHandler.IsInspecting)
+            {
+                MousePivot.gameObject.SetActive(false);
+                return this;
+            }
+
+            bool visibility;
             halfScreenWidth = Screen.width / 2 * _scaler.scaleFactor;
             if (passedObjectData == null)
             {
@@ -106,21 +128,11 @@ namespace Gameplay
 
             if (passedObjectData != null)
             {
-                _popupText0.text = _popupText1.text = passedObjectData.name;
+                _popupText.text = passedObjectData.GetComponent<ObjectBehaviour>().PlatformData.platformName;
             }
             else Debug.LogWarning("No Passed object");
 
-            _popupPivot0.gameObject.SetActive(false);
-            _popupPivot1.gameObject.SetActive(false);
-            MousePivot.gameObject.SetActive(false);
-            if (mousePosition.x > halfScreenWidth)
-            {
-                _popupPivot1.gameObject.SetActive(visibility);
-            }
-            else
-            {
-                _popupPivot0.gameObject.SetActive(visibility);
-            }
+            MousePivot.gameObject.SetActive(visibility);
 
             return this;
         }
