@@ -22,6 +22,7 @@ public class IntroUIControl : MonoBehaviour
     [SerializeField] CanvasGroup _canvasGroup;
     [SerializeField] TMP_InputField _inputField;
     [SerializeField] Button _startButton;
+    [SerializeField] GameObject _selectCharacterPanel;
     [SerializeField] TMP_Text _characterSelectTitle;
     [SerializeField] TMP_InputField _nameInputField;
 
@@ -63,6 +64,6 @@ public class IntroUIControl : MonoBehaviour
 
     public void EnableTitleCharSlc()
     {
-        _characterSelectTitle.gameObject.SetActive(true);
+        _selectCharacterPanel.gameObject.SetActive(true);
     }
 }
