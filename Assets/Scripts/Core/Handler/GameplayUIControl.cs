@@ -22,7 +22,6 @@ namespace Gameplay
         [SerializeField] private CanvasScaler _scaler;
         [SerializeField] private TMP_Text _popupText;
         [SerializeField] private TMP_Text _playerName;
-        [SerializeField] private RectTransform _mouseIcon;
         [SerializeField] private RectTransform _screenArea;
         [SerializeField] private RectTransform _popupLabel;
         [SerializeField] private RectTransform _popupPivot0;
@@ -35,6 +34,9 @@ namespace Gameplay
         [SerializeField] private Button _levelUpButton;
         [SerializeField] private TMP_Text _level;
         [SerializeField] private TMP_Text _levelBtnText;
+
+        [Header("Internal Economy")]
+        [SerializeField] private TMP_Text _goldText;
 
         [Header("Positional")]
         [SerializeField] Transform _inspectUIShowPosition;
@@ -78,8 +80,6 @@ namespace Gameplay
             {               
                 _popupLabel.localPosition = _popupPivot0.localPosition;
             }
-
-
         }
 
         public void SetPlayerUI()
@@ -89,6 +89,11 @@ namespace Gameplay
                 return;
             }
             _playerName.text = _gameHandler._gameDataContainer.PlayerName;
+        }
+
+        public void SetGoldVisual(int goldValue)
+        {
+            _goldText.text = goldValue.ToString();
         }
 
         void RegisterUIEvents()

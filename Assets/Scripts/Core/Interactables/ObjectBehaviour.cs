@@ -22,6 +22,8 @@ namespace Gameplay
             _gameHandler = FindObjectOfType<GameHandler>();
             Trigger = gameObject.GetComponent<EventTrigger>();
 
+            //StartCoroutine(IncreaseGold());
+
             SetMaxLevel(platformObjects.Length - 1);
 
             Trigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
@@ -56,6 +58,18 @@ namespace Gameplay
             {
                 platformObjects[Level - 1].SetActive(true);
                 platformObjects[Level - 1].GetComponent<Animator>().SetTrigger("popItem");
+            }
+        }
+
+        IEnumerator IncreaseGold()
+        {
+            while (true)
+            {
+                var tempGold = _gameHandler.PlayerGold + Level * CurrentCost/20;
+                Debug.Log(tempGold);
+                _gameHandler.PlayerGold += tempGold;
+                Debug.Log("Increasing gold");
+                yield return new WaitForSeconds(3f);
             }
         }
     }

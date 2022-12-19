@@ -12,7 +12,10 @@ namespace Gameplay
         [field: SerializeField] public bool IsInspectable { get; set; }
         [field: SerializeField] public int Level { get; private set; }
         [field: SerializeField] public int MaxLevel { get; private set; }
+        [field: SerializeField] public int LevelBaseCost { get; private set; }
         [field: SerializeField] public ObjectType Type { get; set; }
+
+        public int CurrentCost { get { return LevelBaseCost * Level / 3; } }
         public Action<Interactables> onHoverObject { get; set; }
         public Action<Interactables> onExitHoverObject { get; set; }
         public Action<Interactables> onInteractObject { get; set; }
@@ -29,6 +32,11 @@ namespace Gameplay
             Debug.Log("Destroyed : " + gameObject.name);
         }
 
+        private void Start()
+        {
+            
+        }
+
         public void IncreaseLevel(int levelIncrement, Action maxLevelCallback = null)
         {
             if (Level > MaxLevel)
@@ -38,8 +46,16 @@ namespace Gameplay
                 return;
             }
 
+            if (_gameHandler.PlayerGold < CurrentCost)
+            {
+                _gameHandler._popupUI.SetupPopupUI("Level Notice", "Current gold not enough to upgrade platform", confirmButtonEnabled: true);
+                StartCoroutine(_gameHandler._popupUI.ShowPopup(null));
+                return;
+            }
+
             Level = Level + levelIncrement;
             onlevelUp?.Invoke();
+            _gameHandler.PlayerGold = _gameHandler.PlayerGold - CurrentCost;
 
             if (Level > MaxLevel)
             {

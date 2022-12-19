@@ -15,4 +15,4 @@ MonoBehaviour:
   platformName: Hunter
   platformDescription: The Hunter Stage accommodates people who are experts in hunting,
     they hunt every day for the daily needs of the residents
-  baseUpgradeCost: 0
+  baseUpgradeCost: 800

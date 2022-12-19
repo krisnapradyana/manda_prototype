@@ -15,4 +15,4 @@ MonoBehaviour:
   platformName: Physician
   platformDescription: Physician help residents who are sick and maintain the health
     of city residents
-  baseUpgradeCost: 0
+  baseUpgradeCost: 800

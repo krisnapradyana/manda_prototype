@@ -39,8 +39,14 @@ namespace Gameplay
         public bool IsInspecting { get; private set; }
         public CameraCore PriorityCamera { get; private set; }
 
-        [Header("WIP")]
-        public int _playerGold;
+        [field: Header("Economy System")]
+        private int _playerGold;
+        [field: SerializeField] public int PlayerGold { get { return _playerGold; } set 
+            {
+                _playerGold = value;
+                _uiControl.SetGoldVisual(_playerGold);
+            } 
+        } //starter gold 1000
 
         //Singleton privates
         [HideInInspector] public GameCentralSystem _gameDataContainer { get; private set; }
@@ -62,6 +68,7 @@ namespace Gameplay
 
         private void Start()
         {
+            PlayerGold = 1000;
             _inputListener.InitGameHandler(this);
             InitObjects();
             _uiControl.SetPlayerUI();

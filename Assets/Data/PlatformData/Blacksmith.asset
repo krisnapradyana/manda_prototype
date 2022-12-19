@@ -15,4 +15,4 @@ MonoBehaviour:
   platformName: Blacksmith
   platformDescription: The blacksmith stage creates tools that are useful for the
     daily needs of the city. Ranging from kitchen equipment to hunting equipment
-  baseUpgradeCost: 0
+  baseUpgradeCost: 800

@@ -15,4 +15,4 @@ MonoBehaviour:
   platformName: Commander
   platformDescription: The commander's stage accommodates tough soldiers who keep
     the city safe from the dangers of beasts and bandits
-  baseUpgradeCost: 0
+  baseUpgradeCost: 800

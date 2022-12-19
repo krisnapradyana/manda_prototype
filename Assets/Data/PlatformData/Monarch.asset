@@ -16,4 +16,4 @@ MonoBehaviour:
   platformDescription: As head of state. But in the Absolute Monarchy system, the
     king is also the head of government. In a constitutional monarchy, the head of
     government is the prime minister
-  baseUpgradeCost: 0
+  baseUpgradeCost: 800

@@ -15,4 +15,4 @@ MonoBehaviour:
   platformName: Wizard
   platformDescription: Wizard help citizens in the magical sector helping difficult
     things with magic with magic potions or summoning the help of spirits
-  baseUpgradeCost: 0
+  baseUpgradeCost: 800

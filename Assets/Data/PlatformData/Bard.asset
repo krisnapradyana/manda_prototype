@@ -15,4 +15,4 @@ MonoBehaviour:
   platformName: Bard
   platformDescription: The bard's stage entertains the city daily with music and
     shows. Increase the morale of the townspeople
-  baseUpgradeCost: 0
+  baseUpgradeCost: 800

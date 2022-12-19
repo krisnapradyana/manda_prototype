@@ -15,4 +15,4 @@ MonoBehaviour:
   platformName: Monk
   platformDescription: The monk stage is a place to learn peace and martial arts
     to help others
-  baseUpgradeCost: 0
+  baseUpgradeCost: 800
