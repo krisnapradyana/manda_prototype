@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using Modules;
 using System;
 using DG.Tweening;
+using Singletons;
 
 public class IntroUIControl : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class IntroUIControl : MonoBehaviour
 
     public event Action OnStartGame;
     IntroManager IntroManager { get; set; }
+    PopupUI popupUI { get; set; }
 
     private void OnDestroy()
     {
@@ -36,6 +38,7 @@ public class IntroUIControl : MonoBehaviour
 
     private void Start()
     {
+        popupUI = FindObjectOfType<PopupUI>();
     }
     
     public void InitUIIntro(IntroManager manager)
@@ -45,6 +48,13 @@ public class IntroUIControl : MonoBehaviour
         _startButton.onClick.AddListener(() =>
         {
             Debug.Log("Start Explore game pressed");
+            if (string.IsNullOrEmpty(IntroManager._gameDataContainer.PlayerName))
+            {
+                popupUI.SetupPopupUI("Notice", "Name is left blank, please fill name.", confirmButtonEnabled: true);
+                StartCoroutine(popupUI.ShowPopup(null));
+                return;
+            }
+
             OnStartGame?.Invoke();
             _startButton.interactable = false;
             _canvasGroup.DOFade(0, 4.5f);

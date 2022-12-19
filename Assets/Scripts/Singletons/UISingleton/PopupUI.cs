@@ -86,12 +86,12 @@ namespace Singletons
             {
                 _confirmButton.onClick.AddListener(() => confirmAction());
             }
-            AddCloseEvent();
             return this;
         }
 
         public IEnumerator ShowPopup(Action callback)
         {
+            AddCloseEvent();
             if (_animTween != null)
             {
                 Debug.Log("Anim is still playing");
