@@ -13,7 +13,7 @@ public class IntroManager : MonoBehaviour
     [SerializeField] SelectableCharacter[] _introCharacter;
     [SerializeField] CinemachineVirtualCamera _virtualCamera;
 
-    public GameDataContainer gameDataContainer { get; private set; }
+    public GameCentralSystem _gameDataContainer { get; private set; }
     bool _hasSelected;
 
     private void OnDestroy()
@@ -23,14 +23,14 @@ public class IntroManager : MonoBehaviour
 
     private void Start()
     {
-        gameDataContainer = FindObjectOfType<GameDataContainer>();
+        _gameDataContainer = FindObjectOfType<GameCentralSystem>();
 
         foreach (var item in _introCharacter)
         {
             item.onInteractObject += (obj) =>
             {
                 Debug.Log("Selected character");
-                gameDataContainer.SelectCharacter(obj.GetComponent<SelectableCharacter>().CharacterId);
+                _gameDataContainer.SelectCharacter(obj.GetComponent<SelectableCharacter>().CharacterId);
                 SceneManager.LoadScene(1, LoadSceneMode.Single);
             };
 
@@ -47,6 +47,8 @@ public class IntroManager : MonoBehaviour
 
         _uiControl.InitUIIntro(this);
         _uiControl.OnStartGame += () => StartCoroutine(DelayMoveCamera());
+
+        _gameDataContainer.SetGameState(GameState.intro);
     }
 
     IEnumerator DelayMoveCamera()

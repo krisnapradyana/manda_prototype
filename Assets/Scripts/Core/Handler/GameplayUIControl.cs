@@ -84,11 +84,11 @@ namespace Gameplay
 
         public void SetPlayerUI()
         {
-            if (_gameHandler._dataContainer == null)
+            if (_gameHandler._gameDataContainer == null)
             {
                 return;
             }
-            _playerName.text = _gameHandler._dataContainer.PlayerName;
+            _playerName.text = _gameHandler._gameDataContainer.PlayerName;
         }
 
         void RegisterUIEvents()

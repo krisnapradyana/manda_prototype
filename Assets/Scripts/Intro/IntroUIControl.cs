@@ -51,7 +51,7 @@ public class IntroUIControl : MonoBehaviour
             _canvasGroup.blocksRaycasts = false;
         });
 
-        _nameInputField.onValueChanged.AddListener((input) => IntroManager.gameDataContainer.SetPlayerName(input));
+        _nameInputField.onValueChanged.AddListener((input) => IntroManager._gameDataContainer.SetPlayerName(input));
     }
 
     public void ToggleTextVisibility(GameObject targetObject, bool visibility)

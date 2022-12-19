@@ -35,7 +35,7 @@ namespace Gameplay
                 return result;
             }
         }
-        [field: SerializeField] public Interactables InspectedObject { get => _inspectedObject; }
+        public Interactables InspectedObject { get => _inspectedObject; }
         public bool IsInspecting { get; private set; }
         public CameraCore PriorityCamera { get; private set; }
 
@@ -43,27 +43,38 @@ namespace Gameplay
         public int _playerGold;
 
         //Singleton privates
-        [HideInInspector] public GameDataContainer _dataContainer { get; private set; }
+        [HideInInspector] public GameCentralSystem _gameDataContainer { get; private set; }
+        [HideInInspector] public PopupUI _popupUI { get; private set; }
+        [HideInInspector] public InputListener _inputListener { get; private set; }
 
         ///Private fields
         Interactables _inspectedObject;
         int _lastCameraPriority;
         bool _hasInspectCharacter;
 
+        private void Awake()
+        {            
+            Debug.Log("Starting handler");
+            _gameDataContainer = FindObjectOfType<GameCentralSystem>();
+            _popupUI = FindObjectOfType<PopupUI>();
+            _inputListener = FindObjectOfType<InputListener>();
+        }
+
         private void Start()
         {
-            Debug.Log("Starting handler");
-            _dataContainer = FindObjectOfType<GameDataContainer>();
+            _inputListener.InitGameHandler(this);
             InitObjects();
             _uiControl.SetPlayerUI();
-            if (_dataContainer == null)
+            if (_gameDataContainer == null)
             {
                 InitEvents(0);
             }
             else
             {
-                InitEvents(_dataContainer.SelectedCharacterIndex);
+                InitEvents(_gameDataContainer.SelectedCharacterIndex);
             }
+
+            _gameDataContainer.SetGameState(GameState.gameplay);
         }
 
         private void Update()
@@ -193,6 +204,11 @@ namespace Gameplay
             interactables.OnObjectInspected(out _inspectedObject, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
             {
                 _uiControl.SetLevelUpButton(interactables.Level, interactables.MaxLevel);
+                if (interactables.Level >= interactables.MaxLevel)
+                {
+                    _popupUI.SetupPopupUI("Level Notice", "Maximum level of platform reached. Go Increase another platform level", confirmButtonEnabled: true);
+                    StartCoroutine(_popupUI.ShowPopup(null));
+                }
                 OnInspecting(interactables);
             });
         }

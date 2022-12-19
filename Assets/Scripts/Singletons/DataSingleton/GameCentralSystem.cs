@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 namespace Singletons
 {
-    public class GameDataContainer : MonoBehaviour
+    public class GameCentralSystem : MonoBehaviour
     {
-        public static GameDataContainer GameData { get; private set; }
+        public static GameCentralSystem GameData { get; private set; }
         public int SelectedCharacterIndex { get; private set; }
         public string PlayerName { get; private set; }
+        public GameState CurrentState { get; private set; }
 
         private void Awake()
         {
@@ -34,6 +35,11 @@ namespace Singletons
         public void SetPlayerName(string playerName)
         {
             PlayerName = playerName;
+        }
+
+        public void SetGameState(GameState currentState)
+        {
+            CurrentState = currentState;
         }
     }
 }

@@ -9,6 +9,10 @@ namespace Modules
     {
         public static Vector3 WorldToScreenSpace(Vector3 worldPos, Camera cam, RectTransform area)
         {
+            if (cam == null)
+            {
+                return Vector3.zero;
+            }
             Vector3 screenPoint = cam.WorldToScreenPoint(worldPos);
             screenPoint.z = 0;
 
@@ -20,6 +24,7 @@ namespace Modules
 
             return screenPoint;
         }
+
         public static Vector3 GetWorldPoint()
         {
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
