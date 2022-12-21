@@ -17,6 +17,7 @@ namespace Singletons
         [SerializeField] PopupUI _popupUI;
         [field : SerializeField] public InputAction MoveAction {get; private set;}
         [field: SerializeField] public InputAction UIAction { get; private set; }
+        [field: SerializeField] public InputAction wasdMoveAction { get; private set; }
 
         Camera _cam;
         int layerMask = 1 << 9;
@@ -50,6 +51,11 @@ namespace Singletons
                 {
                     MoveByMouse(AdditionalModule.GetWorldPoint());
                 }
+            };
+
+            wasdMoveAction.performed += context =>
+            {
+                Debug.Log(context.ReadValue<Vector2>());
             };
 
             UIAction.performed += context =>
