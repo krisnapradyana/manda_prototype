@@ -6,20 +6,23 @@ using Pathfinding;
 using Modules;
 using Gameplay;
 using UnityEngine.SceneManagement;
+using System;
 
 namespace Singletons
 {
-    public class InputListener : MonoBehaviour
+    public class InputListener : MonoBehaviour, Controls.IPlayerActionActions
     {
         public static InputListener Instance;
 
         [SerializeField] GameHandler _gameHandler;
         [SerializeField] PopupUI _popupUI;
-        [field : SerializeField] public InputAction MoveAction {get; private set;}
         [field: SerializeField] public InputAction UIAction { get; private set; }
-        [field: SerializeField] public InputAction wasdMoveAction { get; private set; }
+
+        [HideInInspector] public Vector2 _mouseDelta;
+        [HideInInspector] public Vector2 _moveComposite;
 
         Camera _cam;
+        Controls _controls;
         int layerMask = 1 << 9;
 
         private void Awake()
@@ -34,10 +37,24 @@ namespace Singletons
                 DontDestroyOnLoad(this);
             }    
 
-            MoveAction.Enable();
+            //MoveAction.Enable();
             UIAction.Enable();
 
             _cam = Camera.main;
+        }
+
+        private void OnEnable()
+        {
+            if (_controls != null)
+                return;
+
+            _controls = new Controls();
+            _controls.PlayerAction.SetCallbacks(this);
+            _controls.PlayerAction.Enable();
+        }
+        public void OnDisable()
+        {
+            _controls.PlayerAction.Disable();
         }
 
         private void Start()
@@ -45,18 +62,6 @@ namespace Singletons
             layerMask = ~layerMask;
 
             SceneManager.activeSceneChanged += (last, curent) => _cam = Camera.main;
-            MoveAction.performed += context =>
-            {
-                if (_gameHandler._gameDataContainer.CurrentState == GameState.gameplay && _gameHandler.ControlledPlayer != null)
-                {
-                    MoveByMouse(AdditionalModule.GetWorldPoint());
-                }
-            };
-
-            wasdMoveAction.performed += context =>
-            {
-                Debug.Log(context.ReadValue<Vector2>());
-            };
 
             UIAction.performed += context =>
             {
@@ -85,6 +90,32 @@ namespace Singletons
         {
             Ray ray = _cam.ScreenPointToRay(Mouse.current.position.ReadValue());
             Debug.DrawRay(ray.origin, ray.direction * 100, Color.yellow);
+        }
+
+        public void OnLook(InputAction.CallbackContext context)
+        {   
+            _mouseDelta = context.ReadValue<Vector2>();
+        }
+        
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            _moveComposite = context.ReadValue<Vector2>();
+        }
+
+        public void OnRotate(InputAction.CallbackContext context)
+        {
+            return;
+        }
+
+        public void OnMoveByMouse(InputAction.CallbackContext context)
+        {
+            if (!context.performed)
+                return;
+
+            if (_gameHandler._gameDataContainer.CurrentState == GameState.gameplay && _gameHandler.ControlledPlayer != null)
+            {
+                MoveByMouse(AdditionalModule.GetWorldPoint());
+            }
         }
     }
 }
