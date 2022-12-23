@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.114102155, g: 0.3294807, b: 0.71093917, a: 1}
+  m_IndirectSpecularColor: {r: 0.11464225, g: 0.3301195, b: 0.71255356, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1905,23 +1905,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameHandler: {fileID: 0}
   _popupUI: {fileID: 1245116482}
-  <MoveAction>k__BackingField:
-    m_Name: Move
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 25b47219-4c89-4a9e-8019-840ee5e3b21c
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: e738ae8a-35bf-47a7-8a15-56296b2dfb45
-      m_Path: <Mouse>/rightButton
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Move
-      m_Flags: 0
-    m_Flags: 0
   <UIAction>k__BackingField:
     m_Name: UI
     m_Type: 0
@@ -1939,6 +1922,8 @@ MonoBehaviour:
       m_Action: UI
       m_Flags: 0
     m_Flags: 0
+  _mouseDelta: {x: 0, y: 0}
+  _moveComposite: {x: 0, y: 0}
 --- !u!1 &403973353
 GameObject:
   m_ObjectHideFlags: 0
@@ -3879,7 +3864,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7d0cfb3be20b49b4a9a0f2eae613faaf, type: 2}
+  - {fileID: 2100000, guid: 25ec9ad8dde99fd4285f0c648b75815d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7068,7 +7053,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818321667}
-  m_LocalRotation: {x: 0.07609621, y: 0.0046559586, z: -0.00035533498, w: 0.99708956}
+  m_LocalRotation: {x: 0.076096185, y: 0.004655922, z: -0.000355332, w: 0.99708956}
   m_LocalPosition: {x: -0.37, y: 5.6, z: -10.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
