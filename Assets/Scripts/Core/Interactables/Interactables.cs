@@ -55,12 +55,12 @@ namespace Gameplay
         public void OnObjectInspected(out Interactables inspectedObject, GameObject inspectParent, GameObject playgroundParent, GameplayUIControl uiControl, Action additionalEvent = null)
         {
             inspectedObject = this;
-            inspectParent.transform.position = new Vector3(inspectedObject.transform.position.x, 0, inspectedObject.transform.position.z);
-            inspectedObject.transform.parent = inspectParent.transform;
-
-            playgroundParent.SetActive(false);
-            inspectParent.SetActive(true);
-            StartCoroutine(uiControl.ShowOrHidePosition(true, null));
+            //inspectParent.transform.position = new Vector3(inspectedObject.transform.position.x, 0, inspectedObject.transform.position.z);
+            //inspectedObject.transform.parent = inspectParent.transform;
+            //
+            //playgroundParent.SetActive(false);
+            //inspectParent.SetActive(true);
+            //StartCoroutine(uiControl.ShowOrHidePosition(true, null));
             additionalEvent?.Invoke();
             Debug.Log("Inspecting Object : " + gameObject.name);
         }

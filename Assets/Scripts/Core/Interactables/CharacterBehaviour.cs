@@ -86,7 +86,7 @@ namespace Gameplay
         {
             Debug.LogFormat("Set character {0} to {1} ", gameObject.name, state);
             IsSelected = state;
-            _gameHandler.AsisgnCameraPriority(CharacterId);
+            _gameHandler.AssignCameraPriority(CharacterId, _gameHandler._worldCameras);
         }
 
         public void MoveCharacter(Vector3 targetPosition)

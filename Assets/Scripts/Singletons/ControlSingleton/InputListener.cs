@@ -15,7 +15,7 @@ namespace Singletons
         public static InputListener Instance;
 
         [SerializeField] GameHandler _gameHandler;
-        [SerializeField] PopupUI _popupUI;
+        [SerializeField] MainUI _popupUI;
         [field: SerializeField] public InputAction UIAction { get; private set; }
 
         [HideInInspector] public Vector2 _mouseDelta;
@@ -112,7 +112,7 @@ namespace Singletons
             if (!context.performed)
                 return;
 
-            if (_gameHandler._gameDataContainer.CurrentState == GameState.gameplay && _gameHandler.ControlledPlayer != null)
+            if (_gameHandler._centralSystem.CurrentState == GameState.gameplay && _gameHandler.ControlledPlayer != null)
             {
                 MoveByMouse(AdditionalModule.GetWorldPoint());
             }

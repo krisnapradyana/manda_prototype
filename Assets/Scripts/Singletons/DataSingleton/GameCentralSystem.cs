@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Singletons
@@ -24,7 +27,7 @@ namespace Singletons
 
         private void Start()
         {
-
+  
         }
 
         public void SelectCharacter(int targetIndex)
@@ -40,6 +43,11 @@ namespace Singletons
         public void SetGameState(GameState currentState)
         {
             CurrentState = currentState;
+        }
+
+        public void SetSelectedPlatformId(int platformId)
+        {
+
         }
     }
 }

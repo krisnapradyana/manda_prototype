@@ -29,7 +29,7 @@ public class IntroUIControl : MonoBehaviour
 
     public event Action OnStartGame;
     IntroManager IntroManager { get; set; }
-    PopupUI popupUI { get; set; }
+    MainUI popupUI { get; set; }
 
     private void OnDestroy()
     {
@@ -38,7 +38,7 @@ public class IntroUIControl : MonoBehaviour
 
     private void Start()
     {
-        popupUI = FindObjectOfType<PopupUI>();
+        popupUI = FindObjectOfType<MainUI>();
     }
     
     public void InitUIIntro(IntroManager manager)

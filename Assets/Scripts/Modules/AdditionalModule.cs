@@ -17,9 +17,16 @@ namespace Modules
             screenPoint.z = 0;
 
             Vector2 screenPos;
-            if (RectTransformUtility.ScreenPointToLocalPointInRectangle(area, screenPoint, cam, out screenPos))
+            try
             {
-                return screenPos;
+                if (RectTransformUtility.ScreenPointToLocalPointInRectangle(area, screenPoint, cam, out screenPos))
+                {
+                    return screenPos;
+                }
+            }
+            catch
+            {
+                Debug.Log("Target Rect is no longer exist, but code still try to access it");
             }
 
             return screenPoint;
