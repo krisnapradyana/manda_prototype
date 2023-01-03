@@ -172,7 +172,7 @@ namespace Gameplay
                     }
                 };
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
-                item.onInteractObject += (info) => { OnChangedCharacted(); info.GetComponent<CharacterBehaviour>().SetSelected(true); };
+                item.onInteractObject += (info) => { OnChangedCharacted(); info.GetComponent<CharacterBehaviour>().SetSelected(true);};
             }
 
             for (int i = 0; i < _players.Length; i++)
@@ -244,18 +244,9 @@ namespace Gameplay
                      }, noAction: () => ExitVisitRoom());
                     StartCoroutine(_mainUI.ShowPopup(null));
                 });
-                //_uiControl.SetLevelUpButton(interactables.Level, interactables.MaxLevel);
-                //if (interactables.Level >= interactables.MaxLevel)
-                //{
-                //    _popupUI.SetupPopupUI("Level Notice", "Maximum level of platform reached. Go Increase another platform level", confirmButtonEnabled: true);
-                //    StartCoroutine(_popupUI.ShowPopup(null));
-                //}
-                //OnInspecting(interactables);
             });
         }
 
-        //input - character skin, 
-        //
         void ExitVisitRoom()
         {
             _mainUI.FadeScreen(true, 1f, () => _mainUI.ToggleBlockScreen(true), () =>
@@ -267,35 +258,14 @@ namespace Gameplay
                 _mainUI.ToggleBlockScreen(false);
                 _thirdPersonCharacter.transform.position = _inspectStartPos.position;
                 _thirdPersonCharacter.transform.rotation = _inspectStartPos.rotation;
+                SetCameraToLastControlled();
             });
         }
 
-        /// <summary>
-        /// Legacy inspect, Direct inspect item on click without changing scene
-        /// </summary>
-        /// <param name="intereactedObj"></param>
-        /*void OnInspecting(Interactables intereactedObj)
+        void SetCameraToLastControlled()
         {
-            switch (intereactedObj.Type)
-            {
-                case ObjectType.Character:
-                    AssignCameraPriority(intereactedObj.gameObject.GetComponent<CharacterBehaviour>().CharacterId, true);
-                    OnChangedCharacted();
-                    break;
-                case ObjectType.Object:
-                    Debug.Log("Inspecting Object");
-                    var platformData = _inspectedObject.gameObject.GetComponent<ObjectBehaviour>().PlatformData;
-                    var platformInteractable = _inspectedObject.gameObject.GetComponent<Interactables>();
-                    _uiControl.SetUpdateObjectDescription(platformData.platformName,platformData.platformDescription, string.Format("Level : {0}", _inspectedObject.Level.ToString()))
-                        .SetLevelUpButton(platformInteractable.Level, platformInteractable.MaxLevel);
-                    AssignCameraPriority(3, false);
-                    _inspectParent.ToggleInspectionBackground(true);
-                    IsInspecting = true;
-                    break;
-                default:
-                    break;
-            }
+            ResetAllVirtualCameraPriority(_worldCameras);
+            AssignCameraPriority(_worldCameras.First((x) => x.CameraId == ControlledPlayer.CharacterId).CameraId, _worldCameras);
         }
-        */
     }
 }

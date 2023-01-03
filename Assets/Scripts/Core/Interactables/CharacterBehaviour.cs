@@ -86,6 +86,7 @@ namespace Gameplay
         {
             Debug.LogFormat("Set character {0} to {1} ", gameObject.name, state);
             IsSelected = state;
+            _gameHandler.ResetAllVirtualCameraPriority(_gameHandler._worldCameras);
             _gameHandler.AssignCameraPriority(CharacterId, _gameHandler._worldCameras);
         }
 
