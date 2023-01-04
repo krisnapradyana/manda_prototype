@@ -67,7 +67,7 @@ namespace Singletons
             {
                 _popupUI.SetupPopupUI("Notice", "Do you want to exit application?", yesButtonEnabled: true, noButtonEnabled: true);
                 _popupUI.SetupUIEvents(yesAction: () => { Application.Quit(); print("has quit application"); });
-                StartCoroutine(_popupUI.ShowPopup(() => print("has shown popup")));
+                StartCoroutine(_popupUI.ShowPopupIE(() => print("has shown popup")));
             };
         }
 

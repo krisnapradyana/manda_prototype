@@ -10,10 +10,17 @@ namespace Singletons
 {
     public class GameCentralSystem : MonoBehaviour
     {
+        private GameState _currentState;
         public static GameCentralSystem GameData { get; private set; }
         public int SelectedCharacterIndex { get; private set; }
         public string PlayerName { get; private set; }
-        public GameState CurrentState { get; private set; }
+        public GameState CurrentState { get { return _currentState; } private set 
+            {
+                LastState = _currentState;
+                _currentState = value;
+            } 
+        }
+        public GameState LastState { get; private set; }
 
         private void Awake()
         {

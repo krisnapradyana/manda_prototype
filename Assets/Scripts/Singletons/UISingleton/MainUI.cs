@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using TMPro;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Text;
 
 namespace Singletons
 {
@@ -19,6 +20,7 @@ namespace Singletons
         [SerializeField] Button _yesButton;
         [SerializeField] Button _noButton;
         [SerializeField] Button _confirmButton;
+        [SerializeField] Button[] _buttons; //array version of 'Yes No Confirm' for popup buttons
 
         [Header("UI Components")]
         [SerializeField] GameObject _blockBg;
@@ -28,11 +30,25 @@ namespace Singletons
         [SerializeField] float _animDuration;
         [SerializeField] Ease _animEase;
 
+        [Header("Dialog Attributes")]
+        [SerializeField] GameObject _dialogParent;
+        [SerializeField] Camera _dialogRenderCamera;
+        [SerializeField] Image _dialogBox;
+        [SerializeField] TMP_Text _dialogText;
+        [SerializeField] TMP_Text _dialogSpeakerText;
+        [SerializeField] Button _tapToContinue;
+        [SerializeField] float _talkDurationPerChar;
+        [SerializeField] float _characterPortraitYOffset;
+        public bool _isSpeaking;
+        private string _displayedDialog;
+        private int _dialogIndex;
+        private Transform _currentDialogFocusCam;
+        private DialogData _currentLoadedDialog;
+
         [Header("Fade Screen")]
         [SerializeField] Image _blackScreen;
 
         private Tween _animTween;
-        [SerializeField] Button[] _buttons; //array version of 'Yes No Confirm' for popup buttons
 
         private void Awake()
         {
@@ -111,7 +127,7 @@ namespace Singletons
             return this;
         }
 
-        public IEnumerator ShowPopup(Action callback)
+        public IEnumerator ShowPopupIE(Action callback)
         {
             AddCloseEvent();
             if (_animTween != null)
@@ -141,6 +157,56 @@ namespace Singletons
             _yesButton.onClick      .AddListener(() => ToggleBGVisibility(false));
             _noButton.onClick       .AddListener(() => ToggleBGVisibility(false));
             _confirmButton.onClick  .AddListener(() => ToggleBGVisibility(false));
+        }
+
+        public void ShowDialogWindow(string speaker,Transform lookTarget, Vector3 cameraPos, DialogData dialogData)
+        {
+            _currentLoadedDialog = dialogData;
+            if (_dialogIndex >= _currentLoadedDialog.dialogText.Length)
+            {
+                _dialogIndex = 0;
+            }
+            _dialogSpeakerText.text = speaker;
+            _dialogParent.SetActive(true);
+            _dialogRenderCamera.transform.position = cameraPos;
+            _currentDialogFocusCam = lookTarget;
+            _dialogRenderCamera.transform.LookAt( new Vector3(_currentDialogFocusCam.position.x, _currentDialogFocusCam.transform.position.y + _characterPortraitYOffset, _currentDialogFocusCam.transform.position.z));
+            StartCoroutine(StartPerTextDialogIE(dialogData, _talkDurationPerChar));
+        }
+
+        IEnumerator StartPerTextDialogIE(DialogData loadedDialog, float delay = .1f)
+        {
+            _isSpeaking = true;
+            _tapToContinue.onClick.RemoveAllListeners();
+            var builder = new StringBuilder();
+            var charCounter = 0;
+
+            for (int i = 0; i < loadedDialog.dialogText[_dialogIndex].Length; i++)
+            {
+                builder.Append(loadedDialog.dialogText[_dialogIndex][i]);
+                _displayedDialog = builder.ToString();
+                _dialogText.text = _displayedDialog;
+                charCounter++;
+
+                if (charCounter >= loadedDialog.dialogText[_dialogIndex].Length)
+                {
+                    _dialogIndex++;
+                    if (_dialogIndex >= loadedDialog.dialogText.Length)
+                    {
+                        Debug.Log("Ended Dialog");
+                        _tapToContinue.onClick.AddListener(() => { _dialogParent.SetActive(false); _isSpeaking = false;});
+                        yield break;
+                    }
+                    else if(_dialogIndex < loadedDialog.dialogText.Length)
+                    {
+                        Debug.Log("Continue dialog");
+                        _tapToContinue.onClick.AddListener(() => { ShowDialogWindow(_dialogSpeakerText.text, _currentDialogFocusCam, _dialogRenderCamera.transform.position, _currentLoadedDialog); });
+                    }
+                }
+                yield return new WaitForSeconds(delay);
+            }
+
+            yield return null;
         }
     }
 }

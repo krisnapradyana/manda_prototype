@@ -7,6 +7,9 @@ namespace Gameplay
 {
     public class Interactables : MonoBehaviour, IInteractableObject, ILevel
     {
+        [field: Header("Dialog Data")]
+        [field: SerializeField] public DialogData ObjectDialog { get; private set; }
+
         [Header("Parent Referece")]
         [HideInInspector] public GameHandler _gameHandler;
         [field: SerializeField] public bool IsInspectable { get; set; }
@@ -16,8 +19,6 @@ namespace Gameplay
         public Action<Interactables> onHoverObject { get; set; }
         public Action<Interactables> onExitHoverObject { get; set; }
         public Action<Interactables> onInteractObject { get; set; }
-
-
         public event Action onlevelUp;
 
         public virtual void OnDestroy()
@@ -65,6 +66,12 @@ namespace Gameplay
             Debug.Log("Inspecting Object : " + gameObject.name);
         }
 
+        public DialogData GetDialogData ()
+        {
+            return ObjectDialog;
+        }
+
+        [Obsolete("Currently Not used as method flow changed")]
         public void OnCharacterSelected(out Interactables inspectedCharacter, Action additionalEvent = null)
         {
             inspectedCharacter = this;
@@ -72,6 +79,7 @@ namespace Gameplay
             Debug.Log("Inspecting Object : " + gameObject.name);
         }
 
+        [Obsolete("Currently Not used as method flow changed")]
         public void ExitInspectObject
         (GameObject inspectParent, GameObject playgroundParent, GameplayUIControl uiControl, Action additionalEvent = null)
         {

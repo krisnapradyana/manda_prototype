@@ -27,6 +27,9 @@ namespace Gameplay
         [SerializeField] EventTrigger _eventTrigger;
         [SerializeField] Animator _characterAnimator;
 
+        [Header("Dialog Data if NPC")]
+        public Transform _cameraTransform;
+
         private float _targetDistance;
         private float _divider = 1;
 
@@ -61,6 +64,7 @@ namespace Gameplay
                 {
                     if (IsNPC)
                     {
+                        //Character will talk here
                         Debug.Log("Scelected as NPC");
                         if (_gameHandler.IsInspecting)
                         {

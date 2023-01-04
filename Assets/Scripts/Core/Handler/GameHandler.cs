@@ -60,7 +60,7 @@ namespace Gameplay
 
         ///Private fields
         Interactables _inspectedObject;
-        int _lastCameraPriority;
+        //int _lastCameraPriority;
 
         private void OnDestroy()
         {
@@ -98,7 +98,7 @@ namespace Gameplay
                     ExitVisitRoom();
                 },
                     noAction: () => _centralSystem.SetGameState(GameState.inspect));
-                StartCoroutine(_mainUI.ShowPopup(() => _centralSystem.SetGameState(GameState.none)));
+                StartCoroutine(_mainUI.ShowPopupIE(() => _centralSystem.SetGameState(GameState.none)));
             });
         }
 
@@ -134,16 +134,16 @@ namespace Gameplay
                 };
             }
 
-            _uiControl.onReturnInspectPressed += () =>
-            {
-                _inspectedObject.ExitInspectObject(_inspectParent.gameObject, _playgroundParent, _uiControl, () =>
-                {
-                    ResetAllVirtualCameraPriority(_worldCameras);
-                    AssignCameraPriority(_lastCameraPriority, _worldCameras, false);
-                });
-
-                IsInspecting = false;
-            };
+            //_uiControl.onReturnInspectPressed += () =>
+            //{
+            //    _inspectedObject.ExitInspectObject(_inspectParent.gameObject, _playgroundParent, _uiControl, () =>
+            //    {
+            //        ResetAllVirtualCameraPriority(_worldCameras);
+            //        AssignCameraPriority(_lastCameraPriority, _worldCameras, false);
+            //    });
+            //
+            //    IsInspecting = false;
+            //};
         }
 
         private void InitEvents(int focusCharacters)
@@ -172,7 +172,24 @@ namespace Gameplay
                     }
                 };
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
-                item.onInteractObject += (info) => { OnChangedCharacted(); info.GetComponent<CharacterBehaviour>().SetSelected(true);};
+                item.onInteractObject += (info) =>
+                {
+                    {
+                        if (item.IsNPC)
+                        {
+                            if (_mainUI._isSpeaking)
+                            {
+                                Debug.Log("character currently speaking");
+                                return;
+                            }
+                            _mainUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData());
+                        }
+                        else
+                        {
+                            OnChangedCharacted(); item.SetSelected(true);
+                        }
+                    }
+                };
             }
 
             for (int i = 0; i < _players.Length; i++)
@@ -193,7 +210,7 @@ namespace Gameplay
             }
         }
 
-        public void AssignCameraPriority(int comparedId, CameraCore[] collectionList, bool saveLastId = true)
+        public void AssignCameraPriority(int comparedId, CameraCore[] collectionList)//, bool saveLastId = true)
         {
             foreach (var item in collectionList)
             {
@@ -201,8 +218,8 @@ namespace Gameplay
                 {
                     item.SetCameraPriority(1);
                     PriorityCamera = item;
-                    if (saveLastId)
-                        _lastCameraPriority = comparedId;
+                    //if (saveLastId)
+                    //    _lastCameraPriority = comparedId;
                 }
             }
         }
@@ -242,7 +259,7 @@ namespace Gameplay
                          ResetAllVirtualCameraPriority(_inspectCameras);
                          AssignCameraPriority(1, _inspectCameras);
                      }, noAction: () => ExitVisitRoom());
-                    StartCoroutine(_mainUI.ShowPopup(null));
+                    StartCoroutine(_mainUI.ShowPopupIE(null));
                 });
             });
         }

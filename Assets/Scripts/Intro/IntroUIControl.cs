@@ -51,7 +51,7 @@ public class IntroUIControl : MonoBehaviour
             if (string.IsNullOrEmpty(IntroManager._gameDataContainer.PlayerName))
             {
                 popupUI.SetupPopupUI("Notice", "Name is left blank, please fill name.", confirmButtonEnabled: true);
-                StartCoroutine(popupUI.ShowPopup(null));
+                StartCoroutine(popupUI.ShowPopupIE(null));
                 return;
             }
 
