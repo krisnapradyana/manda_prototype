@@ -1,0 +1,281 @@
+fileFormatVersion: 2
+guid: 55dea3fd2538b46439feb86eec77a58e
+ModelImporter:
+  serializedVersion: 21300
+  internalIDToNameTable: []
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Banner_material
+    second: {fileID: 2100000, guid: 81445b3ab6a131f489b7b888b0b37449, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Commander_LvDown_arm_fabric
+    second: {fileID: 2100000, guid: ab6e48abf46478d419b8a44ca2ba9021, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Commander_LvDown_arm_fabric_shading
+    second: {fileID: 2100000, guid: 87aa1e63aec20f74bb67a54c812b39fc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Commander_LvDown_metal
+    second: {fileID: 2100000, guid: 23ff0cfcc710a8b4db9d22d5e388adbf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Commander_LvDown_metal_shading
+    second: {fileID: 2100000, guid: 04cae02536d36544e850c8fa972b75ce, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Commander_LvDown_skirt
+    second: {fileID: 2100000, guid: db05e7d7f52b31248af9b8f55a1348f9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Commander_LvDown_sword_metal
+    second: {fileID: 2100000, guid: 6ea23600defa23b4c91c5ab0c29a659a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Commander_LvDown_sword_metal_shading
+    second: {fileID: 2100000, guid: 4c85770fb2544f949aff98e25aac64a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rack_Material
+    second: {fileID: 2100000, guid: 112813a980ab9d842b4dedda42f05b1f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Sword_Table_Material
+    second: {fileID: 2100000, guid: 5d4907e8e82f0704fa60a413a4e5ea7c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book_binding
+    second: {fileID: 2100000, guid: c80018883b2a3af45816f8e9d66ffdc6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book_brown
+    second: {fileID: 2100000, guid: cb23cf1f4415ad544bb7c31f3f3bf30a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book_dark_blue
+    second: {fileID: 2100000, guid: 72d72eb01d0089540aa299cda686252c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book_gold
+    second: {fileID: 2100000, guid: bb00e93d35979f54f98c87a93c954568, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book_green
+    second: {fileID: 2100000, guid: 7bc2d57600acce04aa095b0c1e84da48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book_light_blue
+    second: {fileID: 2100000, guid: fb004a35c65fa4647aaaf149c4fc8cab, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: book_paper
+    second: {fileID: 2100000, guid: eda989598d9de6944b56eea164a446a0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: commander_table_border
+    second: {fileID: 2100000, guid: 7f0559776204a6948b65fe2c7681800a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: commander_table_wood
+    second: {fileID: 2100000, guid: d126c37c0d439244b89c54557e7ee716, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: dark_metal
+    second: {fileID: 2100000, guid: 997cb6143b42dec4082058e2f0aa3b78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: floor_rug_red
+    second: {fileID: 2100000, guid: 562e1087665f3074d87d7527f7d26952, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: light_metal
+    second: {fileID: 2100000, guid: f6c8a6c9aaeb8764a907da069d811bec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lighter_wood
+    second: {fileID: 2100000, guid: 48d1967f7d331ed4192a582da8dd2530, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pieces_blue
+    second: {fileID: 2100000, guid: dd8c35bc90510464788d27e06ff4b893, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pieces_red
+    second: {fileID: 2100000, guid: 99709153b2958b045a614bc2e76f40d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: quill_feather
+    second: {fileID: 2100000, guid: ddb98e9cc6e32c140baffdad25445608, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: quill_feather_spine
+    second: {fileID: 2100000, guid: 4f77cadf337e0f242a0e40df4642da73, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: red
+    second: {fileID: 2100000, guid: 9e0e051b976cc7e40bd5ea5210f59d39, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: red_wood
+    second: {fileID: 2100000, guid: b04da613906104343835bbca0bec5ef7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: scrolls1
+    second: {fileID: 2100000, guid: c7f010e3451e5774a83bf8621a248310, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: shield_metal
+    second: {fileID: 2100000, guid: bb6e5bb3289cbe347af7361161488703, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall_flag_red
+    second: {fileID: 2100000, guid: 206e65be9d5abe64eb307602c700b428, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wall_flag_yellow
+    second: {fileID: 2100000, guid: 46f30c7685148f348b6bb3be0e8e217b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood
+    second: {fileID: 2100000, guid: 0f3c60d84a08da144b6e9854665f3180, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wood_2
+    second: {fileID: 2100000, guid: 5f4ace5e633b8c74fba64b848307100d, type: 2}
+  materials:
+    materialImportMode: 2
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    removeConstantScaleCurves: 1
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 0
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    sortHierarchyByName: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    nodeNameCollisionStrategy: 1
+    fileIdsGeneration: 2
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    keepQuads: 0
+    weldVertices: 1
+    bakeAxisConversion: 0
+    preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    optimizeBones: 1
+    meshOptimizationFlags: -1
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVMarginMethod: 1
+    secondaryUVMinLightmapResolution: 40
+    secondaryUVMinObjectScale: 1
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 1
+  humanDescription:
+    serializedVersion: 3
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    globalScale: 1
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  autoGenerateAvatarMappingIfUnspecified: 1
+  animationType: 2
+  humanoidOversampling: 1
+  avatarSetup: 0
+  addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  remapMaterialsIfMaterialImportModeIsNone: 0
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
