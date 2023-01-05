@@ -5015,7 +5015,7 @@ MonoBehaviour:
   - {fileID: 830424632}
   - {fileID: 1439916911}
   - {fileID: 1000947249}
-  _playerGold: 0
+  _lookTarget: {fileID: 941681108}
 --- !u!4 &473723166
 Transform:
   m_ObjectHideFlags: 0
@@ -8113,6 +8113,7 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <MaxLevel>k__BackingField: 3
   <Type>k__BackingField: 1
+  _cameraTransform: {fileID: 0}
   platformObjects:
   - {fileID: 271737111}
   - {fileID: 2097847037}
@@ -8603,6 +8604,7 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <MaxLevel>k__BackingField: 0
   <Type>k__BackingField: 0
+  _cameraTransform: {fileID: 800158981}
   <CharacterId>k__BackingField: 1
   <IsSelected>k__BackingField: 0
   <IsNPC>k__BackingField: 1
@@ -9337,7 +9339,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 771456028}
-  m_LocalRotation: {x: 0.2243475, y: 0.45157698, z: -0.11843517, w: 0.8554061}
+  m_LocalRotation: {x: 0.22434749, y: 0.451577, z: -0.118435174, w: 0.8554061}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9496,6 +9498,7 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <MaxLevel>k__BackingField: 4
   <Type>k__BackingField: 1
+  _cameraTransform: {fileID: 0}
   platformObjects:
   - {fileID: 987291729}
   - {fileID: 2081808154}
@@ -10016,6 +10019,7 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <MaxLevel>k__BackingField: 4
   <Type>k__BackingField: 1
+  _cameraTransform: {fileID: 0}
   platformObjects:
   - {fileID: 1089760071}
   - {fileID: 1226500760}
@@ -10818,6 +10822,7 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <MaxLevel>k__BackingField: 3
   <Type>k__BackingField: 1
+  _cameraTransform: {fileID: 0}
   platformObjects:
   - {fileID: 1698688443}
   - {fileID: 943520115}
@@ -10886,6 +10891,7 @@ Transform:
   m_Children:
   - {fileID: 1032732044}
   - {fileID: 1083151771}
+  - {fileID: 1664023971}
   m_Father: {fileID: 1592067031}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10901,12 +10907,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2da4a4aec93d4994abcd308f1ddfc00b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <ObjectDialog>k__BackingField: {fileID: 0}
+  <ObjectDialog>k__BackingField: {fileID: 11400000, guid: d17ae8a855ec9d84caf7500e9a219499,
+    type: 2}
   _gameHandler: {fileID: 0}
   <IsInspectable>k__BackingField: 0
   <Level>k__BackingField: 0
   <MaxLevel>k__BackingField: 0
   <Type>k__BackingField: 0
+  _cameraTransform: {fileID: 1664023971}
   <CharacterId>k__BackingField: 1
   <IntroCharacterAnimator>k__BackingField: {fileID: 941681112}
 --- !u!114 &941681109
@@ -11467,6 +11475,7 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <MaxLevel>k__BackingField: 6
   <Type>k__BackingField: 1
+  _cameraTransform: {fileID: 0}
   platformObjects:
   - {fileID: 1871823319}
   - {fileID: 1098849110}
@@ -12062,6 +12071,7 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <MaxLevel>k__BackingField: 5
   <Type>k__BackingField: 1
+  _cameraTransform: {fileID: 0}
   platformObjects:
   - {fileID: 1341459169}
   - {fileID: 1240391334}
@@ -15963,7 +15973,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303110114}
-  m_LocalRotation: {x: 0.021554857, y: -0.00000001910636, z: 4.1193052e-10, w: 0.9997677}
+  m_LocalRotation: {x: 0.19424807, y: -0, z: -0, w: 0.98095244}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -18122,6 +18132,7 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <MaxLevel>k__BackingField: 3
   <Type>k__BackingField: 1
+  _cameraTransform: {fileID: 0}
   platformObjects:
   - {fileID: 931619884}
   - {fileID: 1113090762}
@@ -20137,6 +20148,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1651731658}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1664023970
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664023971}
+  m_Layer: 0
+  m_Name: CameraPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1664023971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664023970}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: 1, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 941681107}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1671388837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20774,6 +20816,7 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <MaxLevel>k__BackingField: 5
   <Type>k__BackingField: 1
+  _cameraTransform: {fileID: 0}
   platformObjects:
   - {fileID: 610132717}
   - {fileID: 1834239020}
@@ -22791,7 +22834,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906833101}
-  m_LocalRotation: {x: 0.3349462, y: 0.000000018763036, z: -0.0000000066698775, w: 0.94223726}
+  m_LocalRotation: {x: 0.07430089, y: -1e-45, z: -0, w: 0.9972359}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -24691,7 +24734,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2057040004}
-  m_LocalRotation: {x: 0.23605916, y: 0.44991004, z: -0.12461787, w: 0.8522485}
+  m_LocalRotation: {x: 0.23605916, y: 0.44991007, z: -0.12461787, w: 0.8522485}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -36516,6 +36559,7 @@ MonoBehaviour:
   <Level>k__BackingField: 0
   <MaxLevel>k__BackingField: 0
   <Type>k__BackingField: 0
+  _cameraTransform: {fileID: 1817892560}
   <CharacterId>k__BackingField: 0
   <IsSelected>k__BackingField: 0
   <IsNPC>k__BackingField: 0

@@ -20,7 +20,7 @@ namespace Singletons
         [SerializeField] Button _yesButton;
         [SerializeField] Button _noButton;
         [SerializeField] Button _confirmButton;
-        [SerializeField] Button[] _buttons; //array version of 'Yes No Confirm' for popup buttons
+        //[SerializeField] Button[] _buttons; //array version of 'Yes No Confirm' for popup buttons
 
         [Header("UI Components")]
         [SerializeField] GameObject _blockBg;
@@ -37,6 +37,8 @@ namespace Singletons
         [SerializeField] TMP_Text _dialogText;
         [SerializeField] TMP_Text _dialogSpeakerText;
         [SerializeField] Button _tapToContinue;
+        [SerializeField] Button _yesDialogButton;
+        [SerializeField] Button _noDialogButton;
         [SerializeField] float _talkDurationPerChar;
         [SerializeField] float _characterPortraitYOffset;
         public bool _isSpeaking;
@@ -52,7 +54,7 @@ namespace Singletons
 
         private void Awake()
         {
-            _buttons = new Button[]{ _yesButton, _noButton, _confirmButton };
+            //_buttons = new Button[]{ _yesButton, _noButton, _confirmButton };
 
             if (Instance == null)
             {
@@ -159,7 +161,7 @@ namespace Singletons
             _confirmButton.onClick  .AddListener(() => ToggleBGVisibility(false));
         }
 
-        public void ShowDialogWindow(string speaker,Transform lookTarget, Vector3 cameraPos, DialogData dialogData)
+        public void ShowDialogWindow(string speaker,Transform lookTarget, Vector3 cameraPos, DialogData dialogData, Action yesAct = null, Action noAct = null)
         {
             _currentLoadedDialog = dialogData;
             if (_dialogIndex >= _currentLoadedDialog.dialogText.Length)
@@ -171,42 +173,100 @@ namespace Singletons
             _dialogRenderCamera.transform.position = cameraPos;
             _currentDialogFocusCam = lookTarget;
             _dialogRenderCamera.transform.LookAt( new Vector3(_currentDialogFocusCam.position.x, _currentDialogFocusCam.transform.position.y + _characterPortraitYOffset, _currentDialogFocusCam.transform.position.z));
-            StartCoroutine(StartPerTextDialogIE(dialogData, _talkDurationPerChar));
+
+            StartCoroutine(StartPerTextDialogIE(dialogData, yesAct, noAct, _talkDurationPerChar));
         }
 
-        IEnumerator StartPerTextDialogIE(DialogData loadedDialog, float delay = .1f)
+        IEnumerator StartPerTextDialogIE(DialogData loadedDialog, Action yesAct, Action noAct, float duration = .1f)
         {
             _isSpeaking = true;
             _tapToContinue.onClick.RemoveAllListeners();
+            bool forcedComplete = false;
             var builder = new StringBuilder();
             var charCounter = 0;
 
-            for (int i = 0; i < loadedDialog.dialogText[_dialogIndex].Length; i++)
-            {
-                builder.Append(loadedDialog.dialogText[_dialogIndex][i]);
-                _displayedDialog = builder.ToString();
-                _dialogText.text = _displayedDialog;
-                charCounter++;
+            _tapToContinue.onClick.AddListener(() => { forcedComplete = true; });
 
-                if (charCounter >= loadedDialog.dialogText[_dialogIndex].Length)
+            while (!forcedComplete)
+            {
+                for (int i = 0; i < loadedDialog.dialogText[_dialogIndex].Length; i++)
                 {
-                    _dialogIndex++;
-                    if (_dialogIndex >= loadedDialog.dialogText.Length)
+                    builder.Append(loadedDialog.dialogText[_dialogIndex][i]);
+                    _displayedDialog = builder.ToString();
+                    _dialogText.text = _displayedDialog;
+                    charCounter++;
+
+                    if (forcedComplete)
                     {
-                        Debug.Log("Ended Dialog");
-                        _tapToContinue.onClick.AddListener(() => { _dialogParent.SetActive(false); _isSpeaking = false;});
-                        yield break;
+                        break;
                     }
-                    else if(_dialogIndex < loadedDialog.dialogText.Length)
+
+                    if (charCounter >= loadedDialog.dialogText[_dialogIndex].Length)
                     {
-                        Debug.Log("Continue dialog");
-                        _tapToContinue.onClick.AddListener(() => { ShowDialogWindow(_dialogSpeakerText.text, _currentDialogFocusCam, _dialogRenderCamera.transform.position, _currentLoadedDialog); });
+                        _dialogIndex++;
+                        if (_dialogIndex >= loadedDialog.dialogText.Length)
+                        {
+                            Debug.Log("Ended Dialog");
+                            _tapToContinue.onClick.RemoveAllListeners();
+                            if (loadedDialog.isQuestion)
+                            {
+                                _yesDialogButton.gameObject.SetActive(true);
+                                _noDialogButton.gameObject.SetActive(true);
+
+                                _yesDialogButton.onClick.AddListener(() => { yesAct?.Invoke(); });
+                                _noDialogButton.onClick.AddListener(() => { noAct?.Invoke(); });
+                                yield break;
+                            }
+                            _tapToContinue.onClick.AddListener(() => { _dialogParent.SetActive(false); _isSpeaking = false;});
+                            yield break;
+                        }
+                        else if(_dialogIndex < loadedDialog.dialogText.Length)
+                        {
+                            Debug.Log("Continue dialog");
+                            _tapToContinue.onClick.RemoveAllListeners();
+                            _tapToContinue.onClick.AddListener(() => { ShowDialogWindow(_dialogSpeakerText.text, _currentDialogFocusCam, _dialogRenderCamera.transform.position, _currentLoadedDialog, yesAct, noAct); });
+                            yield break;
+                        }
                     }
+                    yield return new WaitForSeconds(duration);
                 }
-                yield return new WaitForSeconds(delay);
+
+                yield return null;
             }
 
-            yield return null;
+            _dialogText.text = loadedDialog.dialogText[_dialogIndex];
+            _dialogIndex++;
+            if (_dialogIndex >= loadedDialog.dialogText.Length)
+            {
+                Debug.Log("Ended Dialog");
+                _tapToContinue.onClick.RemoveAllListeners();
+                if (loadedDialog.isQuestion)
+                {
+                    _yesDialogButton.gameObject.SetActive(true);
+                    _noDialogButton.gameObject.SetActive(true);
+
+                    _yesDialogButton.onClick.AddListener(() => { 
+                        yesAct.Invoke(); _dialogParent.SetActive(false); _isSpeaking = false;
+                        _yesDialogButton.gameObject.SetActive(false);
+                        _noDialogButton.gameObject.SetActive(false);
+                    });
+                    _noDialogButton.onClick.AddListener(() => {  
+                        noAct.Invoke(); _dialogParent.SetActive(false); _isSpeaking = false;
+                        _yesDialogButton.gameObject.SetActive(false);
+                        _noDialogButton.gameObject.SetActive(false);
+                    });
+                    yield break;
+                }
+                _tapToContinue.onClick.AddListener(() => { _dialogParent.SetActive(false); _isSpeaking = false; });
+                yield break;
+            }
+            else if (_dialogIndex < loadedDialog.dialogText.Length)
+            {
+                Debug.Log("Continue dialog");
+                _tapToContinue.onClick.RemoveAllListeners();
+                _tapToContinue.onClick.AddListener(() => { ShowDialogWindow(_dialogSpeakerText.text, _currentDialogFocusCam, _dialogRenderCamera.transform.position, _currentLoadedDialog, yesAct, noAct); });
+                yield break;
+            }
         }
     }
 }

@@ -6,4 +6,5 @@ using UnityEngine;
 public class DialogData : ScriptableObject
 {
     [TextArea] public string[] dialogText;
+    public bool isQuestion;
 }

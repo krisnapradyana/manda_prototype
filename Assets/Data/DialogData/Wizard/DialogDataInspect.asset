@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37f3f1d3c5bb81840819b4be1da399da, type: 3}
-  m_Name: DialogData
+  m_Name: DialogDataInspect
   m_EditorClassIdentifier: 
   dialogText:
-  - Hello young man... Getting used with this Village yet?
-  - Well.... Good luck then!
+  - Hello young man... Thanks for visiting. Do you want to play around my place?
   isQuestion: 1

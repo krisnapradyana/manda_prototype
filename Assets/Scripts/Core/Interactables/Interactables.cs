@@ -19,6 +19,10 @@ namespace Gameplay
         public Action<Interactables> onHoverObject { get; set; }
         public Action<Interactables> onExitHoverObject { get; set; }
         public Action<Interactables> onInteractObject { get; set; }
+
+        [Header("Dialog Data if NPC/Object")]
+        public Transform _cameraTransform;
+
         public event Action onlevelUp;
 
         public virtual void OnDestroy()

@@ -55,8 +55,9 @@ namespace Gameplay
         public bool IsInspecting { get; private set; }
         public CameraCore PriorityCamera { get; private set; }
 
-        [Header("WIP")]
-        public int _playerGold;
+        [Header("Inspect Attributes")]
+        [SerializeField] Interactables _lookTarget;
+
 
         ///Private fields
         Interactables _inspectedObject;
@@ -182,7 +183,10 @@ namespace Gameplay
                                 Debug.Log("character currently speaking");
                                 return;
                             }
-                            _mainUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData());
+                            _mainUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData(),
+                                () => Debug.Log("Yes Pressed"),
+                                () => Debug.Log("No Pressed")
+                                );
                         }
                         else
                         {
@@ -253,13 +257,21 @@ namespace Gameplay
                     _mainUI.FadeScreen(false, .5f);
                     ResetAllVirtualCameraPriority(_inspectCameras);
                     AssignCameraPriority(0, _inspectCameras);
-                    _mainUI.SetupPopupUI("Visit Platform", "Hello... Do you want to play inside my Room?", yesButtonEnabled: true, noButtonEnabled: true).SetupUIEvents(yesAction: () =>
-                     {
-                         _centralSystem.SetGameState(GameState.inspect);
-                         ResetAllVirtualCameraPriority(_inspectCameras);
-                         AssignCameraPriority(1, _inspectCameras);
-                     }, noAction: () => ExitVisitRoom());
-                    StartCoroutine(_mainUI.ShowPopupIE(null));
+
+                    _mainUI.ShowDialogWindow(_lookTarget.name, _lookTarget.transform, _lookTarget._cameraTransform.position, _lookTarget.ObjectDialog, yesAct: () =>
+                    {
+                        _centralSystem.SetGameState(GameState.inspect);
+                        ResetAllVirtualCameraPriority(_inspectCameras);
+                        AssignCameraPriority(1, _inspectCameras);
+                    }, noAct: () => ExitVisitRoom());
+
+                    //_mainUI.SetupPopupUI("Visit Platform", "Hello... Do you want to play inside my Room?", yesButtonEnabled: true, noButtonEnabled: true).SetupUIEvents(yesAction: () =>
+                    // {
+                    //     _centralSystem.SetGameState(GameState.inspect);
+                    //     ResetAllVirtualCameraPriority(_inspectCameras);
+                    //     AssignCameraPriority(1, _inspectCameras);
+                    // }, noAction: () => ExitVisitRoom());
+                    //StartCoroutine(_mainUI.ShowPopupIE(null));
                 });
             });
         }
