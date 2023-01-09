@@ -7,11 +7,13 @@ using Gameplay;
 [RequireComponent(typeof(Rigidbody))]
 public class ThirdPersonPlayerControl : MonoBehaviour
 {
-    [SerializeField] GameHandler _inspectManager;
-    [SerializeField] Animator _characterAnim;
+    [field: SerializeField] public SkinContainer[] CharacterSkins { get; private set; }
+    GameHandler _gameHandler;
+    //[SerializeField] Animator _characterAnim;
     [SerializeField] float _speed = 200f;
 
     Rigidbody _rb;
+    int _skinIndex;
     float _turnSmoothTime = .05f;
     float _turnSmoothVelocity;
     float _horizontal;
@@ -21,16 +23,18 @@ public class ThirdPersonPlayerControl : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _gameHandler = FindObjectOfType<GameHandler>();
+        EnableSkin(_gameHandler._centralSystem.SelectedCharacterIndex);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_inspectManager._centralSystem.CurrentState != GameState.inspect)
+        if (_gameHandler._centralSystem.CurrentState != GameState.inspect)
         {
             return;
         }
-        ControlInput(_inspectManager._inputListener._moveComposite.x, _inspectManager._inputListener._moveComposite.y);
+        ControlInput(_gameHandler._inputListener._moveComposite.x, _gameHandler._inputListener._moveComposite.y);
     }
 
     private void FixedUpdate()
@@ -66,6 +70,17 @@ public class ThirdPersonPlayerControl : MonoBehaviour
 
     void AnimateCharacter()
     {
-        _characterAnim.SetFloat("Velocity", Mathf.Clamp01( _rb.velocity.magnitude));
+        CharacterSkins[_gameHandler._centralSystem.SelectedCharacterIndex].Animation.SetFloat("Velocity", Mathf.Clamp01( _rb.velocity.magnitude));
+    }
+
+    private void EnableSkin(int skinIndex)
+    {
+        _skinIndex = skinIndex;
+        foreach (var item in CharacterSkins)
+        {
+            item.gameObject.SetActive(false);
+        }
+
+        CharacterSkins[skinIndex].gameObject.SetActive(true);
     }
 }

@@ -1424,6 +1424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df2005c2c2c6d874787686cfe9e8808e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <LastState>k__BackingField: 0
 --- !u!1 &351074666
 GameObject:
   m_ObjectHideFlags: 0
@@ -5318,6 +5319,7 @@ MonoBehaviour:
   _animDuration: 0.5
   _animEase: 27
   _dialogParent: {fileID: 2137163894}
+  _renderPortrait: {fileID: 1765002495}
   _dialogRenderCamera: {fileID: 1699348710}
   _dialogBox: {fileID: 1831189087}
   _dialogText: {fileID: 1904595993}
@@ -6712,7 +6714,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 192
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 4d88e7a23d3391641afc00a781c31b24, type: 2}
   m_TargetDisplay: 0
@@ -7242,8 +7244,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1831189086}
+  m_Children: []
   m_Father: {fileID: 2137163895}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7469,7 +7470,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818321667}
-  m_LocalRotation: {x: 0.076096185, y: 0.004655922, z: -0.000355332, w: 0.99708956}
+  m_LocalRotation: {x: 0.07609621, y: 0.0046559586, z: -0.00035533498, w: 0.99708956}
   m_LocalPosition: {x: -0.37, y: 5.6, z: -10.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7511,12 +7512,12 @@ RectTransform:
   - {fileID: 1904595992}
   - {fileID: 1746617207}
   - {fileID: 820002581}
-  m_Father: {fileID: 1765002496}
-  m_RootOrder: 0
+  m_Father: {fileID: 2137163895}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 442.9999, y: -354.07413}
+  m_AnchoredPosition: {x: -0.000030517578, y: -253.07404}
   m_SizeDelta: {x: 1330.4321, y: 279.0131}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1831189087
@@ -8621,6 +8622,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1765002496}
+  - {fileID: 1831189086}
   m_Father: {fileID: 1245116479}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

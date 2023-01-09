@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03882b3d03c7104f850744c4cd99b48, type: 3}
   m_Name: Bard
   m_EditorClassIdentifier: 
-  platformName: Bard
+  platformName: Bard Platform
   platformDescription: The bard's stage entertains the city daily with music and
     shows. Increase the morale of the townspeople
   baseUpgradeCost: 0

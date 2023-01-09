@@ -33,6 +33,7 @@ namespace Gameplay
 
         [Header("Getter Setter Fields")]
         public CharacterBehaviour[] _players;
+        public CharacterBehaviour[] _npcs;
         public CameraCore[] _worldCameras;
         public CameraCore[] _inspectCameras; 
         public ObjectBehaviour[] _objects;
@@ -151,11 +152,13 @@ namespace Gameplay
         {
             Debug.Log("Initializing character events");
 
+            //Events for characters
             foreach (var item in _players)
             {
                 Debug.Log("Creating Character event");
                 item.InitCharacterEvents(this);
-                item.onHoverObject += (info) => {
+                item.onHoverObject += (info) =>
+                {
                     if (IsInspecting)
                     {
                         _uiControl.ToggleHoverInfo();
@@ -175,23 +178,44 @@ namespace Gameplay
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
                 item.onInteractObject += (info) =>
                 {
+                    OnChangedCharacted(); item.SetSelected(true);
+                };
+            }
+
+
+            //Events for NPC's
+            foreach (var item in _npcs)
+            {
+                item.InitCharacterEvents(this);
+                item.onHoverObject += (info) =>
+                {
+                    if (IsInspecting)
                     {
-                        if (item.IsNPC)
+                        _uiControl.ToggleHoverInfo();
+                        return;
+                    }
+                    _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.GetComponent<CharacterBehaviour>(), _uiControl.MousePivot);
+
+                };
+                item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
+                item.onInteractObject += (info) =>
+                {
+
+                    if (item.IsNPC)
+                    {
+                        if (_mainUI._isSpeaking)
                         {
-                            if (_mainUI._isSpeaking)
-                            {
-                                Debug.Log("character currently speaking");
-                                return;
-                            }
-                            _mainUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData(),
-                                () => Debug.Log("Yes Pressed"),
-                                () => Debug.Log("No Pressed")
-                                );
+                            Debug.Log("character currently speaking");
+                            return;
                         }
-                        else
-                        {
-                            OnChangedCharacted(); item.SetSelected(true);
-                        }
+                        _mainUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData(),
+                            () => Debug.Log("Yes Pressed"),
+                            () => Debug.Log("No Pressed")
+                            );
+                    }
+                    else
+                    {
+                        OnChangedCharacted(); item.SetSelected(true);
                     }
                 };
             }
@@ -252,30 +276,37 @@ namespace Gameplay
             _uiControl.ToggleHoverInfo();
             interactables.OnObjectInspected(out _inspectedObject, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
             {
-                _mainUI.FadeScreen(true, .5f, () => _mainUI.ToggleBlockScreen(true), () =>
+                if (interactables.GetComponent<ObjectBehaviour>().isVisitable)
                 {
-                    _rootScene.SetActive(false);
-                    _indoorScene.SetActive(true);
-                    _centralSystem.SetGameState(GameState.none);
-                    _mainUI.FadeScreen(false, .5f);
-                    ResetAllVirtualCameraPriority(_inspectCameras);
-                    AssignCameraPriority(0, _inspectCameras);
-
-                    _mainUI.ShowDialogWindow(_lookTarget.name, _lookTarget.transform, _lookTarget._cameraTransform.position, _lookTarget.ObjectDialog, yesAct: () =>
+                    _mainUI.FadeScreen(true, .5f, () => _mainUI.ToggleBlockScreen(true), () =>
                     {
-                        _centralSystem.SetGameState(GameState.inspect);
+                        _rootScene.SetActive(false);
+                        _indoorScene.SetActive(true);
+                        _centralSystem.SetGameState(GameState.none);
+                        _mainUI.FadeScreen(false, .5f);
                         ResetAllVirtualCameraPriority(_inspectCameras);
-                        AssignCameraPriority(1, _inspectCameras);
-                    }, noAct: () => ExitVisitRoom());
+                        AssignCameraPriority(0, _inspectCameras);
 
-                    //_mainUI.SetupPopupUI("Visit Platform", "Hello... Do you want to play inside my Room?", yesButtonEnabled: true, noButtonEnabled: true).SetupUIEvents(yesAction: () =>
-                    // {
-                    //     _centralSystem.SetGameState(GameState.inspect);
-                    //     ResetAllVirtualCameraPriority(_inspectCameras);
-                    //     AssignCameraPriority(1, _inspectCameras);
-                    // }, noAction: () => ExitVisitRoom());
-                    //StartCoroutine(_mainUI.ShowPopupIE(null));
-                });
+                        _mainUI.ShowDialogWindow(_lookTarget.name, _lookTarget.transform, _lookTarget._cameraTransform.position, _lookTarget.ObjectDialog, yesAct: () =>
+                        {
+                            _centralSystem.SetGameState(GameState.inspect);
+                            ResetAllVirtualCameraPriority(_inspectCameras);
+                            AssignCameraPriority(1, _inspectCameras);
+                        }, noAct: () => ExitVisitRoom());
+
+                        //_mainUI.SetupPopupUI("Visit Platform", "Hello... Do you want to play inside my Room?", yesButtonEnabled: true, noButtonEnabled: true).SetupUIEvents(yesAction: () =>
+                        // {
+                        //     _centralSystem.SetGameState(GameState.inspect);
+                        //     ResetAllVirtualCameraPriority(_inspectCameras);
+                        //     AssignCameraPriority(1, _inspectCameras);
+                        // }, noAction: () => ExitVisitRoom());
+                        //StartCoroutine(_mainUI.ShowPopupIE(null));
+                    });
+                }
+                else
+                {
+                    _mainUI.ShowDialogWindow(_centralSystem.PlayerName, ControlledPlayer.transform, ControlledPlayer._cameraTransform.position, ControlledPlayer.ObjectDialog, allowPortait: false);
+                }
             });
         }
 

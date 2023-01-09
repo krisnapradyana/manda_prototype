@@ -15,6 +15,7 @@ namespace Singletons
         public static MainUI Instance;
 
         [Header("Main Attributes")]
+        private GameCentralSystem _centralSystem;
         [SerializeField] TMP_Text _titleText;
         [SerializeField] TMP_Text _descriptionText;
         [SerializeField] Button _yesButton;
@@ -32,6 +33,7 @@ namespace Singletons
 
         [Header("Dialog Attributes")]
         [SerializeField] GameObject _dialogParent;
+        [SerializeField] GameObject _renderPortrait;
         [SerializeField] Camera _dialogRenderCamera;
         [SerializeField] Image _dialogBox;
         [SerializeField] TMP_Text _dialogText;
@@ -54,8 +56,6 @@ namespace Singletons
 
         private void Awake()
         {
-            //_buttons = new Button[]{ _yesButton, _noButton, _confirmButton };
-
             if (Instance == null)
             {
                 Instance = this;
@@ -65,6 +65,11 @@ namespace Singletons
             {
                 Destroy(this);
             }
+        }
+
+        private void Start()
+        {
+            _centralSystem = FindObjectOfType<GameCentralSystem>();
         }
 
         public MainUI SetupPopupUI(string titleText, string descriptionText, bool yesButtonEnabled = false, bool noButtonEnabled = false, bool confirmButtonEnabled = false)
@@ -161,23 +166,31 @@ namespace Singletons
             _confirmButton.onClick  .AddListener(() => ToggleBGVisibility(false));
         }
 
-        public void ShowDialogWindow(string speaker,Transform lookTarget, Vector3 cameraPos, DialogData dialogData, Action yesAct = null, Action noAct = null)
+        public void ShowDialogWindow(string speaker, Transform lookTarget, Vector3 cameraPos, DialogData dialogData, Action yesAct = null, Action noAct = null, bool allowPortait = true)
         {
+            if (_isSpeaking)
+            {
+                return;
+            }
+
+            _renderPortrait.SetActive(allowPortait);       
             _currentLoadedDialog = dialogData;
+
             if (_dialogIndex >= _currentLoadedDialog.dialogText.Length)
             {
                 _dialogIndex = 0;
             }
+
             _dialogSpeakerText.text = speaker;
             _dialogParent.SetActive(true);
             _dialogRenderCamera.transform.position = cameraPos;
             _currentDialogFocusCam = lookTarget;
             _dialogRenderCamera.transform.LookAt( new Vector3(_currentDialogFocusCam.position.x, _currentDialogFocusCam.transform.position.y + _characterPortraitYOffset, _currentDialogFocusCam.transform.position.z));
 
-            StartCoroutine(StartPerTextDialogIE(dialogData, yesAct, noAct, _talkDurationPerChar));
+            StartCoroutine(StartPerTextDialogIE(dialogData, yesAct, noAct, allowPortait, _talkDurationPerChar));
         }
 
-        IEnumerator StartPerTextDialogIE(DialogData loadedDialog, Action yesAct, Action noAct, float duration = .1f)
+        IEnumerator StartPerTextDialogIE(DialogData loadedDialog, Action yesAct, Action noAct, bool portraitVisibility, float duration = .1f)
         {
             _isSpeaking = true;
             _tapToContinue.onClick.RemoveAllListeners();
@@ -203,6 +216,7 @@ namespace Singletons
 
                     if (charCounter >= loadedDialog.dialogText[_dialogIndex].Length)
                     {
+                        _isSpeaking = false;
                         _dialogIndex++;
                         if (_dialogIndex >= loadedDialog.dialogText.Length)
                         {
@@ -217,14 +231,14 @@ namespace Singletons
                                 _noDialogButton.onClick.AddListener(() => { noAct?.Invoke(); });
                                 yield break;
                             }
-                            _tapToContinue.onClick.AddListener(() => { _dialogParent.SetActive(false); _isSpeaking = false;});
+                            _tapToContinue.onClick.AddListener(() => { _dialogParent.SetActive(false);});
                             yield break;
                         }
                         else if(_dialogIndex < loadedDialog.dialogText.Length)
                         {
                             Debug.Log("Continue dialog");
                             _tapToContinue.onClick.RemoveAllListeners();
-                            _tapToContinue.onClick.AddListener(() => { ShowDialogWindow(_dialogSpeakerText.text, _currentDialogFocusCam, _dialogRenderCamera.transform.position, _currentLoadedDialog, yesAct, noAct); });
+                            _tapToContinue.onClick.AddListener(() => { ShowDialogWindow(_dialogSpeakerText.text, _currentDialogFocusCam, _dialogRenderCamera.transform.position, _currentLoadedDialog, yesAct, noAct, portraitVisibility); });
                             yield break;
                         }
                     }
@@ -235,6 +249,7 @@ namespace Singletons
             }
 
             _dialogText.text = loadedDialog.dialogText[_dialogIndex];
+            _isSpeaking = false;
             _dialogIndex++;
             if (_dialogIndex >= loadedDialog.dialogText.Length)
             {
@@ -246,25 +261,25 @@ namespace Singletons
                     _noDialogButton.gameObject.SetActive(true);
 
                     _yesDialogButton.onClick.AddListener(() => { 
-                        yesAct.Invoke(); _dialogParent.SetActive(false); _isSpeaking = false;
+                        yesAct.Invoke(); _dialogParent.SetActive(false);
                         _yesDialogButton.gameObject.SetActive(false);
                         _noDialogButton.gameObject.SetActive(false);
                     });
                     _noDialogButton.onClick.AddListener(() => {  
-                        noAct.Invoke(); _dialogParent.SetActive(false); _isSpeaking = false;
+                        noAct.Invoke(); _dialogParent.SetActive(false);
                         _yesDialogButton.gameObject.SetActive(false);
                         _noDialogButton.gameObject.SetActive(false);
                     });
                     yield break;
                 }
-                _tapToContinue.onClick.AddListener(() => { _dialogParent.SetActive(false); _isSpeaking = false; });
+                _tapToContinue.onClick.AddListener(() => { _dialogParent.SetActive(false);});
                 yield break;
             }
             else if (_dialogIndex < loadedDialog.dialogText.Length)
             {
                 Debug.Log("Continue dialog");
                 _tapToContinue.onClick.RemoveAllListeners();
-                _tapToContinue.onClick.AddListener(() => { ShowDialogWindow(_dialogSpeakerText.text, _currentDialogFocusCam, _dialogRenderCamera.transform.position, _currentLoadedDialog, yesAct, noAct); });
+                _tapToContinue.onClick.AddListener(() => { ShowDialogWindow(_dialogSpeakerText.text, _currentDialogFocusCam, _dialogRenderCamera.transform.position, _currentLoadedDialog, yesAct, noAct, portraitVisibility); });
                 yield break;
             }
         }

@@ -20,7 +20,7 @@ namespace Singletons
                 _currentState = value;
             } 
         }
-        public GameState LastState { get; private set; }
+        [field: SerializeField] public GameState LastState { get; private set; }
 
         private void Awake()
         {

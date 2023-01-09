@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03882b3d03c7104f850744c4cd99b48, type: 3}
   m_Name: Physician
   m_EditorClassIdentifier: 
-  platformName: Physician
+  platformName: Physician Platform
   platformDescription: Physician help residents who are sick and maintain the health
     of city residents
   baseUpgradeCost: 0

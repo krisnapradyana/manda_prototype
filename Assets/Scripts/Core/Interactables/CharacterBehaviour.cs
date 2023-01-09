@@ -27,6 +27,7 @@ namespace Gameplay
         [Header("References")]
         [SerializeField] EventTrigger _eventTrigger;
 
+        private int _skinIndex;
         private float _targetDistance;
         private float _divider = 1;
 
@@ -50,7 +51,7 @@ namespace Gameplay
             {
                 return;
             }
-            CharacterSkins[_gameHandler._centralSystem.SelectedCharacterIndex].Animation.SetFloat("Velocity", Mathf.Clamp(AiPath.velocity.magnitude, 0, 1) / _divider);
+            CharacterSkins[_skinIndex].Animation.SetFloat("Velocity", Mathf.Clamp(AiPath.velocity.magnitude, 0, 1) / _divider);
         }
 
         public void InitCharacterEvents(GameHandler handler)
@@ -121,9 +122,9 @@ namespace Gameplay
             SeekerObject.StartPath(_gameHandler.ControlledPlayer.transform.position, targetPosition);
         }
 
-
         private void EnableSkin(int skinIndex)
         {
+            _skinIndex = skinIndex;
             foreach (var item in CharacterSkins)
             {
                 item.gameObject.SetActive(false);

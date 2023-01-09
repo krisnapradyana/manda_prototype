@@ -15,6 +15,7 @@ namespace Gameplay
         [SerializeField] GameObject[] platformObjects;
         [field: SerializeField] public PlatformDataScriptables PlatformData { get; private set; }
         [field: SerializeField] public EventTrigger Trigger { get ; set; }
+        [field: SerializeField] public bool isVisitable { get; private set; }
         // Start is called before the first frame update
         void Start()
         {

@@ -53,15 +53,14 @@ public class IntroManager : MonoBehaviour
 
     IEnumerator DelayMoveCamera()
     {
-        yield return new WaitForSeconds(2f);
         _virtualCamera.Priority = 2;
-        _mainPlatform.DORotate(Vector3.zero, 5).OnComplete(() =>
+        _mainPlatform.DORotate(Vector3.zero, 5f).OnComplete(() =>
         {
             _uiControl.EnableTitleCharSlc();
         });
 
         yield return new WaitUntil(() => _hasSelected == true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1.5f);
     }
 
     void HoverInfo(GameObject targetObject, bool visibility)

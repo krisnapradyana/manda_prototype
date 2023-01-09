@@ -8,5 +8,4 @@ public class PlatformDataScriptables : ScriptableObject
     public string platformName;
     [TextArea]
     public string platformDescription;
-    public int baseUpgradeCost;
 }

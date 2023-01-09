@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03882b3d03c7104f850744c4cd99b48, type: 3}
   m_Name: Wizard
   m_EditorClassIdentifier: 
-  platformName: Wizard
+  platformName: Wizard Platform
   platformDescription: Wizard help citizens in the magical sector helping difficult
     things with magic with magic potions or summoning the help of spirits
   baseUpgradeCost: 0
