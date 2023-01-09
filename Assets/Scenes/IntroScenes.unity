@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.11464225, g: 0.3301195, b: 0.71255356, a: 1}
+  m_IndirectSpecularColor: {r: 0.114102155, g: 0.3294807, b: 0.71093917, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6450,11 +6450,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919132148548436602}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.82, z: 0}
+  m_Size: {x: 0.5, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0.61, z: 0}
 --- !u!1 &1551693881
 GameObject:
   m_ObjectHideFlags: 0
@@ -7469,7 +7469,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818321667}
-  m_LocalRotation: {x: 0.07609621, y: 0.0046559586, z: -0.00035533498, w: 0.99708956}
+  m_LocalRotation: {x: 0.076096185, y: 0.004655922, z: -0.000355332, w: 0.99708956}
   m_LocalPosition: {x: -0.37, y: 5.6, z: -10.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8838,7 +8838,7 @@ GameObject:
   - component: {fileID: 4265429289436763026}
   - component: {fileID: 7584071198135321774}
   m_Layer: 0
-  m_Name: blacksmith
+  m_Name: torso1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9130,7 +9130,7 @@ Animator:
   m_GameObject: {fileID: 4641826032273828247}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
-  m_Controller: {fileID: 9100000, guid: 0726e6d6a2ec27f41a21ef63ba6bc62b, type: 2}
+  m_Controller: {fileID: 9100000, guid: c454f46521c8a254d8bf936993e8366b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -9842,7 +9842,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &4680221055286620248
 Transform:
   m_ObjectHideFlags: 0
@@ -9999,11 +9999,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4641826032273828247}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0.82, z: 0}
+  m_Size: {x: 0.5, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0.61, z: 0}
 --- !u!54 &5413542815938900785
 Rigidbody:
   m_ObjectHideFlags: 0

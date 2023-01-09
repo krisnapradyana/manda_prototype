@@ -83,11 +83,11 @@ namespace Gameplay
             _uiControl.SetPlayerUI();
             if (_centralSystem == null)
             {
-                InitEvents(0);
+                InitEvents();//0);
             }
             else
             {
-                InitEvents(_centralSystem.SelectedCharacterIndex);
+                InitEvents();//_centralSystem.SelectedCharacterIndex);
             }
 
             _centralSystem.SetGameState(GameState.gameplay);
@@ -105,7 +105,7 @@ namespace Gameplay
 
         private void Update()
         {
-            MatchCameraRotation(_worldCameras);
+            //MatchCameraRotation(_worldCameras);
         }
 
         private void InitObjects()
@@ -147,7 +147,7 @@ namespace Gameplay
             //};
         }
 
-        private void InitEvents(int focusCharacters)
+        private void InitEvents()//int focusCharacters)
         {
             Debug.Log("Initializing character events");
 
@@ -196,13 +196,13 @@ namespace Gameplay
                 };
             }
 
-            for (int i = 0; i < _players.Length; i++)
-            {
-                if (_players[i].CharacterId == focusCharacters)
-                {
-                    _players[i].SetSelected(true);
-                }
-            }
+            //for (int i = 0; i < _players.Length; i++)
+            //{
+            //    if (_players[i].CharacterId == focusCharacters)
+            //    {
+            //        _players[i].SetSelected(true);
+            //    }
+            //}
         }
 
         public void OnChangedCharacted()
@@ -222,8 +222,6 @@ namespace Gameplay
                 {
                     item.SetCameraPriority(1);
                     PriorityCamera = item;
-                    //if (saveLastId)
-                    //    _lastCameraPriority = comparedId;
                 }
             }
         }
@@ -238,6 +236,11 @@ namespace Gameplay
 
         void MatchCameraRotation(CameraCore[] collectionList)
         {
+            if (collectionList.Length < 1)
+            {
+                return;
+            }
+
             foreach (var item in collectionList)
             {
                 item.OnCameraRotation(PriorityCamera.CameraRotationValue);

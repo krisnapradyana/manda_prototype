@@ -19,16 +19,13 @@ namespace Gameplay
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
         [field: SerializeField] public Seeker SeekerObject { get; private set; }
         [field: SerializeField] public AIPath AiPath { get; private set; }
+        [field: SerializeField] public SkinContainer[] CharacterSkins { get; private set; }
 
         [SerializeField] float _runSpeed;
         [SerializeField] float _walkSpeed;
 
         [Header("References")]
         [SerializeField] EventTrigger _eventTrigger;
-        [SerializeField] Animator _characterAnimator;
-
-        [Header("Dialog Data if NPC")]
-        public Transform _cameraTransform;
 
         private float _targetDistance;
         private float _divider = 1;
@@ -38,9 +35,22 @@ namespace Gameplay
             base.OnDestroy();
         }
 
+        private void Start()
+        {
+            if (IsNPC)
+            {
+                return;
+            }
+            EnableSkin(_gameHandler._centralSystem.SelectedCharacterIndex);
+        }
+
         void FixedUpdate()
         {
-            _characterAnimator.SetFloat("Velocity", Mathf.Clamp(AiPath.velocity.magnitude, 0, 1) / _divider);
+            if (IsNPC)
+            {
+                return;
+            }
+            CharacterSkins[_gameHandler._centralSystem.SelectedCharacterIndex].Animation.SetFloat("Velocity", Mathf.Clamp(AiPath.velocity.magnitude, 0, 1) / _divider);
         }
 
         public void InitCharacterEvents(GameHandler handler)
@@ -109,6 +119,17 @@ namespace Gameplay
                 _divider = 2;
             }
             SeekerObject.StartPath(_gameHandler.ControlledPlayer.transform.position, targetPosition);
+        }
+
+
+        private void EnableSkin(int skinIndex)
+        {
+            foreach (var item in CharacterSkins)
+            {
+                item.gameObject.SetActive(false);
+            }
+
+            CharacterSkins[skinIndex].gameObject.SetActive(true);
         }
     }
 }
