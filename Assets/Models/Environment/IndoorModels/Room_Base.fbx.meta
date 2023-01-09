@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 502832e12db4c0443bab599023db84b6
+guid: f2794da6edfb83f419ecb593e3ac017c
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: candle
-    second: {fileID: 2100000, guid: 6084350a2cc5dd24facbf648451ef8ec, type: 2}
+      name: Default_Material
+    second: {fileID: 2100000, guid: 5f3a1b9d78343c5468a848dd4d824d05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: candle7
+    second: {fileID: 2100000, guid: abdba9c82db0bb044b2f89b13c7c5df2, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -17,18 +22,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: dark_metal
-    second: {fileID: 2100000, guid: b4cbc61d0c451ef44af102a3570a3607, type: 2}
+      name: flame3
+    second: {fileID: 2100000, guid: 8dea30e20e43fe74082db9ca186b1c26, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: flame
-    second: {fileID: 2100000, guid: 54fe3a4ed56cebb479690adefc5f373c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: flame2
-    second: {fileID: 2100000, guid: 741c147d03671084d8b6d3f236c268e2, type: 2}
+      name: flame4
+    second: {fileID: 2100000, guid: b97e1b43ca508c945a41d95a7fa11712, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -42,13 +42,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: lambert1
-    second: {fileID: 2100000, guid: 373072a329aac534aa3d4d32efc4dba1, type: 2}
+      name: lambert58
+    second: {fileID: 2100000, guid: 5cc3a26111a5c1540960d2bac035ad15, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: light_metal
-    second: {fileID: 2100000, guid: 0a173e75657b741499e90df789ea5071, type: 2}
+      name: light_metal4
+    second: {fileID: 2100000, guid: 46b24014b6535f64b852955db88fb4f7, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -57,13 +57,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: window_metal
+    second: {fileID: 2100000, guid: 27b02a829588b8f4e81a416a2fc1e36a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: window_pane
     second: {fileID: 2100000, guid: fd6aeae742aa9564487e3dfa0e1ec796, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: wood
-    second: {fileID: 2100000, guid: dc2e15f4f26c678428e98556bc2ed372, type: 2}
+      name: wood2
+    second: {fileID: 2100000, guid: 1d0b53a7b1cea3e4ca2ac4606e822a62, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

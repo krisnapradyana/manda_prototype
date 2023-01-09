@@ -15,4 +15,4 @@ MonoBehaviour:
   dialogText:
   - Hello young man... Getting used with this Village yet?
   - Well.... Good luck then!
-  isQuestion: 1
+  isQuestion: 0
