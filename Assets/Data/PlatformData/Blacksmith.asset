@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03882b3d03c7104f850744c4cd99b48, type: 3}
   m_Name: Blacksmith
   m_EditorClassIdentifier: 
+  platformID: 2
   platformName: Blacksmith Platform
   platformDescription: The blacksmith stage creates tools that are useful for the
     daily needs of the city. Ranging from kitchen equipment to hunting equipment
-  baseUpgradeCost: 0

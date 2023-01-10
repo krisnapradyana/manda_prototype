@@ -30,6 +30,7 @@ namespace Gameplay
         [SerializeField] private ThirdPersonPlayerControl _thirdPersonCharacter;
         [SerializeField] private GenericTrigger _inspectExit;
         [SerializeField] private Transform _inspectStartPos;
+        [SerializeField] private RoomPreferences[] _roomProps;
 
         [Header("Getter Setter Fields")]
         public CharacterBehaviour[] _players;
@@ -131,6 +132,7 @@ namespace Gameplay
                 {
                     var platformData = _inspectedObject.gameObject.GetComponent<ObjectBehaviour>().PlatformData;
                     var platformInteractable = _inspectedObject.gameObject.GetComponent<Interactables>();
+
                     _uiControl.SetUpdateObjectDescription(platformData.platformName, platformData.platformDescription, string.Format("Level : {0}", _inspectedObject.Level.ToString())).SetLevelUpButton(platformInteractable.Level, platformInteractable.MaxLevel);
                     item.ShowObjectProperties();
                 };
@@ -219,14 +221,6 @@ namespace Gameplay
                     }
                 };
             }
-
-            //for (int i = 0; i < _players.Length; i++)
-            //{
-            //    if (_players[i].CharacterId == focusCharacters)
-            //    {
-            //        _players[i].SetSelected(true);
-            //    }
-            //}
         }
 
         public void OnChangedCharacted()
@@ -278,6 +272,7 @@ namespace Gameplay
             {
                 if (interactables.GetComponent<ObjectBehaviour>().isVisitable)
                 {
+                    _centralSystem.SetSelectedPlatformId(interactables.GetComponent<ObjectBehaviour>().PlatformData.platformID);
                     _mainUI.FadeScreen(true, .5f, () => _mainUI.ToggleBlockScreen(true), () =>
                     {
                         _rootScene.SetActive(false);
@@ -287,11 +282,21 @@ namespace Gameplay
                         ResetAllVirtualCameraPriority(_inspectCameras);
                         AssignCameraPriority(0, _inspectCameras);
 
+                        foreach (var item in _roomProps)
+                        {
+                            item.gameObject.SetActive(false);
+                            if (_centralSystem.SelectedPlatformID == item.roomId)
+                            {
+                                item.gameObject.SetActive(true);
+                            }
+                        }
+
                         _mainUI.ShowDialogWindow(_lookTarget.name, _lookTarget.transform, _lookTarget._cameraTransform.position, _lookTarget.ObjectDialog, yesAct: () =>
                         {
                             _centralSystem.SetGameState(GameState.inspect);
                             ResetAllVirtualCameraPriority(_inspectCameras);
                             AssignCameraPriority(1, _inspectCameras);
+                            
                         }, noAct: () => ExitVisitRoom());
 
                         //_mainUI.SetupPopupUI("Visit Platform", "Hello... Do you want to play inside my Room?", yesButtonEnabled: true, noButtonEnabled: true).SetupUIEvents(yesAction: () =>
@@ -323,6 +328,11 @@ namespace Gameplay
                 _thirdPersonCharacter.transform.rotation = _inspectStartPos.rotation;
                 SetCameraToLastControlled();
             });
+        }
+
+        void InitiateVisitRoom()
+        {
+
         }
 
         void SetCameraToLastControlled()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03882b3d03c7104f850744c4cd99b48, type: 3}
   m_Name: Commander
   m_EditorClassIdentifier: 
+  platformID: 1
   platformName: Commander Platform
   platformDescription: The commander's stage accommodates tough soldiers who keep
     the city safe from the dangers of beasts and bandits
-  baseUpgradeCost: 0
