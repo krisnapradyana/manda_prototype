@@ -10,6 +10,7 @@ namespace Singletons
 {
     public class GameCentralSystem : MonoBehaviour
     {
+        [Header("General Parameter")]
         private GameState _currentState;
         public static GameCentralSystem GameData { get; private set; }
         public int SelectedCharacterIndex { get; private set; }
@@ -23,6 +24,7 @@ namespace Singletons
         }
         [field: SerializeField] public GameState LastState { get; private set; }
         public bool IsCharacterSpeak { get; set; }
+        
 
         private void Awake()
         {
@@ -58,5 +60,6 @@ namespace Singletons
         {
             SelectedPlatformID = platformId;
         }
+
     }
 }

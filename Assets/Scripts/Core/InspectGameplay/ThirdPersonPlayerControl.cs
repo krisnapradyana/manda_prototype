@@ -7,13 +7,11 @@ using Gameplay;
 [RequireComponent(typeof(Rigidbody))]
 public class ThirdPersonPlayerControl : MonoBehaviour
 {
-    [field: SerializeField] public SkinContainer[] CharacterSkins { get; private set; }
     GameHandler _gameHandler;
-    //[SerializeField] Animator _characterAnim;
+    [field: SerializeField] public SkinContainer[] CharacterSkins { get; private set; }
     [SerializeField] float _speed = 200f;
 
     Rigidbody _rb;
-    int _skinIndex;
     float _turnSmoothTime = .05f;
     float _turnSmoothVelocity;
     float _horizontal;
@@ -75,7 +73,7 @@ public class ThirdPersonPlayerControl : MonoBehaviour
 
     private void EnableSkin(int skinIndex)
     {
-        _skinIndex = skinIndex;
+        //skinIndex = skinIndex;
         foreach (var item in CharacterSkins)
         {
             item.gameObject.SetActive(false);
