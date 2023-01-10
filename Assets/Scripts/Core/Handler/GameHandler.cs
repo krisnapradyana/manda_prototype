@@ -27,10 +27,13 @@ namespace Gameplay
         [SerializeField] InspectGroundBehaviour _inspectParent;
 
         [Header("Third person inspect")]
+        [SerializeField] private CinemachineFreeLook _thirdPersonCamera;
         [SerializeField] private ThirdPersonPlayerControl _thirdPersonCharacter;
         [SerializeField] private GenericTrigger _inspectExit;
         [SerializeField] private Transform _inspectStartPos;
         [SerializeField] private RoomPreferences[] _roomProps;
+        [SerializeField] float _cameraHSpeed;
+        [SerializeField] float _cameraVSpeed;
 
         [Header("Getter Setter Fields")]
         public CharacterBehaviour[] _players;
@@ -59,7 +62,6 @@ namespace Gameplay
 
         [Header("Inspect Attributes")]
         [SerializeField] Interactables _lookTarget;
-
 
         ///Private fields
         Interactables _inspectedObject;
@@ -103,6 +105,10 @@ namespace Gameplay
                     noAction: () => _centralSystem.SetGameState(GameState.inspect));
                 StartCoroutine(_mainUI.ShowPopupIE(() => _centralSystem.SetGameState(GameState.none)));
             });
+
+            _thirdPersonCamera.m_XAxis.m_MaxSpeed = _cameraHSpeed;
+            _thirdPersonCamera.m_YAxis.m_MaxSpeed = _cameraVSpeed;
+            _inputListener.OnToggledCursor += ToggleCameraMovement;
         }
 
         private void Update()
@@ -127,7 +133,7 @@ namespace Gameplay
                         );
                 };
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
-                item.onInteractObject += InspectObj;
+                item.onInteractObject += VisitPlatform;
                 item.onlevelUp += () =>
                 {
                     var platformData = _inspectedObject.gameObject.GetComponent<ObjectBehaviour>().PlatformData;
@@ -265,7 +271,7 @@ namespace Gameplay
             }
         }
 
-        void InspectObj(Interactables interactables)
+        void VisitPlatform(Interactables interactables)
         {
             _uiControl.ToggleHoverInfo();
             interactables.OnObjectInspected(out _inspectedObject, _inspectParent.gameObject, _playgroundParent, _uiControl, () =>
@@ -296,7 +302,7 @@ namespace Gameplay
                             _centralSystem.SetGameState(GameState.inspect);
                             ResetAllVirtualCameraPriority(_inspectCameras);
                             AssignCameraPriority(1, _inspectCameras);
-                            
+                            Cursor.lockState = CursorLockMode.Locked;
                         }, noAct: () => ExitVisitRoom());
 
                         //_mainUI.SetupPopupUI("Visit Platform", "Hello... Do you want to play inside my Room?", yesButtonEnabled: true, noButtonEnabled: true).SetupUIEvents(yesAction: () =>
@@ -330,9 +336,19 @@ namespace Gameplay
             });
         }
 
-        void InitiateVisitRoom()
+        void ToggleCameraMovement(bool toggle)
         {
-
+            switch (toggle)
+            {
+                case true:
+                    _thirdPersonCamera.m_XAxis.m_MaxSpeed = 0;
+                    _thirdPersonCamera.m_YAxis.m_MaxSpeed = 0; 
+                    break;
+                case false:
+                    _thirdPersonCamera.m_XAxis.m_MaxSpeed = _cameraHSpeed;
+                    _thirdPersonCamera.m_YAxis.m_MaxSpeed = _cameraVSpeed;
+                    break;
+            }
         }
 
         void SetCameraToLastControlled()
