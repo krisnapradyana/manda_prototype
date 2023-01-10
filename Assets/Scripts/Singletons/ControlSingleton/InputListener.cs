@@ -14,6 +14,7 @@ namespace Singletons
     {
         public static InputListener Instance;
 
+        [SerializeField] MainUI _mainUI;
         [SerializeField] GameHandler _gameHandler;
         [SerializeField] MainUI _popupUI;
         [field: SerializeField] public InputAction UIAction { get; private set; }

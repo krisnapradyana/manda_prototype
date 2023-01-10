@@ -203,7 +203,7 @@ namespace Gameplay
 
                     if (item.IsNPC)
                     {
-                        if (_mainUI._isSpeaking)
+                        if (_mainUI._centralSystem.IsCharacterSpeak)
                         {
                             Debug.Log("character currently speaking");
                             return;

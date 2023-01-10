@@ -14,6 +14,7 @@ namespace Singletons
         public static GameCentralSystem GameData { get; private set; }
         public int SelectedCharacterIndex { get; private set; }
         public string PlayerName { get; private set; }
+        public int SelectedPlatformID { get; private set; }
         public GameState CurrentState { get { return _currentState; } private set 
             {
                 LastState = _currentState;
@@ -21,6 +22,7 @@ namespace Singletons
             } 
         }
         [field: SerializeField] public GameState LastState { get; private set; }
+        public bool IsCharacterSpeak { get; set; }
 
         private void Awake()
         {
@@ -54,7 +56,7 @@ namespace Singletons
 
         public void SetSelectedPlatformId(int platformId)
         {
-
+            SelectedPlatformID = platformId;
         }
     }
 }

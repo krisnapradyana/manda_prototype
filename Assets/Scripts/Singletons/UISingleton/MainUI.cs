@@ -15,7 +15,7 @@ namespace Singletons
         public static MainUI Instance;
 
         [Header("Main Attributes")]
-        private GameCentralSystem _centralSystem;
+        [HideInInspector] public GameCentralSystem _centralSystem;
         [SerializeField] TMP_Text _titleText;
         [SerializeField] TMP_Text _descriptionText;
         [SerializeField] Button _yesButton;
@@ -42,11 +42,8 @@ namespace Singletons
         [SerializeField] Button _noDialogButton;
         [SerializeField] float _talkDurationPerChar;
         [SerializeField] float _characterPortraitYOffset;
-        public bool _isSpeaking;
         private string _displayedDialog;
-        //private int _dialogIndex;
         private Transform _currentDialogFocusCam;
-        private DialogData _currentLoadedDialog;
 
         [Header("Fade Screen")]
         [SerializeField] Image _blackScreen;
@@ -170,19 +167,12 @@ namespace Singletons
 
         public void ShowDialogWindow(string speaker, Transform lookTarget, Vector3 cameraPos, DialogData dialogData, Action yesAct = null, Action noAct = null, bool allowPortait = true)
         {
-            if (_isSpeaking)
+            if (_centralSystem.IsCharacterSpeak)
             {
                 return;
             }
 
             _renderPortrait.SetActive(allowPortait);       
-            _currentLoadedDialog = dialogData;
-
-            //if (_dialogIndex >= _currentLoadedDialog.dialogText.Length || LastTalkId != lookTarget.gameObject.GetInstanceID())
-            //{
-            //    _dialogIndex = 0;
-            //}
-
             _dialogSpeakerText.text = speaker;
             _dialogParent.SetActive(true);
             _dialogRenderCamera.transform.position = cameraPos;
@@ -197,7 +187,7 @@ namespace Singletons
         {
             for (int i = 0; i < loadedDialog.dialogText.Length; i++)
             {
-                _isSpeaking = true;
+                _centralSystem.IsCharacterSpeak = true;
                 _tapToContinue.onClick.RemoveAllListeners();
                 bool forcedComplete = false;
                 var builder = new StringBuilder();
@@ -239,30 +229,30 @@ namespace Singletons
                         _yesDialogButton.gameObject.SetActive(true);
                         _noDialogButton.gameObject.SetActive(true);
 
-                        _yesDialogButton.onClick.AddListener(() => {
-                            _isSpeaking = false;
+                        _yesDialogButton.onClick.AddListener((UnityAction)(() => {
+                            _centralSystem.IsCharacterSpeak = false;
                             partDialogComplete = true;
                             yesAct.Invoke(); _dialogParent.SetActive(false);
                             _yesDialogButton.gameObject.SetActive(false);
                             _noDialogButton.gameObject.SetActive(false);
-                        });
-                        _noDialogButton.onClick.AddListener(() => {
-                            _isSpeaking = false;
+                        }));
+                        _noDialogButton.onClick.AddListener((UnityAction)(() => {
+                            _centralSystem.IsCharacterSpeak = false;
                             partDialogComplete = true;
                             noAct.Invoke(); _dialogParent.SetActive(false);
                             _yesDialogButton.gameObject.SetActive(false);
                             _noDialogButton.gameObject.SetActive(false);
-                        });
+                        }));
                         yield return new WaitUntil(() => partDialogComplete == true);
                         yield break;
                     }
-                    _tapToContinue.onClick.AddListener(() => {
+                    _tapToContinue.onClick.AddListener((UnityAction)(() => {
                         partDialogComplete = true;
-                        _isSpeaking = false;
+                        _centralSystem.IsCharacterSpeak = false;
                         _dialogParent.SetActive(false);
                         _yesDialogButton.gameObject.SetActive(false);
                         _noDialogButton.gameObject.SetActive(false);
-                    });
+                    }));
                     yield return new WaitUntil(() => partDialogComplete == true);
                     yield break;
                 }
