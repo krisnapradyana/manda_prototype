@@ -16,7 +16,6 @@ namespace Singletons
 
         [SerializeField] MainUI _mainUI;
         [SerializeField] GameHandler _gameHandler;
-        [SerializeField] MainUI _popupUI;
         [field: SerializeField] public InputAction UIAction { get; private set; }
 
         [HideInInspector] public Vector2 _mouseDelta;
@@ -25,6 +24,9 @@ namespace Singletons
         Camera _cam;
         Controls _controls;
         int layerMask = 1 << 9;
+
+        //Delegate Event Action
+        public event Action<bool> OnToggledCursor;
 
         private void Awake()
         {
@@ -66,9 +68,9 @@ namespace Singletons
 
             UIAction.performed += context =>
             {
-                _popupUI.SetupPopupUI("Notice", "Do you want to exit application?", yesButtonEnabled: true, noButtonEnabled: true);
-                _popupUI.SetupUIEvents(yesAction: () => { Application.Quit(); print("has quit application"); });
-                StartCoroutine(_popupUI.ShowPopupIE(() => print("has shown popup")));
+                _mainUI.SetupPopupUI("Notice", "Do you want to exit application?", yesButtonEnabled: true, noButtonEnabled: true);
+                _mainUI.SetupUIEvents(yesAction: () => { Application.Quit(); print("has quit application"); });
+                StartCoroutine(_mainUI.ShowPopupIE(() => print("has shown popup")));
             };
         }
 
@@ -116,6 +118,28 @@ namespace Singletons
             if (_gameHandler._centralSystem.CurrentState == GameState.gameplay && _gameHandler.ControlledPlayer != null)
             {
                 MoveByMouse(AdditionalModule.GetWorldPoint());
+            }
+        }
+
+        public void OnToggleMouseLock(InputAction.CallbackContext context)
+        {
+            if (context.started)
+            {
+                var lastState = Cursor.lockState;
+                Debug.Log("Alt Pressed");
+                switch (lastState)
+                {
+                    case CursorLockMode.None: Cursor.lockState = CursorLockMode.Locked;
+                        _controls.PlayerAction.Look.Enable();
+                        OnToggledCursor?.Invoke(false);
+                        Debug.Log("Look Control : " + _controls.PlayerAction.Look.enabled);
+                        break;
+                    case CursorLockMode.Locked: Cursor.lockState = CursorLockMode.None;
+                        _controls.PlayerAction.Look.Disable();
+                        OnToggledCursor?.Invoke(true);
+                        Debug.Log("Look Control : " + _controls.PlayerAction.Look.enabled);
+                        break;
+                }
             }
         }
     }

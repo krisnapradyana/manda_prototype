@@ -62,6 +62,15 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleMouseLock"",
+                    ""type"": ""Button"",
+                    ""id"": ""f8253109-2fe4-467b-bfda-55df57828863"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -174,6 +183,17 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                     ""action"": ""MoveByMouse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""623c4a1d-ac05-4e70-b318-fcecf5a0f07e"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleMouseLock"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -247,6 +267,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         m_PlayerAction_Move = m_PlayerAction.FindAction("Move", throwIfNotFound: true);
         m_PlayerAction_Look = m_PlayerAction.FindAction("Look", throwIfNotFound: true);
         m_PlayerAction_MoveByMouse = m_PlayerAction.FindAction("MoveByMouse", throwIfNotFound: true);
+        m_PlayerAction_ToggleMouseLock = m_PlayerAction.FindAction("ToggleMouseLock", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -310,6 +331,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerAction_Move;
     private readonly InputAction m_PlayerAction_Look;
     private readonly InputAction m_PlayerAction_MoveByMouse;
+    private readonly InputAction m_PlayerAction_ToggleMouseLock;
     public struct PlayerActionActions
     {
         private @Controls m_Wrapper;
@@ -318,6 +340,7 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_PlayerAction_Move;
         public InputAction @Look => m_Wrapper.m_PlayerAction_Look;
         public InputAction @MoveByMouse => m_Wrapper.m_PlayerAction_MoveByMouse;
+        public InputAction @ToggleMouseLock => m_Wrapper.m_PlayerAction_ToggleMouseLock;
         public InputActionMap Get() { return m_Wrapper.m_PlayerAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -339,6 +362,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @MoveByMouse.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnMoveByMouse;
                 @MoveByMouse.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnMoveByMouse;
                 @MoveByMouse.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnMoveByMouse;
+                @ToggleMouseLock.started -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnToggleMouseLock;
+                @ToggleMouseLock.performed -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnToggleMouseLock;
+                @ToggleMouseLock.canceled -= m_Wrapper.m_PlayerActionActionsCallbackInterface.OnToggleMouseLock;
             }
             m_Wrapper.m_PlayerActionActionsCallbackInterface = instance;
             if (instance != null)
@@ -355,6 +381,9 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 @MoveByMouse.started += instance.OnMoveByMouse;
                 @MoveByMouse.performed += instance.OnMoveByMouse;
                 @MoveByMouse.canceled += instance.OnMoveByMouse;
+                @ToggleMouseLock.started += instance.OnToggleMouseLock;
+                @ToggleMouseLock.performed += instance.OnToggleMouseLock;
+                @ToggleMouseLock.canceled += instance.OnToggleMouseLock;
             }
         }
     }
@@ -410,5 +439,6 @@ public partial class @Controls : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnMoveByMouse(InputAction.CallbackContext context);
+        void OnToggleMouseLock(InputAction.CallbackContext context);
     }
 }
