@@ -328,11 +328,11 @@ MonoBehaviour:
   m_DistanceLimit: 0
   m_MinimumOcclusionTime: 0
   m_CameraRadius: 0.66
-  m_Strategy: 1
+  m_Strategy: 0
   m_MaximumEffort: 4
-  m_SmoothingTime: 0.1
-  m_Damping: 2
-  m_DampingWhenOccluded: 0
+  m_SmoothingTime: 0
+  m_Damping: 0.4
+  m_DampingWhenOccluded: 0.4
   m_OptimalTargetDistance: 0
 --- !u!114 &32066365
 MonoBehaviour:
@@ -374,7 +374,7 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 40
     OrthographicSize: 10
-    NearClipPlane: 0.1
+    NearClipPlane: 0.01
     FarClipPlane: 5000
     Dutch: 0
     ModeOverride: 0
@@ -13549,7 +13549,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303110114}
-  m_LocalRotation: {x: 0.21640675, y: -0.6731776, z: 0.21640669, w: 0.6731777}
+  m_LocalRotation: {x: 0.044269223, y: -0.70571965, z: 0.044269215, w: 0.7057197}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -17239,8 +17239,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -367, y: 0.000015259}
-  m_SizeDelta: {x: 152.6609, y: 123.6974}
+  m_AnchoredPosition: {x: -356.25, y: 0.000015259}
+  m_SizeDelta: {x: 103.3896, y: 83.8111}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1642317041
 MonoBehaviour:
@@ -20038,7 +20038,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906833101}
-  m_LocalRotation: {x: 0.06190855, y: -0.7043915, z: 0.061908554, w: 0.7043914}
+  m_LocalRotation: {x: 0.3270107, y: -0.6269482, z: 0.32701057, w: 0.6269483}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
