@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
 using Singletons;
+using UnityEngine.UI;
 
 public class IntroManager : MonoBehaviour
 {
@@ -16,11 +17,14 @@ public class IntroManager : MonoBehaviour
     [SerializeField] CameraCore[] _charactersCamera;
     [SerializeField] GameObject _characterSelectGround;
     [SerializeField] GameObject _editingGround;
-
+    [SerializeField] GameObject _editingPanel;
+    [SerializeField] Button _confirmEditButton;
     [HideInInspector] GameObject _currenlySelected;
 
     public GameCentralSystem _gameDataContainer { get; private set; }
+    int _selectedCharID;
     bool _hasSelected;
+    bool _allowSelect;
 
     private void OnDestroy()
     {
@@ -30,15 +34,17 @@ public class IntroManager : MonoBehaviour
     private void Start()
     {
         _gameDataContainer = FindObjectOfType<GameCentralSystem>();
-
+        Camera.main.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time = 4;
         foreach (var item in _introCharacter)
         {
             item.onInteractObject += (obj) =>
             {
                 Debug.Log("Selected character");
-
-                //_gameDataContainer.SelectCharacter(obj.GetComponent<SelectableCharacter>().CharacterId);
-                //SceneManager.LoadScene(1, LoadSceneMode.Single);
+                if (!_allowSelect)
+                {
+                    return;
+                }
+                _selectedCharID = item.CharacterId;
                 _currenlySelected = item.gameObject;
                 _editingGround.transform.position = _currenlySelected.transform.position;
                 _charactersCamera[item.CharacterId].transform.parent = _editingGround.transform;
@@ -47,12 +53,18 @@ public class IntroManager : MonoBehaviour
                 _editingGround.SetActive(true);
                 _startingCamera.Priority = 0;
                 _focusCamera.Priority = 0;
-                _charactersCamera[item.CharacterId].GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 1.8f; 
+                _charactersCamera[item.CharacterId].GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 1.8f;
+                _editingPanel.SetActive(true);
+                _allowSelect = false;
                 AssignCameraPriority(item.CharacterId, _charactersCamera);
             };
 
             item.onHoverObject += (obj) =>
             {
+                if (!_allowSelect)
+                {
+                    return;
+                }
                 HoverInfo(obj.gameObject, true);
             };
 
@@ -64,6 +76,11 @@ public class IntroManager : MonoBehaviour
 
         _uiControl.InitUIIntro(this);
         _uiControl.OnStartGame += () => StartCoroutine(DelayMoveCamera());
+        _confirmEditButton.onClick.AddListener(() =>
+        {
+            _gameDataContainer.SelectCharacter(_selectedCharID);
+            SceneManager.LoadScene(1, LoadSceneMode.Single);
+        });
 
         _gameDataContainer.SetGameState(GameState.intro);
     }
@@ -74,6 +91,8 @@ public class IntroManager : MonoBehaviour
         _mainPlatform.DORotate(Vector3.zero, 5f).OnComplete(() =>
         {
             _uiControl.EnableTitleCharSlc();
+            _allowSelect = true;
+            Camera.main.GetComponent<CinemachineBrain>().m_DefaultBlend.m_Time = 1;
         });
 
         yield return new WaitUntil(() => _hasSelected == true);
