@@ -10,11 +10,17 @@ public class SelectableCharacter : Interactables
 {
     [field : SerializeField] public int CharacterId { get; private set; }
     [field: SerializeField] public Animator IntroCharacterAnimator { get; private set; }
+    [field :SerializeField] public CharMaterialsAssigner MaterialsAssigner { get; private set; }
     public EventTrigger Trigger { get; private set; }                  
 
     private void Awake()
     {
         InitSelectableCharacter();
+    }
+
+    private void Start()
+    {
+        onInteractObject += AssignMaterial;
     }
 
     public void InitSelectableCharacter()
@@ -36,5 +42,10 @@ public class SelectableCharacter : Interactables
         });
 
         IntroCharacterAnimator.SetFloat("AnimId", CharacterId);
+    }
+
+    void AssignMaterial(Interactables currentComponent)
+    {
+        MaterialsAssigner.AssignColors();
     }
 }

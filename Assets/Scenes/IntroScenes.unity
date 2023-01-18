@@ -2711,7 +2711,7 @@ MonoBehaviour:
   m_BlendUpdateMethod: 1
   m_DefaultBlend:
     m_Style: 1
-    m_Time: 1
+    m_Time: 4
     m_CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -10180,6 +10180,7 @@ MonoBehaviour:
   _cameraTransform: {fileID: 0}
   <CharacterId>k__BackingField: 0
   <IntroCharacterAnimator>k__BackingField: {fileID: 759758683}
+  <MaterialsAssigner>k__BackingField: {fileID: 759758687}
 --- !u!114 &759758687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10196,7 +10197,7 @@ MonoBehaviour:
   _hairMaterialsIndex: 07000000
   _eyeMaterialsIndex: 09000000
   _clothesMaterialsIndex: 0100000004000000
-  isRealtime: 1
+  isAssignedOnStart: 0
 --- !u!1 &762535203
 GameObject:
   m_ObjectHideFlags: 0
@@ -22592,18 +22593,18 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: bb4e9beeea0f15a44878216cf33f27df, type: 2}
-  - {fileID: 2100000, guid: 545d3884481da8d4ab1f8fc217acf219, type: 2}
-  - {fileID: 2100000, guid: 87b534aed680ef847be55cb848d6cc11, type: 2}
-  - {fileID: 2100000, guid: 4b3ecbf43ed42f243a69aa216b985994, type: 2}
-  - {fileID: 2100000, guid: bffb8daf17b4f644094aafb8ea710b3b, type: 2}
-  - {fileID: 2100000, guid: 8a8ad892f3ec7b14aad572c600fd269d, type: 2}
-  - {fileID: 2100000, guid: df136da79b1bd424e8be3bb287119056, type: 2}
-  - {fileID: 2100000, guid: bd212b53b48a5ee46b77fba5b76b45f2, type: 2}
-  - {fileID: 2100000, guid: 081f384b043664a4ebf1ee45a1299b67, type: 2}
-  - {fileID: 2100000, guid: 83f3fd3128745be4e905aab72b7e86be, type: 2}
-  - {fileID: 2100000, guid: 26781313b4e7dcc4db0ea8e7a5ea7512, type: 2}
-  - {fileID: 2100000, guid: 55938d2c7446f64479cef47eddc94e6b, type: 2}
+  - {fileID: 9113391735409495672, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
+  - {fileID: -8896051167825165466, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
+  - {fileID: 4362962105363994262, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
+  - {fileID: 6728736049189609223, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
+  - {fileID: -140102249556894325, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
+  - {fileID: 6880938823845929278, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
+  - {fileID: 9171952328373019990, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
+  - {fileID: -4740866918696808673, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
+  - {fileID: 7717811945691573888, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
+  - {fileID: 1280446133571650962, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
+  - {fileID: -6205368732473128572, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
+  - {fileID: 1963911019567587215, guid: a5e6bc177137b5a4395a8fa836ead201, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -29512,7 +29513,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2137163895
 RectTransform:
   m_ObjectHideFlags: 0
@@ -38214,6 +38215,7 @@ MonoBehaviour:
   _cameraTransform: {fileID: 0}
   <CharacterId>k__BackingField: 2
   <IntroCharacterAnimator>k__BackingField: {fileID: 2143968882134231383}
+  <MaterialsAssigner>k__BackingField: {fileID: 5413542815938900786}
 --- !u!114 &5413542815938900783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38272,7 +38274,7 @@ MonoBehaviour:
   _hairMaterialsIndex: 0a000000
   _eyeMaterialsIndex: 0c000000
   _clothesMaterialsIndex: 0900000002000000
-  isRealtime: 1
+  isAssignedOnStart: 0
 --- !u!4 &5465940245870622804
 Transform:
   m_ObjectHideFlags: 0
@@ -38458,6 +38460,7 @@ MonoBehaviour:
   _cameraTransform: {fileID: 0}
   <CharacterId>k__BackingField: 1
   <IntroCharacterAnimator>k__BackingField: {fileID: 5866666020371071674}
+  <MaterialsAssigner>k__BackingField: {fileID: 5866666020371071678}
 --- !u!114 &5866666020371071676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38503,7 +38506,7 @@ MonoBehaviour:
   _hairMaterialsIndex: 04000000
   _eyeMaterialsIndex: 07000000
   _clothesMaterialsIndex: 0a0000000200000000000000
-  isRealtime: 1
+  isAssignedOnStart: 0
 --- !u!4 &5901452234334030403
 Transform:
   m_ObjectHideFlags: 0
@@ -39122,20 +39125,20 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5866e3463397c884aafcbf1a578546c5, type: 2}
-  - {fileID: 2100000, guid: 09ab51dc2102b4849900eae0dbe42abd, type: 2}
-  - {fileID: 2100000, guid: 00f0cda240d26af4ba6ef7e896afbe9c, type: 2}
+  - {fileID: -2316586686640757316, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+  - {fileID: 8375267468018889162, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+  - {fileID: -2609809028551464901, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
   - {fileID: 3516887107214377460, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
-  - {fileID: 2100000, guid: 3fd76ba484fb4f349b606f9a883b35f2, type: 2}
-  - {fileID: 2100000, guid: 063ea108c9f15054f832d8cbf601926e, type: 2}
-  - {fileID: 2100000, guid: 95101c21dfacf1f45809e9ef618d50cf, type: 2}
-  - {fileID: 2100000, guid: 794527e3832084741a898ef77e3cfbbf, type: 2}
-  - {fileID: 2100000, guid: 1163af35afb315846834cca1db67aa46, type: 2}
-  - {fileID: 2100000, guid: 9f6d29655d8933b4aa7ec14090054df0, type: 2}
-  - {fileID: 2100000, guid: 4834cbc39c04c6c4496fd655e19ba72b, type: 2}
-  - {fileID: 2100000, guid: ea61e2063ab5420448f74671eef4bab4, type: 2}
-  - {fileID: 2100000, guid: 7cfdaebe1fcfe40499c6b61761b25d34, type: 2}
-  - {fileID: 2100000, guid: 1f204396c4f38e24bbc0ca6ef6d6988f, type: 2}
+  - {fileID: -3622417101240053974, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+  - {fileID: -7768144537244511554, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+  - {fileID: -8896051167825165466, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+  - {fileID: 9171952328373019990, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+  - {fileID: 7922251121040759823, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+  - {fileID: -941316091555192780, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+  - {fileID: -4740866918696808673, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+  - {fileID: 7717811945691573888, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+  - {fileID: 1280446133571650962, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+  - {fileID: -6205368732473128572, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

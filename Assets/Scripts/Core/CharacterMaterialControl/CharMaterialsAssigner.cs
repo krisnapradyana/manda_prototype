@@ -11,17 +11,23 @@ public class CharMaterialsAssigner : MonoBehaviour
     [SerializeField] int[] _hairMaterialsIndex;
     [SerializeField] int[] _eyeMaterialsIndex;
     [SerializeField] int[] _clothesMaterialsIndex;
-    [SerializeField] bool isRealtime;
+    [SerializeField] bool isAssignedOnStart;
 
 
     // Start is called before the first frame update
     void Start()
     {
         _centralSystem = FindObjectOfType<GameCentralSystem>();
-        AssignColors();
+        if (isAssignedOnStart)
+        {
+            AssignColors();
+        }
     }
 
-    void AssignColors()
+    /// <summary>
+    /// Assigned on start or by events
+    /// </summary>
+    public void AssignColors()
     {
         var materialPack = _renderer.materials;
         for (int j = 0; j < _hairMaterialsIndex.Length; j++)
