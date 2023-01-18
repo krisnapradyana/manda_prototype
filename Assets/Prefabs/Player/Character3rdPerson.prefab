@@ -277,7 +277,7 @@ MonoBehaviour:
   _hairMaterialsIndex: 07000000
   _eyeMaterialsIndex: 09000000
   _clothesMaterialsIndex: 0100000004000000
-  isRealtime: 0
+  isAssignedOnStart: 1
 --- !u!1 &6224912309110971562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1487,7 +1487,7 @@ MonoBehaviour:
   _hairMaterialsIndex: 0a000000
   _eyeMaterialsIndex: 0c000000
   _clothesMaterialsIndex: 0900000002000000
-  isRealtime: 0
+  isAssignedOnStart: 1
 --- !u!137 &3906181225161957047 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2732125237699809384, guid: 440d967ad94f59f4893753286f9aa6e9,
@@ -1639,7 +1639,7 @@ MonoBehaviour:
   _hairMaterialsIndex: 04000000
   _eyeMaterialsIndex: 07000000
   _clothesMaterialsIndex: 0a0000000200000000000000
-  isRealtime: 0
+  isAssignedOnStart: 1
 --- !u!114 &5584617990720247633
 MonoBehaviour:
   m_ObjectHideFlags: 0
