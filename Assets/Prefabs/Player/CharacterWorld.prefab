@@ -841,6 +841,7 @@ GameObject:
   - component: {fileID: 6740570943739354590}
   - component: {fileID: 7393429234374686955}
   - component: {fileID: 650240321842592851}
+  - component: {fileID: 8602613292038057605}
   m_Layer: 6
   m_Name: Commander
   m_TagString: Untagged
@@ -916,6 +917,22 @@ MonoBehaviour:
   _eyeMaterialsIndex: 09000000
   _clothesMaterialsIndex: 0100000004000000
   isAssignedOnStart: 1
+--- !u!114 &8602613292038057605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857556244023894257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b5b58fad88f24ab555b57c512b1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headBone: {fileID: 4763075560448995783}
+  _bodyBone: {fileID: 7749475520231869566}
+  _assignedOnStart: 1
+  _allowUpdate: 0
 --- !u!1 &6374087754012270244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,6 +1813,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animation>k__BackingField: {fileID: 7216055447251977008}
+--- !u!114 &7469231758298021347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4147648450801402864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b5b58fad88f24ab555b57c512b1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headBone: {fileID: 5911352775965801925}
+  _bodyBone: {fileID: 8906753466229866620}
+  _assignedOnStart: 1
+  _allowUpdate: 0
+--- !u!1 &5911352775965801925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1781356600409242780, guid: baf1ae3840185094eb0afdf0174bffab,
+    type: 3}
+  m_PrefabInstance: {fileID: 3841009299962379937}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &7216055447251977008 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: baf1ae3840185094eb0afdf0174bffab,
@@ -1805,6 +1844,12 @@ Animator:
 --- !u!137 &7360932209051926151 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6010415732892876838, guid: baf1ae3840185094eb0afdf0174bffab,
+    type: 3}
+  m_PrefabInstance: {fileID: 3841009299962379937}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8906753466229866620 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3542885339558904099, guid: baf1ae3840185094eb0afdf0174bffab,
     type: 3}
   m_PrefabInstance: {fileID: 3841009299962379937}
   m_PrefabAsset: {fileID: 0}
@@ -2081,6 +2126,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 440d967ad94f59f4893753286f9aa6e9, type: 3}
+--- !u!1 &831604423520193905 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1781356600409242780, guid: 440d967ad94f59f4893753286f9aa6e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7839969036923293205}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2456729818427371720 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3542885339558904099, guid: 440d967ad94f59f4893753286f9aa6e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7839969036923293205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &4442730547359216516 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 440d967ad94f59f4893753286f9aa6e9,
@@ -2099,6 +2156,22 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7839969036923293205}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2242672862608411569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6920981068746257220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b5b58fad88f24ab555b57c512b1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headBone: {fileID: 831604423520193905}
+  _bodyBone: {fileID: 2456729818427371720}
+  _assignedOnStart: 1
+  _allowUpdate: 0
 --- !u!114 &2607623932289312343
 MonoBehaviour:
   m_ObjectHideFlags: 0

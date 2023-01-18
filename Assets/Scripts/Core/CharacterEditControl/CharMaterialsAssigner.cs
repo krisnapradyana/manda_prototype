@@ -34,27 +34,27 @@ public class CharMaterialsAssigner : MonoBehaviour
         {
             if (!isAssignedOnStart)
             {
-                _centralSystem.selectedHairMaterial.color = _renderer.materials[_hairMaterialsIndex[j]].color;
+                _centralSystem.SelectedHairMaterial.color = _renderer.materials[_hairMaterialsIndex[j]].color;
             }
-            materialPack[_hairMaterialsIndex[j]] = _centralSystem.selectedHairMaterial;
+            materialPack[_hairMaterialsIndex[j]] = _centralSystem.SelectedHairMaterial;
         }
 
         for (int j = 0; j < _eyeMaterialsIndex.Length; j++)
         {
             if (!isAssignedOnStart)
             {
-                _centralSystem.selectedEyeMaterial.color = _renderer.materials[_eyeMaterialsIndex[j]].color;
+                _centralSystem.SelectedEyeMaterial.color = _renderer.materials[_eyeMaterialsIndex[j]].color;
             }
-            materialPack[_eyeMaterialsIndex[j]] = _centralSystem.selectedEyeMaterial;
+            materialPack[_eyeMaterialsIndex[j]] = _centralSystem.SelectedEyeMaterial;
         }
 
         for (int j = 0; j < _clothesMaterialsIndex.Length; j++)
         {
             if (!isAssignedOnStart)
             {
-                _centralSystem.selectedClothesMaterial.color = _renderer.materials[_clothesMaterialsIndex[j]].color;
+                _centralSystem.SelectedClothesMaterial.color = _renderer.materials[_clothesMaterialsIndex[j]].color;
             }
-            materialPack[_clothesMaterialsIndex[j]] = _centralSystem.selectedClothesMaterial;
+            materialPack[_clothesMaterialsIndex[j]] = _centralSystem.SelectedClothesMaterial;
         }
         _renderer.materials = materialPack;
     }

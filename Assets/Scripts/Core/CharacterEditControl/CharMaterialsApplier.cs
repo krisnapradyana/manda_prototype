@@ -24,13 +24,13 @@ public class CharMaterialsApplier : MonoBehaviour
         switch (colorType)
         {
             case ColorType.hair:
-                _centralSystem.selectedHairMaterial.color = color;
+                _centralSystem.SelectedHairMaterial.color = color;
                 break;
             case ColorType.eye:
-                _centralSystem.selectedEyeMaterial.color = color;
+                _centralSystem.SelectedEyeMaterial.color = color;
                 break;
             case ColorType.clothes:
-                _centralSystem.selectedClothesMaterial.color = color;
+                _centralSystem.SelectedClothesMaterial.color = color;
                 break;
             default:
                 break;

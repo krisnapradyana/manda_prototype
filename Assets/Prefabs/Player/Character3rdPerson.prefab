@@ -204,6 +204,7 @@ GameObject:
   - component: {fileID: 6224912309016346243}
   - component: {fileID: 1670888670510678984}
   - component: {fileID: 6704937916923100065}
+  - component: {fileID: 6224912308704144668}
   m_Layer: 0
   m_Name: Commander
   m_TagString: Untagged
@@ -278,6 +279,22 @@ MonoBehaviour:
   _eyeMaterialsIndex: 09000000
   _clothesMaterialsIndex: 0100000004000000
   isAssignedOnStart: 1
+--- !u!114 &6224912308704144668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6224912309016346241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b5b58fad88f24ab555b57c512b1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headBone: {fileID: 6224912310469756634}
+  _bodyBone: {fileID: 6224912309913096727}
+  _assignedOnStart: 1
+  _allowUpdate: 0
 --- !u!1 &6224912309110971562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1488,6 +1505,22 @@ MonoBehaviour:
   _eyeMaterialsIndex: 0c000000
   _clothesMaterialsIndex: 0900000002000000
   isAssignedOnStart: 1
+--- !u!114 &1794454192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2242396363514131342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b5b58fad88f24ab555b57c512b1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headBone: {fileID: 8401649622671510971}
+  _bodyBone: {fileID: 6704411516672208898}
+  _assignedOnStart: 1
+  _allowUpdate: 0
 --- !u!137 &3906181225161957047 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 2732125237699809384, guid: 440d967ad94f59f4893753286f9aa6e9,
@@ -1497,6 +1530,18 @@ SkinnedMeshRenderer:
 --- !u!95 &4806866807424987982 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 440d967ad94f59f4893753286f9aa6e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1432142814282387167}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6704411516672208898 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3542885339558904099, guid: 440d967ad94f59f4893753286f9aa6e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1432142814282387167}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8401649622671510971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1781356600409242780, guid: 440d967ad94f59f4893753286f9aa6e9,
     type: 3}
   m_PrefabInstance: {fileID: 1432142814282387167}
   m_PrefabAsset: {fileID: 0}
@@ -1599,6 +1644,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf1ae3840185094eb0afdf0174bffab, type: 3}
+--- !u!1 &390300577929636230 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -1781356600409242780, guid: baf1ae3840185094eb0afdf0174bffab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7074585273789541090}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3240583332501230655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3542885339558904099, guid: baf1ae3840185094eb0afdf0174bffab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7074585273789541090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!137 &3550156544535472836 stripped
 SkinnedMeshRenderer:
   m_CorrespondingSourceObject: {fileID: 6010415732892876838, guid: baf1ae3840185094eb0afdf0174bffab,
@@ -1653,3 +1710,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animation>k__BackingField: {fileID: 3695041295265290099}
+--- !u!114 &6224912308704144667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7992921781325420467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 730b5b58fad88f24ab555b57c512b1d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _headBone: {fileID: 390300577929636230}
+  _bodyBone: {fileID: 3240583332501230655}
+  _assignedOnStart: 1
+  _allowUpdate: 0
