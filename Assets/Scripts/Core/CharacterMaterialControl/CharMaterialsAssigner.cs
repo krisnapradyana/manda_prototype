@@ -7,9 +7,10 @@ public class CharMaterialsAssigner : MonoBehaviour
 {
     private GameCentralSystem _centralSystem;
 
-    [SerializeField] Material[] _hairMaterials;
-    [SerializeField] Material[] _eyeMaterials;
-    [SerializeField] Material[] _clothesMaterials;
+    [SerializeField] SkinnedMeshRenderer _renderer;
+    [SerializeField] int[] _hairMaterialsIndex;
+    [SerializeField] int[] _eyeMaterialsIndex;
+    [SerializeField] int[] _clothesMaterialsIndex;
     [SerializeField] bool isRealtime;
 
 
@@ -20,24 +21,25 @@ public class CharMaterialsAssigner : MonoBehaviour
         AssignColors();
     }
 
-    private void Update()
-    {
-        AssignColors();   
-    }
-
     void AssignColors()
     {
-        foreach (var item in _hairMaterials)
+        var materialPack = _renderer.materials;
+        for (int j = 0; j < _hairMaterialsIndex.Length; j++)
         {
-            item.color = _centralSystem.selectedHairColor;
+            materialPack[_hairMaterialsIndex[j]] = _centralSystem.selectedHairMaterial;
         }
-        foreach (var item in _eyeMaterials)
+
+        for (int j = 0; j < _eyeMaterialsIndex.Length; j++)
         {
-            item.color = _centralSystem.selectedEyeColor;
+            materialPack[_eyeMaterialsIndex[j]] = _centralSystem.selectedEyeMaterial;
         }
-        foreach (var item in _clothesMaterials)
+
+        for (int j = 0; j < _clothesMaterialsIndex.Length; j++)
         {
-            item.color = _centralSystem.selectedClothesColor;
+            materialPack[_clothesMaterialsIndex[j]] = _centralSystem.selectedClothesMaterial;
         }
+
+
+        _renderer.materials = materialPack;
     }
 }

@@ -840,6 +840,7 @@ GameObject:
   - component: {fileID: 6485721064777857611}
   - component: {fileID: 6740570943739354590}
   - component: {fileID: 7393429234374686955}
+  - component: {fileID: 650240321842592851}
   m_Layer: 0
   m_Name: Commander
   m_TagString: Untagged
@@ -898,6 +899,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animation>k__BackingField: {fileID: 6740570943739354590}
+--- !u!114 &650240321842592851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5857556244023894257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e932b9345ac3144b4539a3b96dc8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 8518496173665333893}
+  _hairMaterialsIndex: 
+  _eyeMaterialsIndex: 
+  _clothesMaterialsIndex: 
+  isRealtime: 0
 --- !u!1 &6374087754012270244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1568,6 +1586,23 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3841009299962379937}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3072009974256164519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4147648450801402864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e932b9345ac3144b4539a3b96dc8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 7360932209051926151}
+  _hairMaterialsIndex: 04000000
+  _eyeMaterialsIndex: 07000000
+  _clothesMaterialsIndex: 0a0000000200000000000000
+  isRealtime: 0
 --- !u!114 &4287293081773627687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1584,6 +1619,12 @@ MonoBehaviour:
 --- !u!95 &7216055447251977008 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: baf1ae3840185094eb0afdf0174bffab,
+    type: 3}
+  m_PrefabInstance: {fileID: 3841009299962379937}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &7360932209051926151 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6010415732892876838, guid: baf1ae3840185094eb0afdf0174bffab,
     type: 3}
   m_PrefabInstance: {fileID: 3841009299962379937}
   m_PrefabAsset: {fileID: 0}
@@ -1687,12 +1728,35 @@ Animator:
     type: 3}
   m_PrefabInstance: {fileID: 7839969036923293205}
   m_PrefabAsset: {fileID: 0}
+--- !u!137 &5271286482943204989 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2732125237699809384, guid: 440d967ad94f59f4893753286f9aa6e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7839969036923293205}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6920981068746257220 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 440d967ad94f59f4893753286f9aa6e9,
     type: 3}
   m_PrefabInstance: {fileID: 7839969036923293205}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2607623932289312343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6920981068746257220}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e932b9345ac3144b4539a3b96dc8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 5271286482943204989}
+  _hairMaterialsIndex: 0a000000
+  _eyeMaterialsIndex: 0c000000
+  _clothesMaterialsIndex: 0900000002000000
+  isRealtime: 0
 --- !u!114 &8131032485370230630
 MonoBehaviour:
   m_ObjectHideFlags: 0

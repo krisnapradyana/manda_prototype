@@ -24,9 +24,9 @@ namespace Singletons
         }
         [field: SerializeField] public GameState LastState { get; private set; }
         public bool IsCharacterSpeak { get; set; }
-        public Color selectedHairColor { get; set; }
-        public Color selectedEyeColor { get; set; }
-        public Color selectedClothesColor { get; set; }
+        [field: SerializeField] public Material     selectedHairMaterial { get; set; }
+        [field: SerializeField] public Material      selectedEyeMaterial { get; set; }
+        [field: SerializeField] public Material  selectedClothesMaterial { get; set; }
         
 
         private void Awake()

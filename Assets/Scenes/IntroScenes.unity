@@ -718,8 +718,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 45693305}
-  m_LocalRotation: {x: 0.102831565, y: 0.026489958, z: -0.002739503, w: 0.99434227}
-  m_LocalPosition: {x: -0.15999901, y: 31.800001, z: -3.529971}
+  m_LocalRotation: {x: 0.102988094, y: -0.009320354, z: 0.00096505973, w: 0.99463844}
+  m_LocalPosition: {x: -0.25, y: 31.800001, z: -3.529971}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1005,8 +1005,8 @@ MonoBehaviour:
   _characterSelectGround: {fileID: 505378956}
   _editingGround: {fileID: 1184076431}
   _editingPanel: {fileID: 1538913554}
-  _editOrthoSize: 1
   _confirmEditButton: {fileID: 377316028}
+  _orthographicSize: 0.8
 --- !u!1 &69098557
 GameObject:
   m_ObjectHideFlags: 0
@@ -4923,6 +4923,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <LastState>k__BackingField: 0
+  <selectedHairMaterial>k__BackingField: {fileID: 2100000, guid: 14c6b3673f83e37499f6ed0d20056ab8,
+    type: 2}
+  <selectedEyeMaterial>k__BackingField: {fileID: 2100000, guid: 7a1d29770a4b3514d81f2ff14f965810,
+    type: 2}
+  <selectedClothesMaterial>k__BackingField: {fileID: 2100000, guid: c8446f7459a254f49b74b0ffdbe78a0e,
+    type: 2}
 --- !u!1 &351074666
 GameObject:
   m_ObjectHideFlags: 0
@@ -6116,8 +6122,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 405676323}
-  m_LocalRotation: {x: 0.04781856, y: 0.002963894, z: -0.00014189212, w: 0.9988517}
-  m_LocalPosition: {x: -0.02, y: 25, z: -3.37}
+  m_LocalRotation: {x: 0.04647999, y: -0.014405751, z: 0.0006703734, w: 0.9988152}
+  m_LocalPosition: {x: -0.25, y: 25, z: -3.466}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6960,8 +6966,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 472632699}
-  m_LocalRotation: {x: 0.10999502, y: -0.014456713, z: 0.0016000456, w: 0.9938257}
-  m_LocalPosition: {x: 0.08501088, y: 31.800001, z: -3.2899854}
+  m_LocalRotation: {x: 0.10997642, y: -0.016665215, z: 0.001844228, w: 0.9937928}
+  m_LocalPosition: {x: -0.25, y: 31.800001, z: -3.2899854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -8466,7 +8472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 1.1, z: 0}
+  m_TrackedObjectOffset: {x: 0.35, y: 1.1, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
@@ -10186,13 +10192,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e932b9345ac3144b4539a3b96dc8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hairMaterials:
-  - {fileID: 2100000, guid: bd212b53b48a5ee46b77fba5b76b45f2, type: 2}
-  _eyeMaterials:
-  - {fileID: 2100000, guid: 83f3fd3128745be4e905aab72b7e86be, type: 2}
-  _clothesMaterials:
-  - {fileID: 2100000, guid: bffb8daf17b4f644094aafb8ea710b3b, type: 2}
-  - {fileID: 2100000, guid: 545d3884481da8d4ab1f8fc217acf219, type: 2}
+  _renderer: {fileID: 1717586937}
+  _hairMaterialsIndex: 07000000
+  _eyeMaterialsIndex: 09000000
+  _clothesMaterialsIndex: 0100000004000000
   isRealtime: 1
 --- !u!1 &762535203
 GameObject:
@@ -12105,7 +12108,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 930558596}
-  - component: {fileID: 930558597}
   m_Layer: 0
   m_Name: WizardObject
   m_TagString: Untagged
@@ -12130,22 +12132,6 @@ Transform:
   m_Father: {fileID: 242468118}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &930558597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 930558595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49e932b9345ac3144b4539a3b96dc8f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hairMaterials: []
-  _eyeMaterials: []
-  _clothesMaterials: []
-  isRealtime: 0
 --- !u!1 &936249021
 GameObject:
   m_ObjectHideFlags: 0
@@ -15277,7 +15263,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 1.1, z: 0}
+  m_TrackedObjectOffset: {x: 0.35, y: 1.1, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
@@ -16951,7 +16937,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 1.1, z: 0}
+  m_TrackedObjectOffset: {x: 0.35, y: 1.1, z: 0}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
@@ -20187,7 +20173,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1525281057}
-  - component: {fileID: 1525281058}
   m_Layer: 0
   m_Name: BlacksmithObject
   m_TagString: Untagged
@@ -20212,22 +20197,6 @@ Transform:
   m_Father: {fileID: 403973354}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1525281058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525281056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49e932b9345ac3144b4539a3b96dc8f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _hairMaterials: []
-  _eyeMaterials: []
-  _clothesMaterials: []
-  isRealtime: 0
 --- !u!1 &1526191036
 GameObject:
   m_ObjectHideFlags: 0
@@ -24031,7 +24000,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1818321667}
-  m_LocalRotation: {x: 0.074722335, y: 0.00891676, z: -0.0006681759, w: 0.9971643}
+  m_LocalRotation: {x: 0.07472231, y: 0.008916761, z: -0.0006681758, w: 0.9971643}
   m_LocalPosition: {x: -0.37, y: 5.6, z: -10.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -29535,13 +29504,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2137163895}
+  - component: {fileID: 2137163897}
+  - component: {fileID: 2137163896}
   m_Layer: 0
   m_Name: DialogPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2137163895
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29564,6 +29535,44 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2137163896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137163894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.011764706}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2137163897
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137163894}
+  m_CullTransparentMesh: 1
 --- !u!1 &2139711630
 GameObject:
   m_ObjectHideFlags: 0
@@ -38259,13 +38268,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e932b9345ac3144b4539a3b96dc8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hairMaterials:
-  - {fileID: 2100000, guid: 4834cbc39c04c6c4496fd655e19ba72b, type: 2}
-  _eyeMaterials:
-  - {fileID: 2100000, guid: 7cfdaebe1fcfe40499c6b61761b25d34, type: 2}
-  _clothesMaterials:
-  - {fileID: 2100000, guid: 9f6d29655d8933b4aa7ec14090054df0, type: 2}
-  - {fileID: 2100000, guid: 00f0cda240d26af4ba6ef7e896afbe9c, type: 2}
+  _renderer: {fileID: 7584071198135321774}
+  _hairMaterialsIndex: 0a000000
+  _eyeMaterialsIndex: 0c000000
+  _clothesMaterialsIndex: 0900000002000000
   isRealtime: 1
 --- !u!4 &5465940245870622804
 Transform:
@@ -38493,12 +38499,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e932b9345ac3144b4539a3b96dc8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hairMaterials:
-  - {fileID: 2100000, guid: 218ce42938052c14db190758a023c4cc, type: 2}
-  _eyeMaterials:
-  - {fileID: 2100000, guid: 402af86675348e94486e0034ac4c9c0a, type: 2}
-  _clothesMaterials:
-  - {fileID: 2100000, guid: 290a08fea1b95764c87bb41a037d9ca6, type: 2}
+  _renderer: {fileID: 6010415733785100045}
+  _hairMaterialsIndex: 04000000
+  _eyeMaterialsIndex: 07000000
+  _clothesMaterialsIndex: 0a0000000200000000000000
   isRealtime: 1
 --- !u!4 &5901452234334030403
 Transform:

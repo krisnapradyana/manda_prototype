@@ -14,7 +14,7 @@ public class CharMaterialsApplier : MonoBehaviour
     private GameCentralSystem _centralSystem;
     public ColorType colorType;
 
-    private void Start()
+    private void Awake()
     {
         _centralSystem = FindObjectOfType<GameCentralSystem>();
     }
@@ -24,13 +24,13 @@ public class CharMaterialsApplier : MonoBehaviour
         switch (colorType)
         {
             case ColorType.hair:
-                _centralSystem.selectedHairColor = color;
+                _centralSystem.selectedHairMaterial.color = color;
                 break;
             case ColorType.eye:
-                _centralSystem.selectedEyeColor = color;
+                _centralSystem.selectedEyeMaterial.color = color;
                 break;
             case ColorType.clothes:
-                _centralSystem.selectedClothesColor = color;
+                _centralSystem.selectedClothesMaterial.color = color;
                 break;
             default:
                 break;

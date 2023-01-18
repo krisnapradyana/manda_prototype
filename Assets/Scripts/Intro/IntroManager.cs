@@ -19,6 +19,7 @@ public class IntroManager : MonoBehaviour
     [SerializeField] GameObject _editingGround;
     [SerializeField] GameObject _editingPanel;
     [SerializeField] Button _confirmEditButton;
+    [SerializeField] float _orthographicSize;
     [HideInInspector] GameObject _currenlySelected;
 
     public GameCentralSystem _gameDataContainer { get; private set; }
@@ -53,7 +54,7 @@ public class IntroManager : MonoBehaviour
                 _editingGround.SetActive(true);
                 _startingCamera.Priority = 0;
                 _focusCamera.Priority = 0;
-                _charactersCamera[item.CharacterId].GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 1.8f;
+                _charactersCamera[item.CharacterId].GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = _orthographicSize;
                 _editingPanel.SetActive(true);
                 _allowSelect = false;
                 AssignCameraPriority(item.CharacterId, _charactersCamera);

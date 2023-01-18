@@ -203,6 +203,7 @@ GameObject:
   - component: {fileID: 6224912309016346246}
   - component: {fileID: 6224912309016346243}
   - component: {fileID: 1670888670510678984}
+  - component: {fileID: 6704937916923100065}
   m_Layer: 0
   m_Name: Commander
   m_TagString: Untagged
@@ -260,6 +261,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animation>k__BackingField: {fileID: 6224912309016346243}
+--- !u!114 &6704937916923100065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6224912309016346241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e932b9345ac3144b4539a3b96dc8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 6224912309647909808}
+  _hairMaterialsIndex: 07000000
+  _eyeMaterialsIndex: 09000000
+  _clothesMaterialsIndex: 0100000004000000
+  isRealtime: 0
 --- !u!1 &6224912309110971562
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,6 +1471,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Animation>k__BackingField: {fileID: 4806866807424987982}
+--- !u!114 &8823404956439346744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2242396363514131342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e932b9345ac3144b4539a3b96dc8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 3906181225161957047}
+  _hairMaterialsIndex: 0a000000
+  _eyeMaterialsIndex: 0c000000
+  _clothesMaterialsIndex: 0900000002000000
+  isRealtime: 0
+--- !u!137 &3906181225161957047 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2732125237699809384, guid: 440d967ad94f59f4893753286f9aa6e9,
+    type: 3}
+  m_PrefabInstance: {fileID: 1432142814282387167}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &4806866807424987982 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 440d967ad94f59f4893753286f9aa6e9,
@@ -1558,6 +1599,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: baf1ae3840185094eb0afdf0174bffab, type: 3}
+--- !u!137 &3550156544535472836 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6010415732892876838, guid: baf1ae3840185094eb0afdf0174bffab,
+    type: 3}
+  m_PrefabInstance: {fileID: 7074585273789541090}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &3695041295265290099 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: baf1ae3840185094eb0afdf0174bffab,
@@ -1576,6 +1623,23 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7074585273789541090}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &373351648185233851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7992921781325420467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49e932b9345ac3144b4539a3b96dc8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 3550156544535472836}
+  _hairMaterialsIndex: 04000000
+  _eyeMaterialsIndex: 07000000
+  _clothesMaterialsIndex: 0a0000000200000000000000
+  isRealtime: 0
 --- !u!114 &5584617990720247633
 MonoBehaviour:
   m_ObjectHideFlags: 0
