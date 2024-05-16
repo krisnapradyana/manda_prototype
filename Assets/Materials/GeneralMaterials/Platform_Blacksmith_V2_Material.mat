@@ -10,6 +10,8 @@ Material:
   m_Name: Platform_Blacksmith_V2_Material
   m_Shader: {fileID: -6465566751694194690, guid: 5e3c36c14c9565847914f6369838b38c,
     type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -18,6 +20,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -65,11 +68,23 @@ Material:
         m_Texture: {fileID: 2800000, guid: de632b87b849c104f97dedd940471e42, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_0437dcee03e74ba5b540f7e19de3708c_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: de632b87b849c104f97dedd940471e42, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_b0e1ec4d0f694e5ea16856b3e0bfadb2_Texture_1:
         m_Texture: {fileID: 2800000, guid: db8b5600b91b5d042be48ef3e3434e38, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_b0e1ec4d0f694e5ea16856b3e0bfadb2_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: db8b5600b91b5d042be48ef3e3434e38, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_c8d777233d794054bc8e39a44bdca3b1_Texture_1:
+        m_Texture: {fileID: 2800000, guid: ca52b9f47231f5c4c9f4d61fc9b56a47, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_c8d777233d794054bc8e39a44bdca3b1_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: ca52b9f47231f5c4c9f4d61fc9b56a47, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -140,4 +155,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 5
+  version: 7

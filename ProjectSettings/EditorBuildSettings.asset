@@ -15,5 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/IndoorGameplayScene.unity
     guid: ead18212986ae8e4b93213e639b2e706
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bdfedf71a40985f48ab4e132a094ca9e,
+      type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: 5256aa1f29144484186f67acdad877e6,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 035f5bc11cb02274bbfe32c1c81a03b3,
+      type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 62f11dffe35c6704b8ca3aa736c528d8,
       type: 2}
