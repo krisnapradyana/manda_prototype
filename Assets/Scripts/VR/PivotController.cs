@@ -13,6 +13,7 @@ public class PivotController : MonoBehaviour
     [SerializeField] float yRot;
     [SerializeField] float xPos, zPos;
     [SerializeField] float scaleWait;
+    [SerializeField] Vector3 currentHand;
     #endregion
 
     Coroutine thumbUpRoutine;
@@ -88,4 +89,6 @@ public class PivotController : MonoBehaviour
             yield return new WaitForSeconds(scaleWait);
         }
     }
+
+
 }

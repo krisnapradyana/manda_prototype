@@ -6,6 +6,6 @@ public class WorldTrigger : MonoBehaviour
 {
     private void OnTriggerStay(Collider other)
     {
-        
+        other.GetComponent()
     }
 }
