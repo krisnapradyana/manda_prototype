@@ -19,7 +19,7 @@ public class PokeEventTrigger : MonoBehaviour
         Debug.Log("Checking Tag");
         if (other.CompareTag("LandToTouch"))
         {
-            PerformRaycast();
+            //PerformRaycast();
             Debug.Log(other.gameObject.name);
         }
     }
