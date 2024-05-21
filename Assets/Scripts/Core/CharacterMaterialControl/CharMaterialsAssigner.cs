@@ -20,7 +20,7 @@ public class CharMaterialsAssigner : MonoBehaviour
         _centralSystem = FindObjectOfType<GameCentralSystem>();
         if (isAssignedOnStart)
         {
-            AssignColors();
+            //AssignColors();
         }
     }
 

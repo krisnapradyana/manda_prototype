@@ -38,12 +38,12 @@ public class PivotController : MonoBehaviour
     {
         if (leftControllerPivotChecker.activeSelf)
         {
-            Debug.Log("currently using controller");
+            //Debug.Log("currently using controller");
             this.transform.position = new Vector3(leftControllerPivot.transform.position.x, leftControllerPivot.transform.position.y + ((float)controllerOffset / 100), leftControllerPivot.transform.position.z);
         }
         else
         {
-            Debug.Log("currently using hand");
+            //Debug.Log("currently using hand");
             this.transform.position = new Vector3(leftHandPivot.transform.position.x, leftHandPivot.transform.position.y + ((float)handOffset / 100), leftHandPivot.transform.position.z);
         }
     }

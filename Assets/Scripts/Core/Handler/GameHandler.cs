@@ -104,6 +104,15 @@ namespace Gameplay
                 },
                     noAction: () => _centralSystem.SetGameState(GameState.inspect));
                 StartCoroutine(_mainUI.ShowPopupIE(() => _centralSystem.SetGameState(GameState.none)));
+
+                //_mainUI.transform.position = _thirdPersonCharacter.transform.position;
+                //_mainUI.SetupPopupUI("Exit", "Do you want to return to world?", yesButtonEnabled: true, noButtonEnabled: true);
+                //_mainUI.SetupUIEvents(yesAction: () =>
+                //{
+                //    ExitVisitRoom();
+                //},
+                //    noAction: () => _centralSystem.SetGameState(GameState.inspect));
+                //StartCoroutine(_mainUI.ShowPopupIE(() => _centralSystem.SetGameState(GameState.none)));
             });
 
             _thirdPersonCamera.m_XAxis.m_MaxSpeed = _cameraHSpeed;
@@ -216,6 +225,7 @@ namespace Gameplay
                             Debug.Log("character currently speaking");
                             return;
                         }
+                        _mainUI.SetCurrentSelectedObject(this.gameObject);
                         _mainUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData(),
                             () => Debug.Log("Yes Pressed"),
                             () => Debug.Log("No Pressed")

@@ -19,6 +19,7 @@ namespace Gameplay
         [field: SerializeField] public Rigidbody Rigidbody { get; private set; }
         [field: SerializeField] public Seeker SeekerObject { get; private set; }
         [field: SerializeField] public AIPath AiPath { get; private set; }
+        [field: SerializeField] public bool HasAI { get; private set; }
         [field: SerializeField] public SkinContainer[] CharacterSkins { get; private set; }
 
         [SerializeField] float _runSpeed;
@@ -36,12 +37,14 @@ namespace Gameplay
             base.OnDestroy();
         }
 
-        private void Start()
+        private IEnumerator Start()
         {
             if (IsNPC)
             {
-                return;
+                yield break;
             }
+
+            yield return new WaitForEndOfFrame();
             EnableSkin(_gameHandler._centralSystem.SelectedCharacterIndex);
         }
 
@@ -51,6 +54,8 @@ namespace Gameplay
             {
                 return;
             }
+            
+            if(!HasAI) { return; }
             CharacterSkins[_skinIndex].Animation.SetFloat("Velocity", Mathf.Clamp(AiPath.velocity.magnitude, 0, 1) / _divider);
         }
 

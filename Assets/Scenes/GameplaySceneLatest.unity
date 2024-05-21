@@ -35202,6 +35202,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 822925010}
     m_Modifications:
+    - target: {fileID: 6740570943006624489, guid: a745f383092e0d942b35b25205723c8d,
+        type: 3}
+      propertyPath: <HasAI>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6740570943006624494, guid: a745f383092e0d942b35b25205723c8d,
         type: 3}
       propertyPath: m_RootOrder

@@ -48,6 +48,9 @@ namespace Singletons
         [Header("Fade Screen")]
         [SerializeField] Image _blackScreen;
 
+        [Header("Other")]
+        [SerializeField] GameObject _currentSelectedObj;
+
         //Properties
         private float LastTalkId { get; set; }
 
@@ -268,6 +271,16 @@ namespace Singletons
                     continue;
                 }
             }
+        }
+
+        public void SetCurrentSelectedObject(GameObject target)
+        {
+            _currentSelectedObj = target;
+        }
+
+        public GameObject GetSelectedObject()
+        {
+            return _currentSelectedObj;
         }
     }
 }
