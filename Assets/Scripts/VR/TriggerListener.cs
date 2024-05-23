@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Gameplay;
 using Singletons;
+using Unity.VisualScripting;
 
 public class TriggerListener : MonoBehaviour
 {
@@ -14,11 +15,13 @@ public class TriggerListener : MonoBehaviour
     bool hasTouched;
     CharacterBehaviour characterBehaviour;
     MainUI mainUI;
+    RectTransform uiRect;
 
     private void Start()
     {
         characterBehaviour = GetComponent<CharacterBehaviour>();
         mainUI = GetComponent<MainUI>();
+        uiRect = mainUI.GetComponent<RectTransform>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,7 +41,7 @@ public class TriggerListener : MonoBehaviour
 
     private void Update()
     {
-        mainUI.transform.position = mainUI.GetSelectedObject().transform.position;
+        mainUI.GetComponent<RectTransform>().position = mainUI.GetSelectedObject().transform.position;
     }
 
     private void OnTriggerExit(Collider other)

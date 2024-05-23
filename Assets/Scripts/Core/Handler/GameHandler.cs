@@ -225,7 +225,7 @@ namespace Gameplay
                             Debug.Log("character currently speaking");
                             return;
                         }
-                        _mainUI.SetCurrentSelectedObject(this.gameObject);
+                        _mainUI.SetCurrentSelectedObject(item.gameObject);
                         _mainUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData(),
                             () => Debug.Log("Yes Pressed"),
                             () => Debug.Log("No Pressed")
