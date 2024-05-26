@@ -20,6 +20,7 @@ namespace Gameplay
         [field: SerializeField] public Seeker SeekerObject { get; private set; }
         [field: SerializeField] public AIPath AiPath { get; private set; }
         [field: SerializeField] public bool HasAI { get; private set; }
+        [field: SerializeField] public bool IsVRCharacter { get; private set; }
         [field: SerializeField] public SkinContainer[] CharacterSkins { get; private set; }
 
         [SerializeField] float _runSpeed;

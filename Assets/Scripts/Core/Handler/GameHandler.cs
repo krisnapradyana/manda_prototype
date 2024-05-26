@@ -15,6 +15,7 @@ namespace Gameplay
         //Singleton privates
         [HideInInspector] public GameCentralSystem _centralSystem { get; private set; }
         [HideInInspector] public MainUI _mainUI { get; private set; }
+        [HideInInspector] public VRUI _vrUI { get; private set; }
         [HideInInspector] public InputListener _inputListener { get; private set; }
 
         [Header("Scene Root object")]
@@ -82,6 +83,11 @@ namespace Gameplay
 
         private void Start()
         {
+            _centralSystem = FindObjectOfType<GameCentralSystem>();
+            _mainUI = FindObjectOfType<MainUI>();
+            _inputListener = FindObjectOfType<InputListener>();
+            _vrUI = FindObjectOfType<VRUI>();
+
             _inputListener.InitGameHandler(this);
             InitObjects();
             _uiControl.SetPlayerUI();
@@ -217,21 +223,35 @@ namespace Gameplay
                 item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
                 item.onInteractObject += (info) =>
                 {
-
-                    if (item.IsNPC)
+                    //Event for VRMode
+                    if (item.IsVRCharacter)
                     {
-                        if (_mainUI._centralSystem.IsCharacterSpeak)
+                        if (_vrUI._centralSystem.IsCharacterSpeak)
                         {
                             Debug.Log("character currently speaking");
                             return;
                         }
-                        _mainUI.SetCurrentSelectedObject(item.gameObject);
-                        _mainUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData(),
-                            () => Debug.Log("Yes Pressed"),
-                            () => Debug.Log("No Pressed")
-                            );
+                        //_vrUI.SetCurrentSelectedObject(item.gameObject);
+                        _vrUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData());
+
+                        return;
                     }
-                    else
+
+                    //Events for generic Mode
+                    //if (item.IsNPC)
+                    //{
+                    //    if (_mainUI._centralSystem.IsCharacterSpeak)
+                    //    {
+                    //        Debug.Log("character currently speaking");
+                    //        return;
+                    //    }
+                    //    _mainUI.SetCurrentSelectedObject(item.gameObject);
+                    //    _mainUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData(),
+                    //        () => Debug.Log("Yes Pressed"),
+                    //        () => Debug.Log("No Pressed")
+                    //        );
+                    //}
+                    //else
                     {
                         OnChangedCharacted(); item.SetSelected(true);
                     }

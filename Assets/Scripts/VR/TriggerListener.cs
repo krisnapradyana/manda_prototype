@@ -14,14 +14,14 @@ public class TriggerListener : MonoBehaviour
     Coroutine executeRoutine;
     bool hasTouched;
     CharacterBehaviour characterBehaviour;
-    MainUI mainUI;
+    VRUI mainUI;
     RectTransform uiRect;
 
     private void Start()
     {
         characterBehaviour = GetComponent<CharacterBehaviour>();
-        mainUI = GetComponent<MainUI>();
-        uiRect = mainUI.GetComponent<RectTransform>();
+        mainUI = GetComponent<VRUI>();
+        //uiRect = mainUI.GetComponent<RectTransform>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,14 +34,12 @@ public class TriggerListener : MonoBehaviour
             
             hasTouched = true;
             executeRoutine = StartCoroutine(IEWaitToExecute());
-            Debug.Log(mainUI.GetSelectedObject().name + " IS SELECTED");
-            Debug.Log(mainUI.GetSelectedObject().name + " POSITION CHANGED");
         }
     }
 
     private void Update()
     {
-        mainUI.GetComponent<RectTransform>().position = mainUI.GetSelectedObject().transform.position;
+        //mainUI.GetComponent<RectTransform>().position = mainUI.GetSelectedObject().transform.position;
     }
 
     private void OnTriggerExit(Collider other)
