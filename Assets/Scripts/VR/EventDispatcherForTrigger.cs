@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class EventDispatcherForTrigger : MonoBehaviour
 {
-    [SerializeField] private GameObject interactableObject;
+    [SerializeField] private GameObject[] listOfInteractables;
 
     public UnityEvent triggerEventEnter;
     public UnityEvent triggerEventExit;
@@ -13,17 +13,23 @@ public class EventDispatcherForTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == interactableObject)
+        foreach (GameObject interactableObject in listOfInteractables)
         {
-            triggerEventEnter.Invoke();
+            if (other.gameObject == interactableObject)
+            {
+                triggerEventEnter.Invoke();
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == interactableObject)
+        foreach (GameObject interactableObject in listOfInteractables)
         {
-            triggerEventExit.Invoke();
+            if (other.gameObject == interactableObject)
+            {
+                triggerEventExit.Invoke();
+            }
         }
     }
 }

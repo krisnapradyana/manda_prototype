@@ -9,15 +9,19 @@ public class XRRespawnOnFall : MonoBehaviour
     public GeneralAttributes generalAttributes;
     [SerializeField] private float moveSpeed = 5f, rotSpeed = 15f;
 
-    [SerializeField] private float YThreshold;
+    //[SerializeField] private float YThreshold;
+    [SerializeField] private int objectIndex;
     [SerializeField] private bool rotateOnReturn;
     [SerializeField] private UnityEvent onFallEvent;
     private Rigidbody rb;
     private GameObject objectToRetrieve;
 
+    private Coroutine moveCoroutine;
+    private Coroutine rotateCoroutine;
+
     private void Start()
     {
-        rb = generalAttributes.playerChar.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
 
         if (Application.platform == RuntimePlatform.OSXEditor || Application.platform == RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.LinuxEditor)
         {
@@ -25,18 +29,21 @@ public class XRRespawnOnFall : MonoBehaviour
         }
         else
         {
-            generalAttributes.xrPrevPos.position = generalAttributes.initialPoint.position;
-            generalAttributes.xrPrevPos.rotation = generalAttributes.initialPoint.rotation;
+            transform.position = generalAttributes.xrPrevPos[objectIndex].position;
+            transform.rotation = generalAttributes.xrPrevPos[objectIndex].rotation;
         }
     }
 
-    private void Update()
-    {
-        if (transform.position.y < YThreshold)
-        {
-            SnapToSocket();
-        }
-    }
+    /// <summary>
+    /// is not used anymore, now using trigger with another object
+    /// </summary>
+    //private void Update()
+    //{
+    //    if (transform.position.y < YThreshold)
+    //    {
+    //        SnapToSocket();
+    //    }
+    //}
 
     public void SnapToSocket()
     {
@@ -45,27 +52,44 @@ public class XRRespawnOnFall : MonoBehaviour
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
-        StartCoroutine(MoveToPrev());
+        StopAnyCoroutines(); // Stop any existing coroutines
+
+        moveCoroutine = StartCoroutine(MoveToPrev());
         if (rotateOnReturn)
+        {   
+            rotateCoroutine = StartCoroutine(RotateToPrev());
+        }
+    }
+
+    public void StopAnyCoroutines()
+    {
+        if (moveCoroutine != null)
         {
-            StartCoroutine(RotateToPrev());
+            StopCoroutine(moveCoroutine);
+            moveCoroutine = null;
+        }
+
+        if (rotateCoroutine != null)
+        {
+            StopCoroutine(rotateCoroutine);
+            rotateCoroutine = null;
         }
     }
 
     IEnumerator MoveToPrev()
     {
-        while (transform.position != generalAttributes.xrPrevPos.position)
+        while (transform.position != generalAttributes.xrPrevPos[objectIndex].position)
         {
-            transform.position = Vector3.MoveTowards(transform.position, generalAttributes.xrPrevPos.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, generalAttributes.xrPrevPos[objectIndex].position, moveSpeed * Time.deltaTime);
             yield return null;
         }
     }
 
     IEnumerator RotateToPrev()
     {
-        while (transform.rotation != generalAttributes.xrPrevPos.rotation)
+        while (transform.rotation != generalAttributes.xrPrevPos[objectIndex].rotation)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, generalAttributes.xrPrevPos.rotation, rotSpeed);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, generalAttributes.xrPrevPos[objectIndex].rotation, rotSpeed);
             yield return null;
         }
     }

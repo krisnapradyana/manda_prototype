@@ -14,7 +14,7 @@ public class XRLocomotion : MonoBehaviour
 
     private void Awake()
     {
-        generalAttributes.xrPrevPos = generalAttributes.xrOrigin.transform;
+        //generalAttributes.xrPrevPos = generalAttributes.xrOrigin.transform;
     }
 
     public void MoveForward()
@@ -48,14 +48,14 @@ public class XRLocomotion : MonoBehaviour
         {
             StopCoroutine(moveToFront);
             moveToFront = null;
-            generalAttributes.xrPrevPos = generalAttributes.xrOrigin.transform;
+            //generalAttributes.xrPrevPos = generalAttributes.xrOrigin.transform;
         }
 
         if (moveToBack != null)
         {
             StopCoroutine(moveToBack);
             moveToBack = null;
-            generalAttributes.xrPrevPos = generalAttributes.xrOrigin.transform;
+            //generalAttributes.xrPrevPos = generalAttributes.xrOrigin.transform;
         }
     }
 
@@ -66,14 +66,14 @@ public class XRLocomotion : MonoBehaviour
         {
             StopCoroutine(rotToRight);
             rotToRight = null;
-            generalAttributes.xrPrevPos = generalAttributes.xrOrigin.transform;
+            //generalAttributes.xrPrevPos = generalAttributes.xrOrigin.transform;
         }
 
         if (rotToLeft != null)
         {
             StopCoroutine(rotToLeft);
             rotToLeft = null;
-            generalAttributes.xrPrevPos = generalAttributes.xrOrigin.transform;
+            //generalAttributes.xrPrevPos = generalAttributes.xrOrigin.transform;
         }
     }
 

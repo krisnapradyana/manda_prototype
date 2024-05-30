@@ -8,8 +8,6 @@ public class XRPerspectiveTransition : MonoBehaviour
     public GeneralAttributes generalAttributes;
     public XRRespawnOnFall xrRespawnOnFall;
 
-    public bool inThirdPersonView = true;
-    public bool canTransitionView = false;
     [SerializeField] private float floatingWaitTime = 1.2f;
 
     private void Awake()
@@ -17,27 +15,18 @@ public class XRPerspectiveTransition : MonoBehaviour
         generalAttributes.xrOrigin.transform.localScale = new Vector3(10, 10, 10);
     }
 
-    private void Update()
-    {
-        if (!inThirdPersonView)
-        {
-            //isinya nanti fungsi buat follow gerakan sama rotasi
-        }
-        else
-        {
-            generalAttributes.xrPrevPos.position = generalAttributes.initialPoint.position;
-            generalAttributes.xrPrevPos.rotation = generalAttributes.initialPoint.rotation;
-        }
-    }
-
     public void ChangePerspective(float transitionDuration)
     {
         StartCoroutine(CheckCondition(transitionDuration));
     }
 
-    public void ToggleBool()
+    public void NowCanTransition()
     {
-        canTransitionView = !canTransitionView;
+        generalAttributes.canTransitionView = true;
+    }
+    public void NowCannotTransition()
+    {
+        generalAttributes.canTransitionView = false;
     }
 
     //use to check condition, when object released from hand (on playerchar/playerpivot
@@ -45,7 +34,7 @@ public class XRPerspectiveTransition : MonoBehaviour
     {
         yield return null;
 
-        if (canTransitionView)
+        if (generalAttributes.canTransitionView)
         {
             // Wait for the first ToggleDarkOpacity to complete
             yield return StartCoroutine(ToggleDarkOpacity(duration));
@@ -56,8 +45,8 @@ public class XRPerspectiveTransition : MonoBehaviour
             // This can be used in the interface so the player position becomes 0,0,0 (but later)
             generalAttributes.xrOrigin.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-            generalAttributes.playerChar.SetActive(false);
-            inThirdPersonView = false;
+            generalAttributes.playerCharPlatform.SetActive(false);
+            generalAttributes.inThirdPersonView = false;
 
             // Wait for the second ToggleDarkOpacity to complete
             yield return StartCoroutine(ToggleDarkOpacity(duration));

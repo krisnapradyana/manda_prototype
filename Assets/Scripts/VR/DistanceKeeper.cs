@@ -5,23 +5,21 @@ using UnityEngine;
 
 public class DistanceKeeper : MonoBehaviour
 {
-    public Transform handObj, mapObj;
+    public GeneralAttributes generalAttributes;
+
     private float distanceBetweenObject;
     [SerializeField, Range(0, 50)] private float distanceThreshold;
     public bool shouldMove;
-    [SerializeField, Range(0, 10)] private float baseSpeed;
-    [SerializeField, Range(0, 5)] private float accelerationFactor;
+    [SerializeField, Range(0, 5)] private float baseSpeed;
+    [SerializeField, Range(0, 10)] private float accelerationFactor;
 
     private void Update()
     {
         shouldMove = checkDistance();
+        
         if (shouldMove)
         {
             MoveToTarget();
-        }
-        else
-        {
-            OnDrawGizmos();
         }
     }
 
@@ -29,28 +27,18 @@ public class DistanceKeeper : MonoBehaviour
     {
         float movementSpeed = baseSpeed + (distanceBetweenObject * accelerationFactor);
         float step = movementSpeed * Time.deltaTime;
-        Vector3 newTarget = new Vector3(handObj.position.x, (handObj.position.y + distanceThreshold), handObj.position.z);
+        Vector3 newTarget = new Vector3(generalAttributes.pivotPos.position.x, (generalAttributes.pivotPos.position.y + distanceThreshold), generalAttributes.pivotPos.position.z);
 
-        mapObj.position = Vector3.MoveTowards(mapObj.position, newTarget, step);
+        generalAttributes.playerCharPlatform.transform.position = Vector3.MoveTowards(generalAttributes.playerCharPlatform.transform.position, newTarget, step);
     }
 
     private bool checkDistance()
     {
-        Vector3 A = handObj.position;
-        Vector3 B = mapObj.position;
+        Vector3 A = generalAttributes.pivotPos.position;
+        Vector3 B = generalAttributes.playerCharPlatform.transform.position;
 
         distanceBetweenObject = Vector3.Distance(A, B);
 
         return distanceBetweenObject >= distanceThreshold || distanceBetweenObject/2 <= distanceThreshold;
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (handObj != null && mapObj != null)
-        {
-            // Draw a line between handObj and mapObj
-            Gizmos.color = Color.red;
-            Gizmos.DrawLine(handObj.position, mapObj.position);
-        }
     }
 }

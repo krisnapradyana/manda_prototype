@@ -7,6 +7,7 @@ public class EventDispatcherForEnterRegion : MonoBehaviour
 {
     public GeneralAttributes generalAttributes;
     [SerializeField] private Vector3 minVector, maxVector;
+    [SerializeField] private bool hasEntered;
 
     public UnityEvent EnterRegionEvent;
     public UnityEvent ExitRegionEvent;
@@ -14,16 +15,20 @@ public class EventDispatcherForEnterRegion : MonoBehaviour
   
     private void Update()
     {
-        Vector3 targetPosition = generalAttributes.playerChar.transform.position;
+        foreach (GameObject targetableObject in generalAttributes.playerChar)
+        {
+            Vector3 targetPosition = targetableObject.transform.position;
 
-        
-        if (IsWithinRegion(targetPosition))
-        {
-            EnterRegionEvent.Invoke();
-        }
-        else
-        {
-            ExitRegionEvent.Invoke();
+            if (IsWithinRegion(targetPosition) && !hasEntered)
+            {
+                EnterRegionEvent.Invoke();
+                hasEntered = true;
+            }
+            else if (!IsWithinRegion(targetPosition) && hasEntered)
+            {
+                ExitRegionEvent.Invoke();
+                hasEntered = false;
+            }
         }
     }
 
