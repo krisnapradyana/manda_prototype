@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GeneralAttributes : MonoBehaviour
 {
     [Header("Meta Object")]
+    public GameObject xrOrigin;
     public GameObject centerEyeObject;
 
-    [Header("User GameObject")]
-    public GameObject TopAnchor;
-    public GameObject panelParent, panelControl;
-    public GameObject pivotLeftController, pivotLeftHand;
-
-    [Header("Canvas")]
-    public Canvas FloatingUI;
+    [Header("Additional GameObject")]
+    public GameObject playerChar;
+    public Transform xrPrevPos, startingPosition, initialPoint;
+    public GameObject pivotLeftController, pivotLeftHand, pivotRightController, pivotRightHand;
+    public Image darkOverlay, lightOverlay;
 }

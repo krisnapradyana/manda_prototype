@@ -19,12 +19,19 @@ public class VRUI : MonoBehaviour
     [field: SerializeField] GameObject _canvas;
     [field: SerializeField] Canvas _uiCanvas;
     [SerializeField] Button _tapToContinue;
+    [SerializeField] GameObject Head;
+    [SerializeField] int currentdialogPos;
 
     #region privates
     private string _displayedDialog;
     [SerializeField] TMP_Text _dialogText;
     [SerializeField] TMP_Text _dialogSpeakerText;
     #endregion
+
+    private void Update()
+    {
+        gameObject.transform.LookAt(Head.transform);
+    }
 
     internal void SetCurrentSelectedObject(GameObject gameObject)
     {
@@ -39,6 +46,7 @@ public class VRUI : MonoBehaviour
 
     IEnumerator StartPerTextDialogIE(DialogData loadedDialog, float duration = .1f)
     {
+        Debug.Log($"num of chat: {loadedDialog.dialogText.Length}");
         for (int i = 0; i < loadedDialog.dialogText.Length; i++)
         {
             _centralSystem.IsCharacterSpeak = true;

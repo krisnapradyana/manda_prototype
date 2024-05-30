@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogText:
   - Hello young man... Thanks for visiting. Do you want to play around my place?
+  - No worries at all!
+  - If you ever find yourself with some free time and in need of some fun, don't
+    hesitate to swing by.
   isQuestion: 1
