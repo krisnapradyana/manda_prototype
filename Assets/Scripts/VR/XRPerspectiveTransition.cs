@@ -32,7 +32,7 @@ public class XRPerspectiveTransition : MonoBehaviour
     //use to check condition, when object released from hand (on playerchar/playerpivot
     IEnumerator CheckCondition(float duration)
     {
-        yield return null;
+        yield return new WaitForSeconds(duration/2);
 
         if (generalAttributes.canTransitionView)
         {
