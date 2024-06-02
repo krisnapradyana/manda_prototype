@@ -23,11 +23,11 @@ public class GeneralAttributes : MonoBehaviour
     public Image darkOverlay, lightOverlay;
 
     [Header("Parameter")]
-    [HideInInspector] public bool isUsingController;
-    [HideInInspector] public bool isRightHanded = false;
-    [HideInInspector] public bool inThirdPersonView = true;
-    [HideInInspector] public bool canTransitionView = false;
-    [HideInInspector] public bool shouldLookAt;
+    public bool isUsingController;
+    public bool isRightHanded = false;
+    public bool inThirdPersonView = true;
+    public bool canTransitionView = false;
+    public bool shouldLookAt;
 
     private void Update()
     {
@@ -49,12 +49,12 @@ public class GeneralAttributes : MonoBehaviour
         }
     }
 
-    public void toggleDominantHand()
+    public void toggleDominantHand(bool newValue)
     {
-        isRightHanded = !isRightHanded;
+        isRightHanded = newValue;
     }
-    public void toggleShouldLookAt()
+    public void toggleShouldLookAt(bool newValue)
     {
-        shouldLookAt = !shouldLookAt;
+        shouldLookAt = newValue;
     }
 }

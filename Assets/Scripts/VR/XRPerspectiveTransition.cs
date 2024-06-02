@@ -9,6 +9,7 @@ public class XRPerspectiveTransition : MonoBehaviour
     public XRRespawnOnFall xrRespawnOnFall;
 
     [SerializeField] private float floatingWaitTime = 1.2f;
+    Coroutine perspectiveCoroutine;
 
     private void Awake()
     {
@@ -17,7 +18,8 @@ public class XRPerspectiveTransition : MonoBehaviour
 
     public void ChangePerspective(float transitionDuration)
     {
-        StartCoroutine(CheckCondition(transitionDuration));
+        StopCoroutine(perspectiveCoroutine);
+        perspectiveCoroutine = StartCoroutine(CheckCondition(transitionDuration));
     }
 
     public void NowCanTransition()

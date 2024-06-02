@@ -9843,7 +9843,7 @@ MonoBehaviour:
   requestBodyTrackingPermissionOnStartup: 0
   requestFaceTrackingPermissionOnStartup: 0
   requestEyeTrackingPermissionOnStartup: 0
-  requestScenePermissionOnStartup: 0
+  requestScenePermissionOnStartup: 1
   requestRecordAudioPermissionOnStartup: 0
   _localDimming: 1
   _trackingOriginType: 1
@@ -11916,7 +11916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8044d9e6ecb4439479a2787c66d0c87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalAttributes: {fileID: 0}
+  generalAttributes: {fileID: 1542799234}
   ignoreX: 0
   ignoreY: 1
   ignoreZ: 0
@@ -15505,7 +15505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8044d9e6ecb4439479a2787c66d0c87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalAttributes: {fileID: 0}
+  generalAttributes: {fileID: 1542799234}
   ignoreX: 0
   ignoreY: 1
   ignoreZ: 0
@@ -22831,7 +22831,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8044d9e6ecb4439479a2787c66d0c87d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalAttributes: {fileID: 0}
+  generalAttributes: {fileID: 1542799234}
   ignoreX: 0
   ignoreY: 1
   ignoreZ: 0
@@ -23876,13 +23876,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1464721f2283eb14e94a33e812b47be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interactableView: {fileID: 2086426555}
+  _interactableView: {fileID: 2086426554}
   _whenHover:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1936874176}
+        m_TargetAssemblyTypeName: XRGeneralFunction, Assembly-CSharp
+        m_MethodName: StartResize
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenUnhover:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1936874176}
+        m_TargetAssemblyTypeName: XRGeneralFunction, Assembly-CSharp
+        m_MethodName: StartResize
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenSelect:
     m_PersistentCalls:
       m_Calls:
@@ -27448,10 +27472,34 @@ MonoBehaviour:
   _interactableView: {fileID: 2086426554}
   _whenHover:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1936874176}
+        m_TargetAssemblyTypeName: XRGeneralFunction, Assembly-CSharp
+        m_MethodName: StartResize
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 2
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenUnhover:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1936874176}
+        m_TargetAssemblyTypeName: XRGeneralFunction, Assembly-CSharp
+        m_MethodName: StopReSize
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _whenSelect:
     m_PersistentCalls:
       m_Calls:
@@ -29127,6 +29175,7 @@ GameObject:
   - component: {fileID: 1936874172}
   - component: {fileID: 1936874171}
   - component: {fileID: 1936874175}
+  - component: {fileID: 1936874176}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -29197,6 +29246,18 @@ MonoBehaviour:
   shouldMove: 0
   baseSpeed: 5
   accelerationFactor: 10
+--- !u!114 &1936874176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1936874170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51795b992b6993348b62324aee52db1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1941217070
 GameObject:
   m_ObjectHideFlags: 0
