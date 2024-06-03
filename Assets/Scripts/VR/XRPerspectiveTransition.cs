@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class XRPerspectiveTransition : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class XRPerspectiveTransition : MonoBehaviour
     public XRRespawnOnFall xrRespawnOnFall;
 
     [SerializeField] private float floatingWaitTime = 1.2f;
+    //public UnityEvent onTransitionEvent;
     Coroutine perspectiveCoroutine;
 
     private void Awake()
@@ -18,30 +20,32 @@ public class XRPerspectiveTransition : MonoBehaviour
 
     public void ChangePerspective(float transitionDuration)
     {
-        StopCoroutine(perspectiveCoroutine);
         perspectiveCoroutine = StartCoroutine(CheckCondition(transitionDuration));
     }
 
-    public void NowCanTransition()
+    public void ChangeTransitionBool(bool newValue)
     {
-        generalAttributes.canTransitionView = true;
-    }
-    public void NowCannotTransition()
-    {
-        generalAttributes.canTransitionView = false;
+        generalAttributes.ToggleTransitionPermit(newValue);
     }
 
     //use to check condition, when object released from hand (on playerchar/playerpivot
     IEnumerator CheckCondition(float duration)
     {
-        yield return new WaitForSeconds(duration/2);
+        yield return new WaitForSeconds(floatingWaitTime);
 
         if (generalAttributes.canTransitionView)
         {
+            //yield return new WaitUntil (()=> bool trasitionNow = )
+
+            generalAttributes.inThirdPersonView = false;
+
             // Wait for the first ToggleDarkOpacity to complete
             yield return StartCoroutine(ToggleDarkOpacity(duration));
 
             generalAttributes.xrOrigin.transform.localScale = new Vector3(1, 1, 1);
+
+            Transform playerTrans = generalAttributes.playerChar[xrRespawnOnFall.objectIndex].transform;
+            generalAttributes.startingPosition.position = new Vector3(playerTrans.position.x, generalAttributes.startingPosition.position.y, playerTrans.position.z);
             generalAttributes.xrOrigin.transform.position = generalAttributes.startingPosition.position;
 
             // This can be used in the interface so the player position becomes 0,0,0 (but later)
@@ -55,8 +59,6 @@ public class XRPerspectiveTransition : MonoBehaviour
         }
         else
         {
-            yield return new WaitForSeconds(floatingWaitTime);
-
             xrRespawnOnFall.SnapToSocket();
         }
     }

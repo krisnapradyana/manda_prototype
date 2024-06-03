@@ -24093,7 +24093,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1611924129}
   m_Layer: 0
-  m_Name: PivotPlatform
+  m_Name: PivotPlatform (Don't_Delete)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29244,8 +29244,8 @@ MonoBehaviour:
   generalAttributes: {fileID: 1542799234}
   distanceThreshold: 0.5
   shouldMove: 0
-  baseSpeed: 5
-  accelerationFactor: 10
+  baseSpeed: 4.6
+  accelerationFactor: 9
 --- !u!114 &1936874176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29485,6 +29485,72 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948298588}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1950700185
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1950700186}
+  - component: {fileID: 1950700187}
+  m_Layer: 0
+  m_Name: RegionEntryPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1950700186
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950700185}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2128880856}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1950700187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950700185}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ee007400a5e38b47a41a76ca703d0a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  generalAttributes: {fileID: 1542799234}
+  minVector: {x: -5, y: 0, z: -5}
+  maxVector: {x: 5, y: 20, z: 5}
+  hasEntered: 0
+  EnterRegionEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  ExitRegionEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1950785561
 GameObject:
   m_ObjectHideFlags: 0
@@ -32558,7 +32624,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1950700186}
   m_Father: {fileID: 1747413773}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2131948930

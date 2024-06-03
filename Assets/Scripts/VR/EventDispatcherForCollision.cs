@@ -5,24 +5,30 @@ using UnityEngine.Events;
 
 public class EventDispatcherForCollision : MonoBehaviour
 {
-    [SerializeField] private GameObject interactableObject;
+    [SerializeField] private GameObject[] listOfInteractables;
 
     public UnityEvent collisionEnterEvent;
     public UnityEvent collisionExitEvent;
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == interactableObject)
+        for (int i = 0; i < listOfInteractables.Length; i++)
         {
-            collisionEnterEvent.Invoke();
+            if (collision.gameObject == listOfInteractables[i])
+            {
+                collisionEnterEvent.Invoke();
+            }
         }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject == interactableObject)
+        foreach (GameObject interactableObject in listOfInteractables)
         {
-            collisionExitEvent.Invoke();
+            if (collision.gameObject == interactableObject)
+            {
+                collisionExitEvent.Invoke();
+            }
         }
     }
 }

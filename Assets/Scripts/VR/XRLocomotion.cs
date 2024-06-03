@@ -81,7 +81,9 @@ public class XRLocomotion : MonoBehaviour
     {
         while (true)
         {
-            generalAttributes.xrOrigin.transform.Translate(Vector3.forward * (strideDistance * modifierValue) * Time.deltaTime);
+            Vector3 forwardDirection = generalAttributes.centerEyeObject.transform.forward;
+            Vector3 nextDirection =  new Vector3(forwardDirection.x, 0, forwardDirection.z).normalized * (strideDistance * modifierValue) * Time.deltaTime;
+            generalAttributes.xrOrigin.transform.Translate(nextDirection);
 
             yield return new WaitForSeconds(strideDelay);
         }

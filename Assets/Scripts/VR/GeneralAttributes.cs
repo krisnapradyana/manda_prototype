@@ -24,10 +24,9 @@ public class GeneralAttributes : MonoBehaviour
 
     [Header("Parameter")]
     public bool isUsingController;
-    public bool isRightHanded = false;
+    public bool isRightHanded = true;
     public bool inThirdPersonView = true;
     public bool canTransitionView = false;
-    public bool shouldLookAt;
 
     private void Update()
     {
@@ -53,8 +52,9 @@ public class GeneralAttributes : MonoBehaviour
     {
         isRightHanded = newValue;
     }
-    public void toggleShouldLookAt(bool newValue)
+
+    public void ToggleTransitionPermit(bool newValue)
     {
-        shouldLookAt = newValue;
+        canTransitionView = newValue;
     }
 }

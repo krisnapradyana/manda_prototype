@@ -882,7 +882,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: f61a01e5-61c7-4589-bd2d-107bccae8f02
-  instanceId: e52cf4fd-48eb-4663-9ed1-45705ba62799
+  instanceId: ccd34ae3-5b40-4ddd-97e6-7859547b1a85
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -1293,7 +1293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 8b766bfd-f92e-401c-8312-e0a7c1df0660
+  instanceId: 22a2b0b0-5526-4e3c-96f8-bbb3ddf0cf27
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -3227,7 +3227,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 6b67162c-2460-4766-a931-980388647573
-  instanceId: 8b8edca2-cf60-4d3f-bd32-17218f4e0321
+  instanceId: 60a6d8cf-a67e-4970-b8bc-d63d9693da78
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -6738,8 +6738,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAttributes: {fileID: 1542799234}
+  camLook: {fileID: 0}
   moveSpeed: 8
   rotSpeed: 10
+  invokeDelay: 0
   objectIndex: 0
   rotateOnReturn: 1
   onFallEvent:
@@ -8389,7 +8391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: f10154e0-16b2-492f-97d0-6639f69e7df6
-  instanceId: 00b76e2f-dede-451d-b281-c2928f3b12b0
+  instanceId: 51b618b5-326e-4446-ad59-56f3194409de
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -9058,7 +9060,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: e47682b9-c270-40b1-b16d-90b627a5ce1b
-  instanceId: 97c28ccf-0648-4805-99e6-28149fbb8cde
+  instanceId: f9089450-3138-4d44-83ad-5b99167b6912
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -9364,8 +9366,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAttributes: {fileID: 1542799234}
+  camLook: {fileID: 0}
   moveSpeed: 8
   rotSpeed: 10
+  invokeDelay: 0
   objectIndex: 2
   rotateOnReturn: 1
   onFallEvent:
@@ -12247,7 +12251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: f61a01e5-61c7-4589-bd2d-107bccae8f02
-  instanceId: 17d29022-bee3-44d0-84c2-f09af0452b29
+  instanceId: 24cb2314-589c-4ce1-8c7c-da0206089c02
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -12383,7 +12387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 27673ac1-cdb0-443f-a07d-6ff1d34daeca
-  instanceId: 1f2b100c-ff4f-4310-aa85-3dd91041953d
+  instanceId: c0a014e2-7c48-4292-94a2-b98151782697
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -13390,8 +13394,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   generalAttributes: {fileID: 1542799234}
+  camLook: {fileID: 0}
   moveSpeed: 8
   rotSpeed: 10
+  invokeDelay: 0
   objectIndex: 1
   rotateOnReturn: 1
   onFallEvent:
@@ -13576,7 +13582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 5817f7c0-f2a5-45f9-a5ca-64264e0166e8
-  instanceId: 8ea05751-eb24-43d5-aba7-756653bb2030
+  instanceId: 8861ccf9-ebf7-4d99-b520-f62b85585252
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -15360,7 +15366,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 81f55626-5fad-45e9-a1df-184f330da7ba
-  instanceId: 06ca3df3-0db9-4f1c-92ae-8eea031bb591
+  instanceId: 7da46283-dc4c-412c-92fe-263051840d39
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -17790,7 +17796,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 6b67162c-2460-4766-a931-980388647573
-  instanceId: e83aff46-425d-41c4-831d-c46dd1b13ae6
+  instanceId: 6e6c4c0c-3826-47ee-9d73-589311440a3b
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -19601,7 +19607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1471365724
 Transform:
   m_ObjectHideFlags: 0
@@ -21088,7 +21094,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1611924129
 Transform:
   m_ObjectHideFlags: 0
@@ -23527,7 +23533,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 17b98e17-6831-43c1-8b07-171ad4478c4d
+  instanceId: 7a537832-c21b-4223-a930-110872745a20
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -24473,7 +24479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 0393ca30-f2a9-4865-a40f-f9a68d01c3a9
-  instanceId: 5f570110-c9b2-4f25-87dc-702e7357de75
+  instanceId: 2c225a46-0b8c-4397-beb1-4acacc1ed829
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -27699,7 +27705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 27673ac1-cdb0-443f-a07d-6ff1d34daeca
-  instanceId: fcd5e9e5-d4be-4770-be63-79378e80c8b3
+  instanceId: d53a748c-7591-4a83-bc0a-22008a67c02e
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 
@@ -28557,7 +28563,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockId: 8b26b298-7bf4-490e-b245-a039c0184303
-  instanceId: 5da4d7ff-00a9-4063-91f2-7e3acd75034b
+  instanceId: 5d45dd20-7f6b-4113-97d1-6343092da50e
   version: 1
   installationRoutineCheckpoint:
     _installationRoutineId: 

@@ -6,11 +6,17 @@ using UnityEngine;
 public class CamLookAtWithIgnore : MonoBehaviour
 {
     public GeneralAttributes generalAttributes;
+    public bool shouldLookAt = true;
     [SerializeField] private bool ignoreX, ignoreY, ignoreZ;
+
+    private void Start()
+    {
+        shouldLookAt = true;
+    }
 
     void Update()
     {
-        if (generalAttributes.shouldLookAt)
+        if (shouldLookAt)
         {
             Vector3 newTarget = GenerateNewTarget(generalAttributes.centerEyeObject);
             transform.LookAt(newTarget);
@@ -23,6 +29,10 @@ public class CamLookAtWithIgnore : MonoBehaviour
         float newY = ignoreY ? transform.position.y : targetToLookAt.transform.position.y;
         float newZ = ignoreZ ? transform.position.z : targetToLookAt.transform.position.z;
 
-        return new Vector3(newX, newY, newZ); 
+        return new Vector3(newX, newY, newZ);
+    }
+    public void toggleShouldLookAt(bool newValue)
+    {
+        shouldLookAt = newValue;
     }
 }

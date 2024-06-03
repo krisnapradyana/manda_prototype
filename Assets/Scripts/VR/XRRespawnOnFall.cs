@@ -7,14 +7,16 @@ using UnityEngine.Events;
 public class XRRespawnOnFall : MonoBehaviour
 {
     public GeneralAttributes generalAttributes;
+    public CamLookAtWithIgnore camLook;
+
     [SerializeField] private float moveSpeed = 5f, rotSpeed = 15f;
 
     //[SerializeField] private float YThreshold;
-    [SerializeField] private int objectIndex;
+    [SerializeField] private float invokeDelay;
+    public int objectIndex;
     [SerializeField] private bool rotateOnReturn;
     [SerializeField] private UnityEvent onFallEvent;
     private Rigidbody rb;
-    private GameObject objectToRetrieve;
 
     private Coroutine moveCoroutine;
     private Coroutine rotateCoroutine;
@@ -34,31 +36,15 @@ public class XRRespawnOnFall : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// is not used anymore, now using trigger with another object
-    /// </summary>
-    //private void Update()
-    //{
-    //    if (transform.position.y < YThreshold)
-    //    {
-    //        SnapToSocket();
-    //    }
-    //}
-
     public void SnapToSocket()
     {
-        onFallEvent.Invoke();
-
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-
-        StopAnyCoroutines(); // Stop any existing coroutines
-
-        moveCoroutine = StartCoroutine(MoveToPrev());
-        if (rotateOnReturn)
-        {   
-            rotateCoroutine = StartCoroutine(RotateToPrev());
-        }
+        //StopAnyCoroutines(); // Stop any existing coroutines
+        //
+        //moveCoroutine = StartCoroutine(MoveToPrev());
+        //if (rotateOnReturn)
+        //{   
+        //    rotateCoroutine = StartCoroutine(RotateToPrev());
+        //}
     }
 
     public void StopAnyCoroutines()
@@ -78,11 +64,20 @@ public class XRRespawnOnFall : MonoBehaviour
 
     IEnumerator MoveToPrev()
     {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+
+        yield return new WaitForSeconds(invokeDelay);
+
+        onFallEvent.Invoke();
+
         while (transform.position != generalAttributes.xrPrevPos[objectIndex].position)
         {
             transform.position = Vector3.MoveTowards(transform.position, generalAttributes.xrPrevPos[objectIndex].position, moveSpeed * Time.deltaTime);
             yield return null;
         }
+
+        camLook.toggleShouldLookAt(true);
     }
 
     IEnumerator RotateToPrev()

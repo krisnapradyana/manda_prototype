@@ -10,12 +10,11 @@ public class EventDispatcherForTrigger : MonoBehaviour
     public UnityEvent triggerEventEnter;
     public UnityEvent triggerEventExit;
 
-
     private void OnTriggerEnter(Collider other)
     {
-        foreach (GameObject interactableObject in listOfInteractables)
+        for (int i = 0; i < listOfInteractables.Length; i++)
         {
-            if (other.gameObject == interactableObject)
+            if (other.gameObject == listOfInteractables[i])
             {
                 triggerEventEnter.Invoke();
             }
