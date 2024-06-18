@@ -61,3 +61,5 @@ crashlytics-build.properties
 *.zip
 /WindowsBuild
 *WebBuild
+UserSettings/EditorUserSettings.asset
+*UserSettings/
