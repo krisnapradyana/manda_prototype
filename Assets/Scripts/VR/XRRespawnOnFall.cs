@@ -34,17 +34,20 @@ public class XRRespawnOnFall : MonoBehaviour
             transform.position = generalAttributes.xrPrevPos[objectIndex].position;
             transform.rotation = generalAttributes.xrPrevPos[objectIndex].rotation;
         }
+
+        Debug.Log($"Initial Position for {gameObject.name}: {transform.position}");
+        Debug.Log($"Initial Velocity for {gameObject.name}: {rb.velocity}");
     }
 
     public void SnapToSocket()
     {
-        //StopAnyCoroutines(); // Stop any existing coroutines
-        //
-        //moveCoroutine = StartCoroutine(MoveToPrev());
-        //if (rotateOnReturn)
-        //{   
-        //    rotateCoroutine = StartCoroutine(RotateToPrev());
-        //}
+        StopAnyCoroutines(); // Stop any existing coroutines
+
+        moveCoroutine = StartCoroutine(MoveToPrev());
+        if (rotateOnReturn)
+        {
+            rotateCoroutine = StartCoroutine(RotateToPrev());
+        }
     }
 
     public void StopAnyCoroutines()

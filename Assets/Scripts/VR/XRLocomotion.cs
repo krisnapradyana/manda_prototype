@@ -6,7 +6,7 @@ public class XRLocomotion : MonoBehaviour
 {
     public GeneralAttributes generalAttributes;
 
-    [SerializeField] private float strideDistance, strideDelay;
+    [SerializeField] private float strideDistance, basicStrideDistance, strideDelay;
     [SerializeField] private float rotDegree, rotDelay;
     [SerializeField] private Coroutine moveToFront, moveToBack, rotToRight, rotToLeft;
 
@@ -14,7 +14,7 @@ public class XRLocomotion : MonoBehaviour
 
     private void Awake()
     {
-        //generalAttributes.xrPrevPos = generalAttributes.xrOrigin.transform;
+        basicStrideDistance = strideDistance;
     }
 
     public void MoveForward()
@@ -79,6 +79,8 @@ public class XRLocomotion : MonoBehaviour
 
     private IEnumerator MoveXR(int modifierValue)
     {
+        strideDistance = basicStrideDistance * generalAttributes.xrOrigin.transform.localScale.x;
+
         while (true)
         {
             Vector3 forwardDirection = generalAttributes.centerEyeObject.transform.forward;
@@ -87,6 +89,8 @@ public class XRLocomotion : MonoBehaviour
 
             yield return new WaitForSeconds(strideDelay);
         }
+
+        strideDistance = basicStrideDistance;
     }
 
     private IEnumerator RotateXR(int modifierValue)
