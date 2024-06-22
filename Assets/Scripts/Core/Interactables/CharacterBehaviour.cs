@@ -46,7 +46,7 @@ namespace Gameplay
             }
 
             yield return new WaitForEndOfFrame();
-            EnableSkin(_gameHandler._centralSystem.SelectedCharacterIndex);
+            EnableSkin(_gameHandler.centralSystem.SelectedCharacterIndex);
         }
 
         void FixedUpdate()
@@ -60,9 +60,9 @@ namespace Gameplay
             CharacterSkins[_skinIndex].Animation.SetFloat("Velocity", Mathf.Clamp(AiPath.velocity.magnitude, 0, 1) / _divider);
         }
 
-        public void InitCharacterEvents(GameHandler handler)
+        public void InitCharacterEvents(object handler)
         {
-            _gameHandler = handler;
+            _gameHandler = handler as RootHandler;
             _eventTrigger = GetComponent<EventTrigger>();
 
             _eventTrigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
@@ -107,6 +107,8 @@ namespace Gameplay
         {
             Debug.LogFormat("Set character {0} to {1} ", gameObject.name, state);
             IsSelected = state;
+
+            ///Main handler related, Should rework the mechanism
             _gameHandler.ResetAllVirtualCameraPriority(_gameHandler._worldCameras);
             _gameHandler.AssignCameraPriority(CharacterId, _gameHandler._worldCameras);
         }

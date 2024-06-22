@@ -11,7 +11,7 @@ namespace Gameplay
         [field: SerializeField] public DialogData ObjectDialog { get; private set; }
 
         [Header("Parent Referece")]
-        [HideInInspector] public GameHandler _gameHandler;
+        [HideInInspector] public RootHandler _gameHandler;
         [field: SerializeField] public bool IsInspectable { get; set; }
         [field: SerializeField] public int Level { get; private set; }
         [field: SerializeField] public int MaxLevel { get; private set; }

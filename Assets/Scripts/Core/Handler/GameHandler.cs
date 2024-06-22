@@ -10,13 +10,10 @@ using UnityEngine.SceneManagement;
 
 namespace Gameplay
 {
-    public class GameHandler : MonoBehaviour
+    public class GameHandler : RootHandler
     {
         //Singleton privates
-        [HideInInspector] public GameCentralSystem _centralSystem { get; private set; }
         [HideInInspector] public MainUI _mainUI { get; private set; }
-        [HideInInspector] public VRUI _vrUI { get; private set; }
-        [HideInInspector] public InputListener _inputListener { get; private set; }
 
         [Header("Scene Root object")]
         [SerializeField] GameObject _rootScene;
@@ -37,26 +34,9 @@ namespace Gameplay
         [SerializeField] float _cameraVSpeed;
 
         [Header("Getter Setter Fields")]
-        public CharacterBehaviour[] _players;
-        public CharacterBehaviour[] _npcs;
-        public CameraCore[] _worldCameras;
+
         public CameraCore[] _inspectCameras; 
-        public ObjectBehaviour[] _objects;
-        public CharacterBehaviour ControlledPlayer
-        {
-            get
-            {
-                CharacterBehaviour result = null;
-                foreach (var item in _players)
-                {
-                    if (item.IsSelected)
-                    {
-                        result = item;
-                    }
-                }
-                return result;
-            }
-        }
+
         public Interactables InspectedObject { get => _inspectedObject; }
         public bool IsInspecting { get; private set; }
         public CameraCore PriorityCamera { get; private set; }
@@ -70,37 +50,36 @@ namespace Gameplay
 
         private void OnDestroy()
         {
-          
+ 
         }
 
         private void Awake()
-        {            
-            Debug.Log("Starting handler");
-            _centralSystem = FindObjectOfType<GameCentralSystem>();
+        {
+            base.Awake();
+            centralSystem = FindObjectOfType<GameCentralSystem>();
             _mainUI = FindObjectOfType<MainUI>();
-            _inputListener = FindObjectOfType<InputListener>();
+            inputListener = FindObjectOfType<InputListener>();
         }
 
         private void Start()
         {
-            _centralSystem = FindObjectOfType<GameCentralSystem>();
+            centralSystem = FindObjectOfType<GameCentralSystem>();
             _mainUI = FindObjectOfType<MainUI>();
-            _inputListener = FindObjectOfType<InputListener>();
-            _vrUI = FindObjectOfType<VRUI>();
+            inputListener = FindObjectOfType<InputListener>();
 
-            _inputListener.InitGameHandler(this);
+            inputListener.InitGameHandler(this);
             InitObjects();
             _uiControl.SetPlayerUI();
-            if (_centralSystem == null)
+            if (centralSystem == null)
             {
                 InitEvents();//0);
             }
             else
             {
-                InitEvents();//_centralSystem.SelectedCharacterIndex);
+                InitEvents();//centralSystem.SelectedCharacterIndex);
             }
 
-            _centralSystem.SetGameState(GameState.gameplay);
+            centralSystem.SetGameState(GameState.gameplay);
             _inspectExit.InitTrigger(_thirdPersonCharacter.gameObject.tag, () =>
             {
                 _mainUI.SetupPopupUI("Exit", "Do you want to return to world?", yesButtonEnabled: true, noButtonEnabled: true);
@@ -108,8 +87,8 @@ namespace Gameplay
                 {
                     ExitVisitRoom();
                 },
-                    noAction: () => _centralSystem.SetGameState(GameState.inspect));
-                StartCoroutine(_mainUI.ShowPopupIE(() => _centralSystem.SetGameState(GameState.none)));
+                    noAction: () => centralSystem.SetGameState(GameState.inspect));
+                StartCoroutine(_mainUI.ShowPopupIE(() => centralSystem.SetGameState(GameState.none)));
 
                 //_mainUI.transform.position = _thirdPersonCharacter.transform.position;
                 //_mainUI.SetupPopupUI("Exit", "Do you want to return to world?", yesButtonEnabled: true, noButtonEnabled: true);
@@ -117,13 +96,13 @@ namespace Gameplay
                 //{
                 //    ExitVisitRoom();
                 //},
-                //    noAction: () => _centralSystem.SetGameState(GameState.inspect));
-                //StartCoroutine(_mainUI.ShowPopupIE(() => _centralSystem.SetGameState(GameState.none)));
+                //    noAction: () => centralSystem.SetGameState(GameState.inspect));
+                //StartCoroutine(_mainUI.ShowPopupIE(() => centralSystem.SetGameState(GameState.none)));
             });
 
             _thirdPersonCamera.m_XAxis.m_MaxSpeed = _cameraHSpeed;
             _thirdPersonCamera.m_YAxis.m_MaxSpeed = _cameraVSpeed;
-            _inputListener.OnToggledCursor += ToggleCameraMovement;
+            inputListener.OnToggledCursor += ToggleCameraMovement;
         }
 
         private void Update()
@@ -240,7 +219,7 @@ namespace Gameplay
                     //Events for generic Mode
                     //if (item.IsNPC)
                     //{
-                    //    if (_mainUI._centralSystem.IsCharacterSpeak)
+                    //    if (_mainUI.centralSystem.IsCharacterSpeak)
                     //    {
                     //        Debug.Log("character currently speaking");
                     //        return;
@@ -268,26 +247,6 @@ namespace Gameplay
             }
         }
 
-        public void AssignCameraPriority(int comparedId, CameraCore[] collectionList)//, bool saveLastId = true)
-        {
-            foreach (var item in collectionList)
-            {
-                if (item.CameraId == comparedId)
-                {
-                    item.SetCameraPriority(1);
-                    PriorityCamera = item;
-                }
-            }
-        }
-
-        public void ResetAllVirtualCameraPriority(CameraCore[] collectionList)
-        {
-            foreach (var item in collectionList)
-            {
-                item.SetCameraPriority(0);
-            }
-        }
-
         void MatchCameraRotation(CameraCore[] collectionList)
         {
             if (collectionList.Length < 1)
@@ -308,12 +267,12 @@ namespace Gameplay
             {
                 if (interactables.GetComponent<ObjectBehaviour>().isVisitable)
                 {
-                    _centralSystem.SetSelectedPlatformId(interactables.GetComponent<ObjectBehaviour>().PlatformData.platformID);
+                    centralSystem.SetSelectedPlatformId(interactables.GetComponent<ObjectBehaviour>().PlatformData.platformID);
                     _mainUI.FadeScreen(true, .5f, () => _mainUI.ToggleBlockScreen(true), () =>
                     {
                         _rootScene.SetActive(false);
                         _indoorScene.SetActive(true);
-                        _centralSystem.SetGameState(GameState.none);
+                        centralSystem.SetGameState(GameState.none);
                         _mainUI.FadeScreen(false, .5f);
                         ResetAllVirtualCameraPriority(_inspectCameras);
                         AssignCameraPriority(0, _inspectCameras);
@@ -321,7 +280,7 @@ namespace Gameplay
                         foreach (var item in _roomProps)
                         {
                             item.gameObject.SetActive(false);
-                            if (_centralSystem.SelectedPlatformID == item.roomId)
+                            if (centralSystem.SelectedPlatformID == item.roomId)
                             {
                                 item.gameObject.SetActive(true);
                             }
@@ -329,7 +288,7 @@ namespace Gameplay
 
                         _mainUI.ShowDialogWindow(_lookTarget.name, _lookTarget.transform, _lookTarget._cameraTransform.position, _lookTarget.ObjectDialog, yesAct: () =>
                         {
-                            _centralSystem.SetGameState(GameState.inspect);
+                            centralSystem.SetGameState(GameState.inspect);
                             ResetAllVirtualCameraPriority(_inspectCameras);
                             AssignCameraPriority(1, _inspectCameras);
                             Cursor.lockState = CursorLockMode.Locked;
@@ -337,7 +296,7 @@ namespace Gameplay
 
                         //_mainUI.SetupPopupUI("Visit Platform", "Hello... Do you want to play inside my Room?", yesButtonEnabled: true, noButtonEnabled: true).SetupUIEvents(yesAction: () =>
                         // {
-                        //     _centralSystem.SetGameState(GameState.inspect);
+                        //     centralSystem.SetGameState(GameState.inspect);
                         //     ResetAllVirtualCameraPriority(_inspectCameras);
                         //     AssignCameraPriority(1, _inspectCameras);
                         // }, noAction: () => ExitVisitRoom());
@@ -346,7 +305,7 @@ namespace Gameplay
                 }
                 else
                 {
-                    _mainUI.ShowDialogWindow(_centralSystem.PlayerName, ControlledPlayer.transform, ControlledPlayer._cameraTransform.position, ControlledPlayer.ObjectDialog, allowPortait: false);
+                    _mainUI.ShowDialogWindow(centralSystem.PlayerName, ControlledPlayer.transform, ControlledPlayer._cameraTransform.position, ControlledPlayer.ObjectDialog, allowPortait: false);
                 }
             });
         }
@@ -357,7 +316,7 @@ namespace Gameplay
             {
                 _rootScene.SetActive(true);
                 _indoorScene.SetActive(false);
-                _centralSystem.SetGameState(GameState.gameplay);
+                centralSystem.SetGameState(GameState.gameplay);
                 _mainUI.FadeScreen(false, .5f);
                 _mainUI.ToggleBlockScreen(false);
                 _thirdPersonCharacter.transform.position = _inspectStartPos.position;

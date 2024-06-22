@@ -22,17 +22,17 @@ public class ThirdPersonPlayerControl : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _gameHandler = FindObjectOfType<GameHandler>();
-        EnableSkin(_gameHandler._centralSystem.SelectedCharacterIndex);
+        EnableSkin(_gameHandler.centralSystem.SelectedCharacterIndex);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (_gameHandler._centralSystem.CurrentState != GameState.inspect)
+        if (_gameHandler.centralSystem.CurrentState != GameState.inspect)
         {
             return;
         }
-        ControlInput(_gameHandler._inputListener._moveComposite.x, _gameHandler._inputListener._moveComposite.y);
+        ControlInput(_gameHandler.inputListener._moveComposite.x, _gameHandler.inputListener._moveComposite.y);
     }
 
     private void FixedUpdate()
@@ -68,7 +68,7 @@ public class ThirdPersonPlayerControl : MonoBehaviour
 
     void AnimateCharacter()
     {
-        CharacterSkins[_gameHandler._centralSystem.SelectedCharacterIndex].Animation.SetFloat("Velocity", Mathf.Clamp01( _rb.velocity.magnitude));
+        CharacterSkins[_gameHandler.centralSystem.SelectedCharacterIndex].Animation.SetFloat("Velocity", Mathf.Clamp01( _rb.velocity.magnitude));
     }
 
     private void EnableSkin(int skinIndex)

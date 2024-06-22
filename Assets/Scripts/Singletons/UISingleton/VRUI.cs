@@ -33,12 +33,12 @@ public class VRUI : MonoBehaviour
         gameObject.transform.LookAt(Head.transform);
     }
 
-    internal void SetCurrentSelectedObject(GameObject gameObject)
+    public void SetCurrentSelectedObject(GameObject gameObject)
     {
         throw new NotImplementedException();
     }
 
-    internal void ShowDialogWindow(string speaker, Transform transform, Vector3 position, DialogData dialogData)
+    public void ShowDialogWindow(string speaker, Transform transform, Vector3 position, DialogData dialogData)
     {
         _dialogSpeakerText.text = speaker;
         StartCoroutine(StartPerTextDialogIE(dialogData, 0.05f));

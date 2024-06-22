@@ -115,7 +115,7 @@ namespace Singletons
             if (!context.performed)
                 return;
 
-            if (_gameHandler._centralSystem.CurrentState == GameState.gameplay && _gameHandler.ControlledPlayer != null)
+            if (_gameHandler.centralSystem.CurrentState == GameState.gameplay && _gameHandler.ControlledPlayer != null)
             {
                 MoveByMouse(AdditionalModule.GetWorldPoint());
             }
