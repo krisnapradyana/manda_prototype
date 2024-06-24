@@ -38,7 +38,6 @@ namespace Gameplay
         public CameraCore[] _inspectCameras; 
 
         public Interactables InspectedObject { get => _inspectedObject; }
-        public bool IsInspecting { get; private set; }
         public CameraCore PriorityCamera { get; private set; }
 
         [Header("Inspect Attributes")]
@@ -56,16 +55,12 @@ namespace Gameplay
         private void Awake()
         {
             base.Awake();
-            centralSystem = FindObjectOfType<GameCentralSystem>();
             _mainUI = FindObjectOfType<MainUI>();
-            inputListener = FindObjectOfType<InputListener>();
         }
 
         private void Start()
         {
-            centralSystem = FindObjectOfType<GameCentralSystem>();
             _mainUI = FindObjectOfType<MainUI>();
-            inputListener = FindObjectOfType<InputListener>();
 
             inputListener.InitGameHandler(this);
             InitObjects();
@@ -203,34 +198,34 @@ namespace Gameplay
                 item.onInteractObject += (info) =>
                 {
                     //Event for VRMode
-                    if (item.IsVRCharacter)
-                    {
-                        if (_vrUI._centralSystem.IsCharacterSpeak)
-                        {
-                            Debug.Log("character currently speaking");
-                            return;
-                        }
-                        //_vrUI.SetCurrentSelectedObject(item.gameObject);
-                        _vrUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData());
-
-                        return;
-                    }
-
-                    //Events for generic Mode
-                    //if (item.IsNPC)
+                    //if (item.IsVRCharacter)
                     //{
-                    //    if (_mainUI.centralSystem.IsCharacterSpeak)
+                    //    if (_vrUI._centralSystem.IsCharacterSpeak)
                     //    {
                     //        Debug.Log("character currently speaking");
                     //        return;
                     //    }
-                    //    _mainUI.SetCurrentSelectedObject(item.gameObject);
-                    //    _mainUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData(),
-                    //        () => Debug.Log("Yes Pressed"),
-                    //        () => Debug.Log("No Pressed")
-                    //        );
+                    //    //_vrUI.SetCurrentSelectedObject(item.gameObject);
+                    //    _vrUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData());
+                    //
+                    //    return;
                     //}
-                    //else
+
+                    //Events for generic Mode
+                    if (item.IsNPC)
+                    {
+                        if (_mainUI._centralSystem.IsCharacterSpeak)
+                        {
+                            Debug.Log("character currently speaking");
+                            return;
+                        }
+                        _mainUI.SetCurrentSelectedObject(item.gameObject);
+                        _mainUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData(),
+                            () => Debug.Log("Yes Pressed"),
+                            () => Debug.Log("No Pressed")
+                            );
+                    }
+                    else
                     {
                         OnChangedCharacted(); item.SetSelected(true);
                     }

@@ -15,10 +15,9 @@ public class WorldLevelGameHandler : RootHandler
 
     [Header("References")]
     [SerializeField] GameplayUIControl _uiControl;
+    [SerializeField] float rayDistance;
 
-    [Header("Level Objects Properties")]
-    public CharacterBehaviour[] _npcs;
-    public ObjectBehaviour[] _objects;
+    RaycastHit hit;
 
     private void Awake()
     {
@@ -28,13 +27,13 @@ public class WorldLevelGameHandler : RootHandler
     // Start is called before the first frame update
     void Start()
     {
-        
+        InitObjects();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        DrawRayFromCamera();
     }
 
     void InitObjects()
@@ -70,4 +69,44 @@ public class WorldLevelGameHandler : RootHandler
                 }
             };
         }
+    }
+
+    void DrawRayFromCamera()
+    {
+        // Create a ray from the camera's position and forward direction
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+      
+        // Perform the raycast
+        if (Physics.Raycast(ray, out hit, rayDistance))
+        {
+            // Log the name of the object hit
+            Debug.Log("Hit object: " + hit.collider.gameObject.name);
+
+            // Optional: draw a line in the editor to visualize the raycast
+            Debug.DrawLine(ray.origin, hit.point, Color.red, 0.001f);
+            GetCollidedObject(hit);
+        }
+        else
+        {
+            // Draw the ray in the Scene view for debugging purposes
+            Debug.DrawRay(ray.origin, ray.direction * rayDistance, Color.green);
+        }
+    }
+
+    void GetCollidedObject(RaycastHit hit)
+    {
+        if (hit.collider.gameObject.GetComponent<Interactables>())
+        {
+            Debug.Log("YEZZ");
+        }
+        else
+        {
+            Debug.Log("NOOO");
+        }
+    }
+
+    void ShowUIOnObjects()
+    {
+
+    }
 }

@@ -8,6 +8,7 @@ namespace Gameplay
 { 
     public class RootHandler : MonoBehaviour
     {
+        [Header("Root Handler Parameters")]
         //Publics
         [HideInInspector] public GameCentralSystem centralSystem;
         [HideInInspector] public InputListener inputListener;
@@ -46,7 +47,7 @@ namespace Gameplay
         }
 
 
-        public void AssignCameraPriority(int comparedId, CameraCore[] collectionList, out CameraCore priorCam)//, bool saveLastId = true)
+        public void AssignCameraPriority(int comparedId, CameraCore[] collectionList)//, bool saveLastId = true)
         {
             CameraCore selectedCam = null;
             foreach (var item in collectionList)
@@ -55,9 +56,9 @@ namespace Gameplay
                 {
                     item.SetCameraPriority(1);
                     selectedCam = item;
+                    //Think about this later
                 }
             }
-            priorCam = selectedCam;
         }
 
         public void ResetAllVirtualCameraPriority(CameraCore[] collectionList)

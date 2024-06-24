@@ -28,6 +28,7 @@ namespace Gameplay
 
         [Header("References")]
         [SerializeField] EventTrigger _eventTrigger;
+        public DoOnce doOnce = new DoOnce();
 
         private int _skinIndex;
         private float _targetDistance;
@@ -64,6 +65,8 @@ namespace Gameplay
         {
             _gameHandler = handler as RootHandler;
             _eventTrigger = GetComponent<EventTrigger>();
+
+            doOnce.SetDoOnceAction(() => onHoverObject?.Invoke(this));
 
             _eventTrigger.AddEvent(EventTriggerType.PointerEnter, (data) =>
             {
@@ -110,7 +113,7 @@ namespace Gameplay
 
             ///Main handler related, Should rework the mechanism
             _gameHandler.ResetAllVirtualCameraPriority(_gameHandler._worldCameras);
-            _gameHandler.AssignCameraPriority(CharacterId, _gameHandler._worldCameras);
+            _gameHandler.AssignCameraPriority(CharacterId, _gameHandler._worldCameras); //Curreently do nothing
         }
 
         public void MoveCharacter(Vector3 targetPosition)

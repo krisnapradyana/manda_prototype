@@ -109,4 +109,9 @@ public class VRUI : MonoBehaviour
             }
         }
     }
+
+    void ShowUIHover()
+    {
+
+    }
 }
