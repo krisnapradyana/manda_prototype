@@ -14,7 +14,7 @@ public class WorldLevelGameHandler : RootHandler
     [SerializeField] GameObject _rootScene;
 
     [Header("References")]
-    [SerializeField] GameplayUIControl _uiControl;
+    [SerializeField] VRUIControl _uiControl;
     [SerializeField] float rayDistance;
 
     RaycastHit hit;
@@ -43,31 +43,31 @@ public class WorldLevelGameHandler : RootHandler
             item.InitCharacterEvents(this);
             item.onHoverObject += (info) =>
             {
-                if (IsInspecting)
-                {
-                    _uiControl.ToggleHoverInfo();
-                    return;
-                }
-                _uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.GetComponent<CharacterBehaviour>(), _uiControl.MousePivot);
+                //if (IsInspecting)
+                //{
+                //    _uiControl.ToggleHoverInfo();
+                //    return;
+                //}
+                //_uiControl.ToggleHoverInfo(info.gameObject).ToggleMouse(info.GetComponent<CharacterBehaviour>(), _uiControl.MousePivot);
 
             };
-            item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
-            item.onInteractObject += (info) =>
-            {
-                //Event for VRMode
-                if (item.IsVRCharacter)
-                {
-                    if (_vrUI._centralSystem.IsCharacterSpeak)
-                    {
-                        Debug.Log("character currently speaking");
-                        return;
-                    }
-                    //_vrUI.SetCurrentSelectedObject(item.gameObject);
-                    _vrUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData());
-
-                    return;
-                }
-            };
+            //item.onExitHoverObject += (info) => _uiControl.ToggleHoverInfo();
+            //item.onInteractObject += (info) =>
+            //{
+            //    //Event for VRMode
+            //    if (item.IsVRCharacter)
+            //    {
+            //        if (_vrUI._centralSystem.IsCharacterSpeak)
+            //        {
+            //            Debug.Log("character currently speaking");
+            //            return;
+            //        }
+            //        //_vrUI.SetCurrentSelectedObject(item.gameObject);
+            //        _vrUI.ShowDialogWindow(item.name, item.transform, item._cameraTransform.position, item.GetDialogData());
+            //
+            //        return;
+            //    }
+            //};
         }
     }
 
@@ -84,7 +84,7 @@ public class WorldLevelGameHandler : RootHandler
 
             // Optional: draw a line in the editor to visualize the raycast
             Debug.DrawLine(ray.origin, hit.point, Color.red, 0.001f);
-            GetCollidedObject(hit);
+            GetCollidedObject();
         }
         else
         {
@@ -93,16 +93,28 @@ public class WorldLevelGameHandler : RootHandler
         }
     }
 
-    void GetCollidedObject(RaycastHit hit)
+    void GetCollidedObject()
     {
         if (hit.collider.gameObject.GetComponent<Interactables>())
         {
             Debug.Log("YEZZ");
+            if (hit.collider.gameObject.GetComponent<CharacterBehaviour>())
+            {
+                hit.collider.gameObject.GetComponent<CharacterBehaviour>().doOnce.Execute();
+            }
+
+            if (hit.collider.gameObject.GetComponent<ObjectBehaviour>())
+            {
+                hit.collider.gameObject.GetComponent<ObjectBehaviour>().doOnce.Execute();
+            }
         }
         else
         {
+            hit.collider.gameObject.GetComponent<CharacterBehaviour>().doOnce.Reset();
             Debug.Log("NOOO");
+            return;
         }
+
     }
 
     void ShowUIOnObjects()

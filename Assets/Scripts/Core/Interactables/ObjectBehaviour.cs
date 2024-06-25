@@ -16,11 +16,16 @@ namespace Gameplay
         [field: SerializeField] public PlatformDataScriptables PlatformData { get; private set; }
         [field: SerializeField] public EventTrigger Trigger { get ; set; }
         [field: SerializeField] public bool isVisitable { get; private set; }
+
+        public DoOnce doOnce = new DoOnce();
+
         // Start is called before the first frame update
         void Start()
         {
             _gameHandler = FindObjectOfType<GameHandler>();
             Trigger = gameObject.GetComponent<EventTrigger>();
+
+            doOnce.SetDoOnceAction(() => onHoverObject?.Invoke(this));
 
             SetMaxLevel(platformObjects.Length - 1);
 

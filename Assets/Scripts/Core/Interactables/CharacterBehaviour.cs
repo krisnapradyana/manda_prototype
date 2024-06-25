@@ -47,7 +47,7 @@ namespace Gameplay
             }
 
             yield return new WaitForEndOfFrame();
-            EnableSkin(_gameHandler.centralSystem.SelectedCharacterIndex);
+            //EnableSkin(_gameHandler.centralSystem.SelectedCharacterIndex);
         }
 
         void FixedUpdate()
