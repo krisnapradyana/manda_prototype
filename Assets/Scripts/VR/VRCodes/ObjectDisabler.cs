@@ -6,7 +6,7 @@ public class ObjectDisabler : MonoBehaviour
 {
     [Header("Disabler")]
     [SerializeField] GameObject[] objectToDisableForEditor;
-    [SerializeField] GameObject[] objectToDisableForDeployNEditor;
+    [SerializeField] GameObject[] objectToDisableForBuildOnly;
 
     void Awake()
     {
@@ -32,7 +32,7 @@ public class ObjectDisabler : MonoBehaviour
 
     void DisableOndeloy()
     {
-        foreach (GameObject target in objectToDisableForDeployNEditor)
+        foreach (GameObject target in objectToDisableForBuildOnly)
         {
             target.SetActive(false);
         }

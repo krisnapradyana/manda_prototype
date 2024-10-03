@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,32 +7,42 @@ using UnityEngine.Events;
 public class SelectCharacter : MonoBehaviour
 {
     //[SerializeField] private UnityEvent onSelectEvent;
-    [SerializeField] private GameObject[] selectableCharacter;
-    [SerializeField] private GameObject[] pokeablePanel;
-    [SerializeField] private GameObject[] confirmationPanel;
+    [SerializeField] private GameObject confirmationPanel;
+    [SerializeField] private GameObject[] selectableCharacters;
+    public int selectedChar = -1;
 
-    //public void InvokeEvent()
-    //{
-    //    onSelectEvent.Invoke();
-    //}
+    private void Start()
+    {
+        Debug.LogWarning($"sc: {selectedChar}, opt: {selectableCharacters.Length}");
+    }
 
     public void OnSelectCharacter(int targetID)
     {
-        for (int i = 0; i < selectableCharacter.Length; i++)
+        for (int i = 0; i < selectableCharacters.Length; i++)
         {
-            if (i == targetID)
-            {
-                selectableCharacter[i].SetActive(true);
-                pokeablePanel[i].SetActive(false);
-                confirmationPanel[i].SetActive(true);
-            }
+            Debug.Log(i);
+            selectableCharacters[i].SetActive(false);
+        }
 
-            else
-            {
-                selectableCharacter[i].SetActive(false);
-                pokeablePanel[i].SetActive(true);
-                confirmationPanel[i].SetActive(false);
-            }
+        selectedChar = targetID;
+        confirmationPanel.SetActive(true);
+    }
+
+    public void OnConfirmSelection()
+    {
+        if (selectedChar != null && selectedChar >= 0 && selectedChar <= selectableCharacters.Length)
+        {
+            Debug.Log($"selected = {selectedChar}");
+        }
+    }
+
+    public void OnBackSelection()
+    {
+        confirmationPanel.SetActive(false);
+
+        for (int i = 0; i < selectableCharacters.Length; i++)
+        {
+            selectableCharacters[i].SetActive(true);
         }
     }
 }
