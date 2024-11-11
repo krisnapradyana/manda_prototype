@@ -17,8 +17,8 @@ namespace ObjectGeneration
         [field: SerializeField] private int numberSpreadedObject { get; set; }
         [field: SerializeField] private Vector2 startSpreadedObjectPos { get; set; }
         [field: SerializeField] private Vector2 endSpreadedObjectPos { get; set; }
-        [field: SerializeField, Range(1, 100)] int spreadGapMin { get; set; }
-        [field: SerializeField, Range(1, 100)] int spreadGapMax { get; set; }
+        //[field: SerializeField, Range(1, 100)] int spreadGapMin { get; set; }
+        //[field: SerializeField, Range(1, 100)] int spreadGapMax { get; set; }
 
         private void OnEnable()
         {
@@ -35,6 +35,8 @@ namespace ObjectGeneration
         {
             SetupObjectGeneration += GenerateObjectPositions(() => { Debug.Log("Object Generation has completed"); });
             Debug.Log("Started Object Generator0");
+
+            SetupObjectGeneration();
         }
 
         void Initialize()
@@ -51,17 +53,21 @@ namespace ObjectGeneration
         {
             for (int i = (int)startSpreadedObjectPos.y; i < (int)endSpreadedObjectPos.y; i++)
             {
-                for (int j = (int)startSpreadedObjectPos.x + Random.Range(spreadGapMin,spreadGapMax); j < (int)endSpreadedObjectPos.x; j++)
+                for (int j = (int)startSpreadedObjectPos.x; j < (int)endSpreadedObjectPos.x; j++)
                 {
                     if (numberSpreadedObject <= 0)
                     {
                         break;
                     }
-                    var randomSelectedObject = Random.Range(0, spreadedObject.Count);
-                    var instantiatedObject = Instantiate(spreadedObject[randomSelectedObject], position: new Vector3(j, 0, i), rotation: Quaternion.identity);
-                    Debug.LogFormat("{0} has spawned at {1}", instantiatedObject.name, new Vector3(j, 0, i));
-                    Debug.Log(numberSpreadedObject);
-                    numberSpreadedObject--;
+
+                    if (Random.Range(1,64) / 9  % 2 == 0)
+                    {
+                        var randomSelectedObject = Random.Range(0, spreadedObject.Count);
+                        var instantiatedObject = Instantiate(spreadedObject[randomSelectedObject], position: new Vector3(j, 0, i), rotation: Quaternion.identity);
+                        Debug.LogFormat("{0} has spawned at {1}", instantiatedObject.name, new Vector3(j, 0, i));
+                        Debug.Log(numberSpreadedObject);
+                        numberSpreadedObject--;
+                    }          
                 }
             }
 
