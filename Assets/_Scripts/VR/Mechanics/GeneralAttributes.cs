@@ -1,0 +1,91 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GeneralAttributes : MonoBehaviour
+{
+    [Header("Meta Objects")]
+    public GameObject playerRoot;
+    public GameObject xrOrigin;
+    public GameObject centerEyeAnchor, leftEyeAnchor, rightEyeAnchor;
+    public GameObject leftHandAnchor, rightHandAnchor;
+
+    [Header("Additional GameObjects")]
+    //player related additional object
+    public GameObject forwardDir;
+    public GameObject[] playerChar;
+    public GameObject fallThreshold;
+    public GameObject leftWatch, rightWatch;
+
+    [Header("Parameters")]
+    public bool isRightHanded = true;
+    public bool canMove = false;
+    public bool leftHoldingTools, rightHoldingTools;
+    public static float sceneStartTime;
+
+    [Header("Canvas")]
+    //Save Canvas/Interactable Menu Here
+    public GameObject HandPsuedoCanvas;
+    public GameObject BasicMenu;
+
+    [Header("Tools n Drop")]
+    //SaveTools and Prefabs Here
+    public GameObject[] toolsToSpawn;
+
+    [Header("Pose")]
+    //Save Pose Here
+    public GameObject openMenu_Right;
+    public GameObject openMenu_Left;
+    public GameObject closeMenu_Right, closeMenu_Left;
+    public GameObject runGesture_Right, runGesture_Left;
+    private bool leftRunPose, rightRunPose;
+
+    void Awake()
+    {
+        sceneStartTime = Time.time;
+        Debug.Log($"started at: {sceneStartTime}");
+    }
+
+    public static float CurrentTime
+    {
+        get { return Time.time - sceneStartTime; }
+    }
+
+    private void MoveConditionChecker()
+    {
+        if (!leftHoldingTools && !rightHoldingTools && leftRunPose && rightRunPose)
+        {
+            canMove = true;
+        }
+        else
+        {
+            canMove = false;
+        }
+    }
+
+    public void R_GrabChecker(bool value)
+    {
+        rightHoldingTools = value;
+        MoveConditionChecker();
+    }
+
+    public void L_GrabChecker(bool value)
+    {
+        leftHoldingTools = value;
+        MoveConditionChecker();
+    }
+
+    public void R_RunPoseChecker(bool value)
+    {
+        rightRunPose = value;
+        MoveConditionChecker();
+    }
+
+    public void L_RunPoseChecker(bool value)
+    {
+        leftRunPose = value;
+        MoveConditionChecker();
+    }
+}

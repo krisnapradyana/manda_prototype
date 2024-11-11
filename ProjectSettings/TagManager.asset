@@ -6,6 +6,11 @@ TagManager:
   tags:
   - FingerPoke
   - Ground
+  - Player_LeftHand
+  - Player_RightHand
+  - Player_Head
+  - LogTag
+  - RockTag
   layers:
   - Default
   - TransparentFX
@@ -14,11 +19,11 @@ TagManager:
   - Water
   - UI
   - Player
+  - HiddenMesh
   - 
   - 
-  - 
-  - 
-  - 
+  - Character
+  - MirroredCharacter
   - 
   - 
   - 
