@@ -23,19 +23,20 @@ public class Farming_Tools : MonoBehaviour
     private void Awake()
     {
         GameObject targetObject = GameObject.Find("GameManager");
-        //generalAttributes = targetObject.GetComponent<GeneralAttributes>();
-
+        generalAttributes = targetObject.GetComponent<GeneralAttributes>();
     }
 
     private void OnDisable()
     {
         rigidbody.isKinematic = true;
-        //ResetTransform();
     }
 
     private void OnEnable()
     {
-        StartCoroutine(InitializingObject());
+        if (generalAttributes != null)
+        {
+            ResetTransform();
+        }
     }
 
     private void Start()
@@ -51,18 +52,8 @@ public class Farming_Tools : MonoBehaviour
         }
     }     
 
-    IEnumerator InitializingObject()
-    {
-        Debug.Log("Initializing tool manager");
-        yield return new WaitUntil(() => GeneralAttributes.Instance != null);
-        generalAttributes = GeneralAttributes.Instance;
-        ResetTransform();
-    }
-
     private void ResetTransform()
     {
-        Debug.LogWarning("Resetting Transform = " + generalAttributes);
-
         if (generalAttributes == null)
         {
             Debug.LogError("generalAttributes is null");
@@ -125,14 +116,6 @@ public class Farming_Tools : MonoBehaviour
         if (objectData != null)
         {
             objectData.OnHit(toolsStrength); // Pass the objectStrength to the OnHit function
-        }
-    }
-
-    public void ToggleKinematic(bool value)
-    {
-        if (rigidbody.isKinematic != value)
-        {
-            rigidbody.isKinematic = value;
         }
     }
 }

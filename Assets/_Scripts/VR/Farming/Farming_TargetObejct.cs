@@ -6,7 +6,8 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Farming_TargetObejct : MonoBehaviour
 {
-    public Farming_CollectiblesManager collectiblesManager;
+    private GeneralAttributes generalAttributes;
+    private Farming_CollectiblesManager collectiblesManager;
 
     private int objectHitPoint;
     [SerializeField] private int defaultHitPoint = 2, objectStrength = 2;
@@ -27,6 +28,21 @@ public class Farming_TargetObejct : MonoBehaviour
 
     private MeshRenderer meshRenderer;
     private Collider collider;
+
+    private void Awake()
+    {
+        GameObject targetObject = GameObject.Find("GameManager");
+        generalAttributes = targetObject.GetComponent<GeneralAttributes>();
+
+        if (gameObject.tag == "RockTag")
+        {
+            collectiblesManager = generalAttributes.RockPrefabParent.GetComponent<Farming_CollectiblesManager>();
+        }
+        else if (gameObject.tag == "LogTag")
+        {
+            collectiblesManager = generalAttributes.LogPrefabParent.GetComponent<Farming_CollectiblesManager>();
+        }
+    }
 
     void Start()
     {

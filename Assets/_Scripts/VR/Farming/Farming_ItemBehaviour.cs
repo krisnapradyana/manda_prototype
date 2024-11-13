@@ -28,11 +28,13 @@ public class Farming_ItemBehaviour : MonoBehaviour
     private bool shouldMoveToTarget;
     [SerializeField] private float speed = 5;
 
-    private void Start()
+    private void Awake()
     {
         GameObject targetObject = GameObject.Find("GameManager");
         generalAttributes = targetObject.GetComponent<GeneralAttributes>();
-
+    }
+    private void Start()
+    {
         if (generalAttributes.isRightHanded)
         {
             targetGameObject = generalAttributes.leftHandAnchor;
