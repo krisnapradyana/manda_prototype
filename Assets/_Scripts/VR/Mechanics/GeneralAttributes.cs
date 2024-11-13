@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class GeneralAttributes : MonoBehaviour
 {
+    public static GeneralAttributes Instance;
+
     [Header("Meta Objects")]
     public GameObject playerRoot;
     public GameObject xrOrigin;
@@ -42,8 +44,23 @@ public class GeneralAttributes : MonoBehaviour
     public GameObject runGesture_Right, runGesture_Left;
     private bool leftRunPose, rightRunPose;
 
+    //[Header("Environment Objects")]
+    //public GameObject StartPoint;
+
     void Awake()
     {
+        Debug.Log("Initializing general attribute");
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(this);
+            return;
+        }
+
         sceneStartTime = Time.time;
         Debug.Log($"started at: {sceneStartTime}");
     }
@@ -55,7 +72,7 @@ public class GeneralAttributes : MonoBehaviour
 
     private void MoveConditionChecker()
     {
-        if (!leftHoldingTools && !rightHoldingTools && leftRunPose && rightRunPose)
+        if (!leftHoldingTools && !rightHoldingTools && (leftRunPose || rightRunPose))
         {
             canMove = true;
         }
