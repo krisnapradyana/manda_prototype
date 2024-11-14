@@ -44,10 +44,11 @@ public class GeneralAttributes : MonoBehaviour
     public GameObject runGesture_Right, runGesture_Left;
     private bool leftRunPose, rightRunPose;
 
-    [Header("PrefabsParent")]
+    [Header("Prefabs Related")]
     //Add Prefabs Here
-    public GameObject LogPrefabParent;
-    public GameObject RockPrefabParent;
+    public GameObject LogPrefab_Parent;
+    public GameObject RockPrefab_Parent;
+    public Transform MinThreshold, MaxThreshold;
 
     void Awake()
     {

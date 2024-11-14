@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
-using static UnityEngine.GraphicsBuffer;
 
-public class Farming_TargetObejct : MonoBehaviour
+public class Farming_TargetObject : MonoBehaviour
 {
     private GeneralAttributes generalAttributes;
     private Farming_CollectiblesManager collectiblesManager;
@@ -19,15 +20,16 @@ public class Farming_TargetObejct : MonoBehaviour
     private int waitTime, endTime;
     private bool isCoolingdown;
 
+    public bool canBeShown;
     private Vector3 previousPos;
     [SerializeField] private bool shouldRandomizePos;
     private float newPosX, newPosY, newPosZ;
-    [SerializeField] private Transform minThreshold, maxThreshold;
+    private Transform minPosRef, maxPosRef;
 
     public UnityEvent hitSuccessEvent, hitFailureEvent, hitDestroyEvent;
 
-    private MeshRenderer meshRenderer;
-    private Collider collider;
+    private GameObject[] variantVarieties;
+    private GameObject selectedVariant;
 
     private void Awake()
     {
@@ -46,24 +48,18 @@ public class Farming_TargetObejct : MonoBehaviour
 
     void Start()
     {
-        previousPos = transform.position;
+        variantVarieties = GetAllChildObjects(transform);
         objectHitPoint = defaultHitPoint;
-        if (collectiblesManager == null)
+
+        for (int i = 0; i < variantVarieties.Length; i++)
         {
-            Debug.LogError("Farming_CollectiblesManager not found!");
+            variantVarieties[i].SetActive(false);
         }
 
-        meshRenderer = GetComponent<MeshRenderer>();
-        if (meshRenderer == null)
-        {
-            Debug.LogError($"No MeshRenderer at {gameObject.name}!");
-        }
+        minPosRef = generalAttributes.MinThreshold;
+        maxPosRef = generalAttributes.MaxThreshold;
 
-        collider = GetComponent<Collider>();
-        if (collider == null)
-        {
-            Debug.LogError($"No Collider at {gameObject.name}!");
-        }
+        OnSpawn();
     }
 
     void Update()
@@ -102,13 +98,39 @@ public class Farming_TargetObejct : MonoBehaviour
         }
     }
 
+    private void OnSpawn()
+    {
+        if (variantVarieties != null)
+        {
+            int i = UnityEngine.Random.Range(0, variantVarieties.Length);
+            selectedVariant = variantVarieties[i];
+            selectedVariant.SetActive(true);
+
+            RandomizeNewTransfrom();
+
+        }
+        else
+        {
+            Debug.LogWarning("variant is not found, check it again!");
+        }
+    }
+
+    private void RandomizeNewTransfrom()
+    {
+
+    }
+
     public void OnBrustResource()
     {
         previousPos = transform.position;
 
-        ToggleVisibility(false);
-        waitTime = Random.Range(minCooldown, maxCooldown);
-        numberOfLoot = Random.Range(minLoot, maxLoot);
+        for (int i = 0; i < variantVarieties.Length; i++)
+        {
+            variantVarieties[i].SetActive(false);
+        }
+
+        waitTime = UnityEngine.Random.Range(minCooldown, maxCooldown);
+        numberOfLoot = UnityEngine.Random.Range(minLoot, maxLoot);
 
         collectiblesManager.CheckPrefabsAvailability();
         collectiblesManager.FetchFromPool(numberOfLoot, gameObject);
@@ -117,44 +139,28 @@ public class Farming_TargetObejct : MonoBehaviour
         isCoolingdown = true;
     }
 
-    public void OnRespawn()
-    {
-        if (shouldRandomizePos)
-        {
-            if (minThreshold != null && maxThreshold != null)
-            {
-                // Randomize X, Y, Z within the defined threshold
-                newPosX = Random.Range(minThreshold.position.x, maxThreshold.position.x);
-                newPosY = Random.Range(minThreshold.position.y, maxThreshold.position.y);
-                newPosZ = Random.Range(minThreshold.position.z, maxThreshold.position.z);
-
-                // Set the new position
-                transform.position = new Vector3(newPosX, newPosY, newPosZ);
-            }
-        }
-        else
-        {
-            transform.position = previousPos;
-        }
-
-        objectHitPoint = defaultHitPoint;
-        ToggleVisibility(true);
-    }
-
-
     void OnCooldown()
     {
         if (GeneralAttributes.CurrentTime >= endTime)
         {
             isCoolingdown = false;
 
-            OnRespawn();
+            OnSpawn();
         }
     }
 
-    void ToggleVisibility(bool value)
+    GameObject[] GetAllChildObjects(Transform parent)
     {
-        meshRenderer.enabled = value;
-        collider.enabled = value;
+        List<GameObject> childrenList = new List<GameObject>();
+
+        foreach (Transform child in parent)
+        {
+            childrenList.Add(child.gameObject);
+
+            // Recursively add nested children
+            childrenList.AddRange(GetAllChildObjects(child));
+        }
+
+        return childrenList.ToArray();
     }
 }
