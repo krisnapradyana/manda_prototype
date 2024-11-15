@@ -11,6 +11,8 @@ TagManager:
   - Player_Head
   - LogTag
   - RockTag
+  - LogTool
+  - RockTool
   layers:
   - Default
   - TransparentFX

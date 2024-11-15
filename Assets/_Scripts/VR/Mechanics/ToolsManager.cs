@@ -18,15 +18,17 @@ public class ToolsManager : MonoBehaviour
 
     //[SerializeField] private KeyCode keyCode;
 
+    private void Awake()
+    {
+        GameObject targetObject = GameObject.Find("GameManager");
+        generalAttributes = targetObject.GetComponent<GeneralAttributes>();     
+    }
 
     private void Start()
     {
-        GameObject targetObject = GameObject.Find("GameManager");
-        generalAttributes = targetObject.GetComponent<GeneralAttributes>();
-
-        foreach (var tool in generalAttributes.toolsToSpawn)
+        for (int i = 0; i < generalAttributes.toolsOption.Length; i++)
         {
-            tool.SetActive(false);
+            generalAttributes.toolsOption[i].toolToSpawn.SetActive(false);
         }
 
         if (upperPoint == null)
@@ -68,38 +70,28 @@ public class ToolsManager : MonoBehaviour
         }
     }
 
-    public void ActivateTools(int spawnID)
+    public void ActivateTools(int index)
     {
-        // Check for valid spawnID and ensure movement isn't already in progress
-        if (spawnID < 0 || spawnID >= generalAttributes.toolsToSpawn.Length || shouldMove)
-        {
-            Debug.LogError("There's no tool at that ID, or tool movement is already in progress.");
-            return;
-        }
+        Debug.LogWarning($"Trying to activate tool at index {index}");
 
-        // Check if the selected tool is inactive and exists in the array
-        if (generalAttributes.toolsToSpawn[spawnID] != null && !generalAttributes.toolsToSpawn[spawnID].activeSelf)
+        if (index >= 0 && index < generalAttributes.toolsOption.Length)
         {
-            selectedTool = generalAttributes.toolsToSpawn[spawnID];
-
-            // Loop through tools and toggle the selected tool on, others off
-            for (int i = 0; i < generalAttributes.toolsToSpawn.Length; i++)
+            Debug.LogWarning($"Tool Option Found: {generalAttributes.toolsOption[index]}");
+            if (generalAttributes.toolsOption[index].toolToSpawn != null)
             {
-                if (i == spawnID)
-                {
-                    shouldMove = true;
-                    selectedTool.transform.position = upperPoint.position;
-                    selectedTool.SetActive(true);
-                }
-                else if (generalAttributes.toolsToSpawn[i] != null)
-                {
-                    generalAttributes.toolsToSpawn[i].SetActive(false);
-                    generalAttributes.toolsToSpawn[i].transform.localPosition = Vector3.zero;
-                    generalAttributes.toolsToSpawn[i].transform.localRotation = Quaternion.Euler(0, -90, 90);
-                }
+                Debug.LogWarning($"Spawning tool: {generalAttributes.toolsOption[index].toolToSpawn.name}");
+            }
+            else
+            {
+                Debug.LogError($"Tool to spawn at index {index} is null.");
             }
         }
+        else
+        {
+            Debug.LogError($"Index {index} is out of bounds. Available range: 0 - {generalAttributes.toolsOption.Length - 1}");
+        }
     }
+
 
 
     private IEnumerator MoveToTargetCoroutine(GameObject tool, Vector3 target, float speed)

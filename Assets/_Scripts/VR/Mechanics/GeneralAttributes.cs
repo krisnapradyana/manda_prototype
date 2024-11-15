@@ -4,6 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable] // This attribute makes ToolOption visible in the Unity Inspector
+public class ToolOption
+{
+    public GameObject toolToSpawn;
+    public string targetTag;
+    public int toolStrength;
+    public float waitTime;
+}
+
 public class GeneralAttributes : MonoBehaviour
 {
     public static GeneralAttributes Instance;
@@ -33,8 +42,8 @@ public class GeneralAttributes : MonoBehaviour
     public GameObject BasicMenu;
 
     [Header("Tools n Drop")]
-    //SaveTools and Prefabs Here
-    public GameObject[] toolsToSpawn;
+    public ToolOption[] toolsOption;
+    //public GameObject[] toolsToSpawn;
 
     [Header("Pose")]
     //Save Pose Here
