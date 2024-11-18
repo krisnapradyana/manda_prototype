@@ -7,43 +7,48 @@ using UnityEngine.Events;
 
 public class Farming_TargetObject : MonoBehaviour
 {
+    [Header("General Settings")]
     private GeneralAttributes generalAttributes;
-    private Farming_CollectiblesManager collectiblesManager;
+    [SerializeField] private Farming_CollectiblesManager collectiblesManager;
 
+    [Header("Object Attributes")]
     private int objectHitPoint;
     [SerializeField] private int defaultHitPoint = 2, objectStrength = 2;
 
-    [SerializeField] private int minLoot, maxLoot;
+    [Header("Loot Settings")]
     private int numberOfLoot;
+    [SerializeField] private int minLoot, maxLoot;
 
+    [Header("Cooldown Settings")]
+    private bool isCoolingdown;
     [SerializeField] private int minCooldown, maxCooldown;
     private int waitTime, endTime;
-    private bool isCoolingdown;
 
-    public bool canBeShown;
-    private Vector3 previousPos;
+    [Header("Randomize NewTransform")]
+    [SerializeField] private bool shouldRandomizeTransform = false;
+    [Space(8)]
     [SerializeField] private bool shouldRandomizePos;
-    private float newPosX, newPosY, newPosZ;
     private Transform minPosRef, maxPosRef;
+    [Space(6)]
+    [SerializeField] private bool shouldRandomizeSize;
+    [SerializeField] private float minSize = 0.8f, maxSize = 2.2f;
+    [Space(6)]
+    [SerializeField] private bool shouldRandomizeRotation;
+    [SerializeField] private float minYRotation = 0f, maxYRotation = 359f;
 
+    [Header("Events")]
     public UnityEvent hitSuccessEvent, hitFailureEvent, hitDestroyEvent;
 
-    private GameObject[] variantVarieties;
-    private GameObject selectedVariant;
+    [Header("Variants")]
+    [SerializeField] private GameObject[] variantVarieties;
+    [SerializeField] private GameObject selectedVariant;
+
+    private Vector3 previousPos;
 
     private void Awake()
     {
         GameObject targetObject = GameObject.Find("GameManager");
         generalAttributes = targetObject.GetComponent<GeneralAttributes>();
-
-        if (gameObject.tag == "RockTag")
-        {
-            collectiblesManager = generalAttributes.RockPrefab_Parent.GetComponent<Farming_CollectiblesManager>();
-        }
-        else if (gameObject.tag == "LogTag")
-        {
-            collectiblesManager = generalAttributes.LogPrefab_Parent.GetComponent<Farming_CollectiblesManager>();
-        }
     }
 
     void Start()
@@ -56,10 +61,12 @@ public class Farming_TargetObject : MonoBehaviour
             variantVarieties[i].SetActive(false);
         }
 
-        minPosRef = generalAttributes.MinThreshold;
-        maxPosRef = generalAttributes.MaxThreshold;
+        minPosRef = generalAttributes.minThreshold;
+        maxPosRef = generalAttributes.maxThreshold;
 
         OnSpawn();
+
+        Debug.Log($"Current time: {GeneralAttributes.CurrentTime}");
     }
 
     void Update()
@@ -72,9 +79,11 @@ public class Farming_TargetObject : MonoBehaviour
 
     public void OnHit(int hitterStrength)
     {
+        Debug.Log($"Transported HS: {hitterStrength}");
         if (hitterStrength >= objectStrength && objectHitPoint > 0)
         {
             objectHitPoint--;
+            Debug.Log("Invoked");
 
             if (objectHitPoint > 0)
             {
@@ -86,7 +95,6 @@ public class Farming_TargetObject : MonoBehaviour
                 hitDestroyEvent.Invoke();
 
                 OnBrustResource();
-
             }
         }
 
@@ -104,10 +112,26 @@ public class Farming_TargetObject : MonoBehaviour
         {
             int i = UnityEngine.Random.Range(0, variantVarieties.Length);
             selectedVariant = variantVarieties[i];
+
+            objectHitPoint = defaultHitPoint;
+
+            if (shouldRandomizeTransform)
+            {
+                if (shouldRandomizeRotation)
+                {
+                    OnRotate();
+                }
+                if (shouldRandomizeSize)
+                {
+                    OnResize();
+                }
+                if (shouldRandomizePos && minPosRef != null && maxPosRef != null)
+                {
+                    OnReposition();
+                }
+            }
+
             selectedVariant.SetActive(true);
-
-            RandomizeNewTransfrom();
-
         }
         else
         {
@@ -115,9 +139,24 @@ public class Farming_TargetObject : MonoBehaviour
         }
     }
 
-    private void RandomizeNewTransfrom()
+    private void OnRotate()
     {
+        float newYRotation = UnityEngine.Random.Range(minYRotation, maxYRotation);
+        transform.rotation = Quaternion.Euler(0f, newYRotation, 0f);
+    }
 
+    private void OnResize()
+    {
+        float newSize = UnityEngine.Random.Range(minSize, maxSize);
+        transform.localScale = Vector3.one * newSize;
+    }
+
+    private void OnReposition()
+    {
+        float newX = UnityEngine.Random.Range(minPosRef.position.x, maxPosRef.position.x);
+        float newY = UnityEngine.Random.Range(minPosRef.position.y, maxPosRef.position.y);
+        float newZ = UnityEngine.Random.Range(minPosRef.position.z, maxPosRef.position.z);
+        transform.position = new Vector3(newX, newY, newZ);
     }
 
     public void OnBrustResource()

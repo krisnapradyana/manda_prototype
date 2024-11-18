@@ -52,58 +52,37 @@ public class ToolsManager : MonoBehaviour
         }
     }
 
-    private void WatchController(bool moveWatch, bool rotateWatch, bool scaleWatch)
+    public void ActivateTools(int spawnID)
     {
-        if (moveWatch)
+        // Check for valid spawnID and ensure movement isn't already in progress
+        if (spawnID < 0 || spawnID >= generalAttributes.toolsOption.Length || shouldMove)
         {
-            //interactableWatch.transform.position = watchPlacement.transform.position;
+            Debug.LogError("There's no tool at that ID, or tool movement is already in progress.");
+            return;
         }
 
-        if (rotateWatch)
+        // Check if the selected tool is inactive and exists in the array
+        if (generalAttributes.toolsOption[spawnID] != null && generalAttributes.toolsOption[spawnID].toolToSpawn != null && !generalAttributes.toolsOption[spawnID].toolToSpawn.activeSelf)
         {
-            //interactableWatch.transform.rotation = watchPlacement.transform.rotation;
-        }
+            selectedTool = generalAttributes.toolsOption[spawnID].toolToSpawn;
 
-        if (scaleWatch)
-        {
-            //interactableWatch.transform.localScale = watchPlacement.transform.localScale;
-        }
-    }
-
-    public void ActivateTools(int index)
-    {
-        Debug.LogWarning($"Trying to activate tool at index {index}");
-
-        if (index >= 0 && index < generalAttributes.toolsOption.Length)
-        {
-            Debug.LogWarning($"Tool Option Found: {generalAttributes.toolsOption[index]}");
-            if (generalAttributes.toolsOption[index].toolToSpawn != null)
+            // Loop through tools and toggle the selected tool on, others off
+            for (int i = 0; i < generalAttributes.toolsOption.Length; i++)
             {
-                Debug.LogWarning($"Spawning tool: {generalAttributes.toolsOption[index].toolToSpawn.name}");
-            }
-            else
-            {
-                Debug.LogError($"Tool to spawn at index {index} is null.");
+                if (i == spawnID)
+                {
+                    shouldMove = true;
+                    selectedTool.transform.position = upperPoint.position;
+                    selectedTool.SetActive(true);
+                }
+                else if (generalAttributes.toolsOption[i].toolToSpawn != null)
+                {
+                    generalAttributes.toolsOption[i].toolToSpawn.SetActive(false);
+                    generalAttributes.toolsOption[i].toolToSpawn.transform.localPosition = Vector3.zero;
+                    generalAttributes.toolsOption[i].toolToSpawn.transform.localRotation = Quaternion.Euler(0, -90, 90);
+                }
             }
         }
-        else
-        {
-            Debug.LogError($"Index {index} is out of bounds. Available range: 0 - {generalAttributes.toolsOption.Length - 1}");
-        }
-    }
-
-
-
-    private IEnumerator MoveToTargetCoroutine(GameObject tool, Vector3 target, float speed)
-    {
-        //Rigidbody rb = tool.GetComponent<Rigidbody>();
-        while (Vector3.Distance(transform.position, target) > 0.1f)
-        {
-            tool.transform.position = Vector3.MoveTowards(tool.transform.position, target, speed * Time.deltaTime);
-        }
-
-        transform.position = target;
-        yield return null;
     }
 
     private void CheckDistance()

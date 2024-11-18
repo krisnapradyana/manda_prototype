@@ -57,7 +57,7 @@ public class GeneralAttributes : MonoBehaviour
     //Add Prefabs Here
     public GameObject LogPrefab_Parent;
     public GameObject RockPrefab_Parent;
-    public Transform MinThreshold, MaxThreshold;
+    public Transform minThreshold, maxThreshold;
 
     void Awake()
     {
