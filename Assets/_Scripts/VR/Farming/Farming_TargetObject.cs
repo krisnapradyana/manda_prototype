@@ -53,11 +53,12 @@ public class Farming_TargetObject : MonoBehaviour
 
     void Start()
     {
-        variantVarieties = GetAllChildObjects(transform);
+        //variantVarieties = GetAllChildObjects(transform);
         objectHitPoint = defaultHitPoint;
 
         for (int i = 0; i < variantVarieties.Length; i++)
         {
+            Debug.LogWarning($"length is: {variantVarieties.Length}");
             variantVarieties[i].SetActive(false);
         }
 
