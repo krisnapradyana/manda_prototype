@@ -57,7 +57,7 @@ public class ToolsManager : MonoBehaviour
         // Check for valid spawnID and ensure movement isn't already in progress
         if (spawnID < 0 || spawnID >= generalAttributes.toolsOption.Length || shouldMove)
         {
-            Debug.LogError("There's no tool at that ID, or tool movement is already in progress.");
+            Debug.LogWarning("There's no tool at that ID, or tool movement is already in progress.");
             return;
         }
 

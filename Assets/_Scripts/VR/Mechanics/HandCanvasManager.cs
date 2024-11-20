@@ -20,6 +20,11 @@ public class HandCanvasManager : MonoBehaviour
 
         interactablePanel.SetActive(false);
         ToggleHandCanvas(generalAttributes.isRightHanded);
+
+        if (generalAttributes.disableHandCanvas)
+        {
+            DisableHandCanvas();
+        }
     }
 
     private void Update()
@@ -44,6 +49,14 @@ public class HandCanvasManager : MonoBehaviour
         generalAttributes.BasicMenu.SetActive(!generalAttributes.BasicMenu.activeSelf);
     }
 
+    public void DisableHandCanvas()
+    {
+        generalAttributes.openMenu_Right.SetActive(false);
+        generalAttributes.closeMenu_Right.SetActive(false);
+        generalAttributes.openMenu_Left.SetActive(false);
+        generalAttributes.closeMenu_Left.SetActive(false);
+    }
+
     public void ToggleHandCanvas(bool value)
     {
         generalAttributes.isRightHanded = value;
@@ -52,19 +65,28 @@ public class HandCanvasManager : MonoBehaviour
         {
             handToFollow = generalAttributes.leftHandAnchor.transform;
 
+
+            if (!generalAttributes.disableHandCanvas)
+            {
+                generalAttributes.openMenu_Left.SetActive(true);
+                generalAttributes.closeMenu_Left.SetActive(true);
+            }
+
             generalAttributes.openMenu_Right.SetActive(false);
             generalAttributes.closeMenu_Right.SetActive(false);
             generalAttributes.rightWatch.SetActive(false);
-            generalAttributes.openMenu_Left.SetActive(true);
-            generalAttributes.closeMenu_Left.SetActive(true);
             generalAttributes.leftWatch.SetActive(true);
         }
         else
         {
             handToFollow = generalAttributes.rightHandAnchor.transform;
 
-            generalAttributes.openMenu_Right.SetActive(true);
-            generalAttributes.closeMenu_Right.SetActive(true);
+            if (!generalAttributes.disableHandCanvas)
+            {
+                generalAttributes.openMenu_Right.SetActive(true);
+                generalAttributes.closeMenu_Right.SetActive(true);
+            }
+
             generalAttributes.rightWatch.SetActive(true);
             generalAttributes.openMenu_Left.SetActive(false);
             generalAttributes.closeMenu_Left.SetActive(false);

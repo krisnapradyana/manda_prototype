@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Farming_Tools : MonoBehaviour
 {
-    [SerializeField] private GeneralAttributes generalAttributes;
+    private GeneralAttributes generalAttributes;
 
     public string targetTag = "TargetTag";
     [Range(1,10)]
@@ -109,13 +109,13 @@ public class Farming_Tools : MonoBehaviour
         }
     }
 
-    void invokeTarget(GameObject gameObject)
+    public void invokeTarget(GameObject gameObject)
     {
         // Call the OnHit function from the FarmableData script
-        Farming_TargetObejct objectData = gameObject.GetComponent<Farming_TargetObejct>();
+        TriggerReceiver objectData = gameObject.GetComponent<TriggerReceiver>();
         if (objectData != null)
         {
-            objectData.OnHit(toolsStrength); // Pass the objectStrength to the OnHit function
+            objectData.TriggerTransporter(toolsStrength); // Pass the objectStrength to the OnHit function
         }
     }
 }

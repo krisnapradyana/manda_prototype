@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwingingArmMotion : MonoBehaviour
 {
     private GeneralAttributes generalAttributes;
+    private Rigidbody rb;
 
     // Game Objects
     private GameObject leftHand, rightHand;
@@ -22,6 +23,8 @@ public class SwingingArmMotion : MonoBehaviour
     private Vector3 positionCurrentFrameLeftHand;
 
     // Speed
+    [SerializeField] private float lowHandSpeed;
+    [SerializeField] private float maxHandSpeed;
     private float handSpeed;
     [SerializeField] private float staticSpeed = 70;
     private float initialSpeed = 0f;   // Starting speed of movement
@@ -33,6 +36,8 @@ public class SwingingArmMotion : MonoBehaviour
     {
         GameObject targetObject = GameObject.Find("GameManager");
         generalAttributes = targetObject.GetComponent<GeneralAttributes>();
+
+        rb = GetComponent<Rigidbody>();
 
         leftHand = generalAttributes.leftHandAnchor;
         rightHand = generalAttributes.rightHandAnchor;
@@ -81,8 +86,22 @@ public class SwingingArmMotion : MonoBehaviour
             {
                 Vector3 targetDirection = mainCamera.transform.forward;
                 targetDirection.y = 0f;
+                //targetDirection.Normalize(); // Ensure the direction is normalized
 
-                transform.position += targetDirection * handSpeed * staticSpeed * Time.deltaTime;
+                ////Method2
+                Debug.Log(handSpeed);
+                if (positionCurrentFrameLeftHand != leftHand.transform.position && positionCurrentFrameRightHand != rightHand.transform.position)
+                {
+                    if (handSpeed > maxHandSpeed)
+                    {
+                        handSpeed = maxHandSpeed;
+                    }
+                    rb.AddForce(targetDirection * handSpeed * staticSpeed, ForceMode.Force);
+                }
+                else
+                {
+                    rb.velocity = Vector3.zero;
+                }
             }
 
             // set previous position of hands for next frame

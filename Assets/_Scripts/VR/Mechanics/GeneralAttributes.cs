@@ -32,9 +32,11 @@ public class GeneralAttributes : MonoBehaviour
 
     [Header("Parameters")]
     public bool isRightHanded = true;
+    public bool disableHandCanvas = true;
     public bool canMove = false;
     public bool leftHoldingTools, rightHoldingTools;
-    public static float sceneStartTime;
+    [HideInInspector] public static float sceneStartTime;
+
 
     [Header("Canvas")]
     //Save Canvas/Interactable Menu Here

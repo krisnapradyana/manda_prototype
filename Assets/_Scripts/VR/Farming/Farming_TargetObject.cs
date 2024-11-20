@@ -58,7 +58,6 @@ public class Farming_TargetObject : MonoBehaviour
 
         for (int i = 0; i < variantVarieties.Length; i++)
         {
-            Debug.LogWarning($"length is: {variantVarieties.Length}");
             variantVarieties[i].SetActive(false);
         }
 
@@ -80,7 +79,6 @@ public class Farming_TargetObject : MonoBehaviour
 
     public void OnHit(int hitterStrength)
     {
-        Debug.Log($"Transported HS: {hitterStrength}");
         if (hitterStrength >= objectStrength && objectHitPoint > 0)
         {
             objectHitPoint--;
