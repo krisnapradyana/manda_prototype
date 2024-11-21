@@ -11,9 +11,6 @@ public class SwingingArmMotion : MonoBehaviour
     private GameObject leftHand, rightHand;
     private GameObject mainCamera;
 
-    // Axis Tracking Booleans
-    //[SerializeField] private bool trackXAxis = true, trackYAxis = true, trackZAxis = true;
-
     // Vector3 Positions
     private Vector3 positionPreviousFrameLeftHand;
     private Vector3 positionPreviousFrameRightHand;
@@ -25,12 +22,11 @@ public class SwingingArmMotion : MonoBehaviour
     // Speed
     [SerializeField] private float lowHandSpeed;
     [SerializeField] private float maxHandSpeed;
-    private float handSpeed;
     [SerializeField] private float staticSpeed = 70;
-    private float initialSpeed = 0f;   // Starting speed of movement
-    private float maximumSpeed = 100f;  // Max possible speed
-    private float acceleration = 5f;    // Rate of speed increase per second
-    private float currentSpeed;
+    private float handSpeed;
+
+    // Movement Detection
+    [SerializeField] private float movementThreshold = 0.01f; // Minimum distance to consider movement
 
     void Start()
     {
@@ -46,76 +42,68 @@ public class SwingingArmMotion : MonoBehaviour
         playerPositionPreviousFrame = transform.position; // set current positions
         positionPreviousFrameLeftHand = leftHand.transform.position; // set previous positions
         positionPreviousFrameRightHand = rightHand.transform.position;
-        currentSpeed = initialSpeed; // set initial speed
     }
 
     void Update()
     {
-        // get forward direction from the main camera and set it to the forward direction object
-
         if (generalAttributes.canMove)
         {
-            MovingForwardMechanism();
+            UpdateHandPositions();
+            HandleMovement();
         }
-        //else if (!leftRunPose && !rightRunPose && playerPositionPreviousFrame == playerPositionCurrentFrame)
-        //{
-        //    currentSpeed = initialSpeed;
-        //}
+        else
+        {
+            StopPlayerMotion();
+        }
     }
 
-    void MovingForwardMechanism()
+    private void UpdateHandPositions()
     {
-        // get positons of hands
+        // Update hand and player positions
         positionCurrentFrameLeftHand = leftHand.transform.position;
         positionCurrentFrameRightHand = rightHand.transform.position;
-
-        // position of player
         playerPositionCurrentFrame = transform.position;
+    }
 
-        // get distance the hands and player has moved from last frame
-        var playerDistanceMoved = Vector3.Distance(playerPositionCurrentFrame, playerPositionPreviousFrame);
+    private void HandleMovement()
+    {
+        // Calculate distances moved
         var leftHandDistanceMoved = Vector3.Distance(positionPreviousFrameLeftHand, positionCurrentFrameLeftHand);
         var rightHandDistanceMoved = Vector3.Distance(positionPreviousFrameRightHand, positionCurrentFrameRightHand);
 
-        if (leftHandDistanceMoved > 0 && rightHandDistanceMoved > 0)
+        // Check if hands are stationary
+        if (leftHandDistanceMoved < movementThreshold && rightHandDistanceMoved < movementThreshold)
         {
-            // aggregate to get hand speed
-            handSpeed = ((leftHandDistanceMoved - playerDistanceMoved) + (rightHandDistanceMoved - playerDistanceMoved));
-
-            if (Time.timeSinceLevelLoad > 1f)
-            {
-                Vector3 targetDirection = mainCamera.transform.forward;
-                targetDirection.y = 0f;
-                //targetDirection.Normalize(); // Ensure the direction is normalized
-
-                ////Method2
-                Debug.Log(handSpeed);
-                if (positionCurrentFrameLeftHand != leftHand.transform.position && positionCurrentFrameRightHand != rightHand.transform.position)
-                {
-                    if (handSpeed > maxHandSpeed)
-                    {
-                        handSpeed = maxHandSpeed;
-                    }
-                    rb.AddForce(targetDirection * handSpeed * staticSpeed, ForceMode.Force);
-                }
-                else
-                {
-                    rb.velocity = Vector3.zero;
-                }
-            }
-
-            // set previous position of hands for next frame
-            positionPreviousFrameLeftHand = positionCurrentFrameLeftHand;
-            positionPreviousFrameRightHand = positionCurrentFrameRightHand;
-            // set player position previous frame
-            playerPositionPreviousFrame = playerPositionCurrentFrame;
-
-            // set player position previous frame
-            if (playerPositionPreviousFrame == playerPositionCurrentFrame)
-            {
-                currentSpeed = initialSpeed;
-            }
-
+            StopPlayerMotion();
+            return;
         }
+
+        // Calculate hand speed
+        handSpeed = leftHandDistanceMoved + rightHandDistanceMoved;
+
+        // Clamp hand speed
+        handSpeed = Mathf.Clamp(handSpeed, lowHandSpeed, maxHandSpeed);
+
+        ApplyMovementForce();
+
+        // Update previous positions
+        positionPreviousFrameLeftHand = positionCurrentFrameLeftHand;
+        positionPreviousFrameRightHand = positionCurrentFrameRightHand;
+        playerPositionPreviousFrame = playerPositionCurrentFrame;
+    }
+
+    private void ApplyMovementForce()
+    {
+        Vector3 targetDirection = mainCamera.transform.forward;
+        targetDirection.y = 0f; // Ignore vertical movement
+        targetDirection.Normalize();
+
+        rb.AddForce(targetDirection * handSpeed * staticSpeed, ForceMode.Force);
+    }
+
+    private void StopPlayerMotion()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
     }
 }

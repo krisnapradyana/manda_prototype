@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: 97d9e77a886f14245abac248db097c6a
+guid: 59f40d11af207534cabe14a6a21bcff2
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: IMG_7566
+    second: {fileID: 2100000, guid: af6068f2fd4a88b4195308420761cb5e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
