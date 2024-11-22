@@ -472,9 +472,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b43ae01bd9d7cd645a9a9bb94959832b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  generalAttributes: {fileID: 0}
-  minForce: 8
-  maxForce: 14
+  minForce: 2
+  maxForce: 4
   targetGameObject: {fileID: 0}
   minimumDistance: 6
   prefabVarieties:

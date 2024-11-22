@@ -20,6 +20,7 @@ public class Farming_TargetObject : MonoBehaviour
     [SerializeField] private int minLoot, maxLoot;
 
     [Header("Cooldown Settings")]
+    [SerializeField] private bool shouldRespawn = false;
     private bool isCoolingdown;
     [SerializeField] private int minCooldown, maxCooldown;
     private int waitTime, endTime;
@@ -167,14 +168,17 @@ public class Farming_TargetObject : MonoBehaviour
             variantVarieties[i].SetActive(false);
         }
 
-        waitTime = UnityEngine.Random.Range(minCooldown, maxCooldown);
+        if (shouldRespawn)
+        {
+            waitTime = UnityEngine.Random.Range(minCooldown, maxCooldown);
+
+            endTime = (int)GeneralAttributes.CurrentTime + waitTime;
+            isCoolingdown = true;
+        }
         numberOfLoot = UnityEngine.Random.Range(minLoot, maxLoot);
 
         collectiblesManager.CheckPrefabsAvailability();
         collectiblesManager.FetchFromPool(numberOfLoot, gameObject);
-
-        endTime = (int)GeneralAttributes.CurrentTime + waitTime;
-        isCoolingdown = true;
     }
 
     void OnCooldown()

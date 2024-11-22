@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Scenes/VR/_New GameplaySceneLatest with FPS VR (REVISIT).unity
-    guid: 02e6f5806ecb33f4980e30f937458098
+    path: Assets/_Scenes/VR/_New GameplaySceneLatest with FPS VR (REVISIT) 3.unity
+    guid: a08b85d20bdefcf44bca271313701b23
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bdfedf71a40985f48ab4e132a094ca9e,
       type: 2}

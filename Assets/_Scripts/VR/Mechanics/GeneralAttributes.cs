@@ -36,7 +36,7 @@ public class GeneralAttributes : MonoBehaviour
     public bool canMove = false;
     public bool leftHoldingTools, rightHoldingTools;
     [HideInInspector] public static float sceneStartTime;
-
+    public bool isIntroduction;
 
     [Header("Canvas")]
     //Save Canvas/Interactable Menu Here
